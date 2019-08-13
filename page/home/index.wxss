@@ -1,0 +1,76 @@
+/* page/home/index.wxss */
+@import "/wxss/icon.wxss";
+
+/* ==================
+          轮播
+ ==================== */
+
+.index-container swiper.square-dot .wx-swiper-dot {
+  background-color: var(--white);
+  opacity: 0.4;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 20rpx;
+  margin: 0 8rpx !important;
+}
+
+.index-container swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
+  opacity: 1;
+  width: 30rpx;
+}
+
+.index-container .screen-swiper {
+  min-height: 375rpx;
+}
+
+.index-container .screen-swiper image, .index-container .swiper-item image {
+  width: 100%;
+  display: block;
+  height: 100%;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* ==================
+          门店位置
+ ==================== */
+
+ .index-container .info-container{
+   background-color: var(--white);
+ }
+
+.index-container .info-container .line{
+  width: calc(100% - 64rpx);
+  height: 1px;
+  transform: scaleY(0.5);
+  background-color:rgba(0, 0, 0, 0.1);
+  margin: 0 32rpx;
+}
+
+.index-container .info-container .location-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 32rpx;
+  background-color: var(--white);
+}
+
+.index-container .info-container .location-container .city-container {
+  margin-right: 10rpx;
+  flex: 1;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.index-container .info-container .location-container .city-container .text-container {
+  overflow: auto;
+  padding-right: 10rpx;
+}
+
+.index-container .info-container .location-container .city-container .text-container text:first-child {
+  float: left;
+}
+
+.index-container .info-container .location-container .city-container .text-container text:last-child {
+  float: right;
+}
+
+

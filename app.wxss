@@ -1,0 +1,10 @@
+/* reset */
+page {
+  --white: #FFFFFF;
+  --black: #000000;
+  --grey: #F8F8F8;
+  background-color: #F8F8F8;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+}

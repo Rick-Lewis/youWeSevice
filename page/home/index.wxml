@@ -1,0 +1,43 @@
+<!--page/home/index.wxml-->
+<view class="index-container">
+  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key>
+      <image src="{{item.url}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+  <view class="info-container">
+    <view class="location-container" style="margin-top: 15rpx;">
+      <view class="city-container">
+        <view>取车城市</view>
+        <view class="text-container">
+          <text>呼和浩特市</text>
+          <text class="cuIcon-right"></text>
+        </view>
+      </view>
+      <view class="site-container">
+        <view>取车门店</view>
+        <view class="text-container">
+          <text>福田站送车点福田站送车点</text>
+          <text class="cuIcon-right"></text>
+        </view>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="location-container">
+      <view class="city-container">
+        <view>还车城市</view>
+        <view class="text-container">
+          <text>呼和浩特市</text>
+          <text class="cuIcon-right"></text>
+        </view>
+      </view>
+      <view class="site-container">
+        <view>还车门店</view>
+        <view class="text-container">
+          <text>福田站送车点福田站送车点</text>
+          <text class="cuIcon-right"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
