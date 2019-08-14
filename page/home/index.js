@@ -1,10 +1,11 @@
 // page/home/index.js
 Page({
-
+  keys: 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS',
   /**
    * 页面的初始数据
    */
   data: {
+    region: [],
     swiperList: [{
       id: 0,
       type: 'image',
@@ -40,7 +41,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.getLocation({
+      type: 'wgs84',
+      success: res => {
+        console.log('home index.js onLoad wx.getLocation success', res);
+        this.getDistrict(res.latitude, res.longitude);
+      }
+    });
   },
 
   /**
@@ -90,5 +97,28 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getDistrict: function(latitude, longitude) {
+    wx.request({
+      url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: res => {
+        console.log('home index.js getDistrict success', res);
+        // 省
+        let province = res.data.result.address_component.province;
+        // 市
+        let city = res.data.result.address_component.city;
+        // 区
+        let district = res.data.result.address_component.district;
+        this.setData({
+          region: [province, city, district]
+        })
+      }
+    })
+  },
+  handleSelectCar: function(e){
+    console.log('home index.js handleSelectCar', e);
   }
 })

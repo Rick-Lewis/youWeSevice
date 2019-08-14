@@ -1,16 +1,17 @@
 <!--page/home/index.wxml-->
 <view class="index-container">
-  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="50000" duration="500">
     <swiper-item wx:for="{{swiperList}}" wx:key>
       <image src="{{item.url}}" mode="aspectFill"></image>
     </swiper-item>
   </swiper>
   <view class="info-container">
+    <!-- 取车地址 -->
     <view class="location-container" style="margin-top: 15rpx;">
       <view class="city-container">
         <view>取车城市</view>
         <view class="text-container">
-          <text>呼和浩特市</text>
+          <text>{{region[1]}}</text>
           <text class="cuIcon-right"></text>
         </view>
       </view>
@@ -22,12 +23,14 @@
         </view>
       </view>
     </view>
+    <!-- 分割线 -->
     <view class="line"></view>
+    <!-- 还车地址 -->
     <view class="location-container">
       <view class="city-container">
         <view>还车城市</view>
         <view class="text-container">
-          <text>呼和浩特市</text>
+          <text>{{region[1]}}</text>
           <text class="cuIcon-right"></text>
         </view>
       </view>
@@ -39,5 +42,29 @@
         </view>
       </view>
     </view>
+    <!-- 分割线 -->
+    <view class="line"></view>
+    <!-- 租车时间 -->
+    <view class="duration-container">
+      <view class="time-container">
+        <view>08月15日</view>
+        <view>星期四 09:00</view>
+      </view>
+      <view class="day-container">
+        <view class="line"></view>
+        <view class="content-container">
+          <view>2天</view>
+          <view>23小时</view>
+        </view>
+        <view class="line"></view>
+      </view>
+      <view class="time-container">
+        <view>08月17日</view>
+        <view>星期六 09:00</view>
+      </view>
+    </view>
+  </view>
+  <view class="btn-container">
+    <i-button type="success" bindtap="handleSelectCar">去选车</i-button>
   </view>
 </view>

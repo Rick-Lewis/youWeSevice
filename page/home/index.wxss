@@ -35,21 +35,23 @@
           门店位置
  ==================== */
 
- .index-container .info-container{
-   background-color: var(--white);
- }
+.index-container .info-container {
+  background-color: var(--white);
+  margin: 0 10px;
+}
 
-.index-container .info-container .line{
+.index-container .info-container .line {
   width: calc(100% - 64rpx);
   height: 1px;
   transform: scaleY(0.5);
-  background-color:rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   margin: 0 32rpx;
 }
 
 .index-container .info-container .location-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20rpx 32rpx;
   background-color: var(--white);
 }
@@ -58,6 +60,10 @@
   margin-right: 10rpx;
   flex: 1;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.index-container .info-container .location-container .city-container>view:first-child {
+  font-size: 24rpx;
 }
 
 .index-container .info-container .location-container .city-container .text-container {
@@ -73,4 +79,34 @@
   float: right;
 }
 
+.index-container .info-container .location-container .site-container>view:first-child {
+  font-size: 24rpx;
+}
 
+/* ==================
+          租车时间
+ ==================== */
+
+.index-container .info-container .duration-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  background-color: var(--white);
+}
+
+.index-container .info-container .duration-container .time-container>view:last-child {
+  font-size: 12px;
+}
+
+.index-container .info-container .duration-container .day-container .content-container {
+  text-align: center;
+}
+
+/* ==================
+          去选车
+ ==================== */
+
+.index-container .btn-container {
+  margin-top: 60rpx;
+}
