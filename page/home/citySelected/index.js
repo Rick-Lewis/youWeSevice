@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar,
+    cities: [],
+    listCur: '',
+    words: [],
     hidden: true
   },
 
@@ -18,14 +19,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let list = [];
-    for (let i = 0; i < 26; i++) {
-      list[i] = String.fromCharCode(65 + i)
-    }
-    this.setData({
-      list: list,
-      listCur: list[0]
+    let storeCity = new Array(26);
+    const words = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    words.forEach((item, index) => {
+      storeCity[index] = {
+        key: item,
+        list: []
+      }
+    })
+    cities.forEach((item) => {
+      let firstName = item.pinyin.substring(0, 1);
+      let index = words.indexOf(firstName);
+      storeCity[index].list.push({
+        name: item.name,
+        key: firstName
+      });
     });
+    this.setData({
+      cities: storeCity,
+      words: words
+    })
   },
 
   /**
@@ -142,5 +155,9 @@ Page({
         return false
       }
     }
+  },
+  //选择地址
+  handleSelectedItem: function(e){
+    console.log('citySelected index.js handleSelectedItem', e);
   }
 })
