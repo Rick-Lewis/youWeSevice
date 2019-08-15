@@ -10,14 +10,14 @@
     <view class="location-container" style="margin-top: 15rpx;">
       <view class="city-container">
         <view>取车城市</view>
-        <view class="text-container">
+        <view class="text-container" data-name="fetchCity" bindtap="handleSelectSite">
           <text>{{region[1]}}</text>
           <text class="cuIcon-right"></text>
         </view>
       </view>
       <view class="site-container">
         <view>取车门店</view>
-        <view class="text-container">
+        <view class="text-container" data-name="fetchSite" bindtap="handleSelectSite">
           <text>福田站送车点福田站送车点</text>
           <text class="cuIcon-right"></text>
         </view>
@@ -29,14 +29,14 @@
     <view class="location-container">
       <view class="city-container">
         <view>还车城市</view>
-        <view class="text-container">
+        <view class="text-container" data-name="repayCity" bindtap="handleSelectSite">
           <text>{{region[1]}}</text>
           <text class="cuIcon-right"></text>
         </view>
       </view>
       <view class="site-container">
         <view>还车门店</view>
-        <view class="text-container">
+        <view class="text-container" data-name="repaySite" bindtap="handleSelectSite">
           <text>福田站送车点福田站送车点</text>
           <text class="cuIcon-right"></text>
         </view>

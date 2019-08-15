@@ -40,7 +40,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.getLocation({
       type: 'wgs84',
       success: res => {
@@ -53,51 +53,52 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
+  //将坐标转换成地址
   getDistrict: function(latitude, longitude) {
     wx.request({
       url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
@@ -118,7 +119,25 @@ Page({
       }
     })
   },
-  handleSelectCar: function(e){
+  //选择去送车地址
+  handleSelectSite: function(e) {
+    console.log('home index.js handleSelectCar', e);
+    switch (e.currentTarget.dataset.name) {
+      case 'fetchCity':
+        wx.navigateTo({
+          url: '/page/home/citySelected/index',
+        });
+        break;
+      case 'fetchSite':
+        break;
+      case 'repayCity':
+        break;
+      case 'repaySite':
+        break;
+    }
+  },
+  //去取车
+  handleSelectCar: function(e) {
     console.log('home index.js handleSelectCar', e);
   }
 })

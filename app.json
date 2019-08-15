@@ -2,7 +2,8 @@
   "pages": [
     "page/home/index",
     "page/myZone/index",
-    "page/order/index"
+    "page/order/index",
+    "page/home/citySelected/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
