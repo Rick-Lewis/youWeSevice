@@ -1,7 +1,7 @@
 <!--page/home/citySelected/index.wxml-->
 <view class="city-selected-container">
-  <i-searchbar class="i-searchbar-container"></i-searchbar>
-  <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - 48px)" scroll-with-animation="true" enable-back-to-top="true">
+  <i-searchbar class="i-searchbar-container" items="{{origCities}}" bind:mychoiceevent="handleSelectedItem"></i-searchbar>
+  <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:100vh" enable-back-to-top="true">
     <block wx:for="{{cities}}" wx:key>
       <view class="padding indexItem-{{item.key}}" id="indexes-{{item.key}}" data-index="{{item.key}}">{{item.key}}</view>
       <view class="cu-list menu-avatar no-padding">

@@ -105,6 +105,9 @@
 .searchbar-result {
   margin-top: 0;
   font-size: 14px;
+  height: calc(100vh - 48px);
+  background-color: #fff;
+  overflow-y: auto;
 }
 
 .searchbar-result .weui-cell__bd {

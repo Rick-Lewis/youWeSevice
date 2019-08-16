@@ -1,15 +1,7 @@
-/* page/home/citySelected/index.wxss */
+/* page/home/siteSelected/index.wxss */
 @import "/wxss/colorUi.wxss";
-
-.city-selected-container .i-searchbar-container {
-  position: absolute;
-  width: 100%;
-  z-index: 11;
-}
-
 .indexes {
   position: relative;
-  padding-top: 96rpx;
 }
 
 .indexBar {

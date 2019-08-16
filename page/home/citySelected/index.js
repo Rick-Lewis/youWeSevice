@@ -1,6 +1,6 @@
 // page/home/citySelected/index.js
 import {
-  cities
+  cities as origCities
 } from './city';
 const app = getApp();
 Page({
@@ -9,9 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cities: [],
+    options: null, //对应onLoad中的options
+    origCities: [], //未分类的城市列表
+    cities: [], //按字母分类的城市列表
     listCur: '',
-    words: [],
+    words: [], //字母表
     hidden: true
   },
 
@@ -19,15 +21,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let storeCity = new Array(26);
-    const words = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    console.log('citySelected index.js options', options);
+    let storeCity = new Array(22);
+    const words = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"];
     words.forEach((item, index) => {
       storeCity[index] = {
         key: item,
         list: []
       }
     })
-    cities.forEach((item) => {
+    origCities.forEach((item) => {
       let firstName = item.pinyin.substring(0, 1);
       let index = words.indexOf(firstName);
       storeCity[index].list.push({
@@ -36,8 +39,10 @@ Page({
       });
     });
     this.setData({
+      origCities: origCities,
       cities: storeCity,
-      words: words
+      words: words,
+      options: options
     })
   },
 
@@ -45,13 +50,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    console.log('citySelected index.js onReady');
     let that = this;
-    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
+    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function(res) {
       that.setData({
         boxTop: res.top
       })
     }).exec();
-    wx.createSelectorQuery().select('.indexes').boundingClientRect(function (res) {
+    wx.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
       that.setData({
         barTop: res.top
       })
@@ -101,13 +107,15 @@ Page({
   },
   //获取文字信息
   getCur(e) {
+    console.log('citySelected index.js getCur', e);
     this.setData({
       hidden: false,
-      listCur: this.data.list[e.target.id],
+      listCur: this.data.words[e.target.id],
     })
   },
 
   setCur(e) {
+    console.log('citySelected index.js setCur', e);
     this.setData({
       hidden: true,
       listCur: this.data.listCur
@@ -115,6 +123,7 @@ Page({
   },
   //滑动选择Item
   tMove(e) {
+    console.log('citySelected index.js tMove', e);
     let y = e.touches[0].clientY,
       offsettop = this.data.boxTop,
       that = this;
@@ -122,13 +131,14 @@ Page({
     if (y > offsettop) {
       let num = parseInt((y - offsettop) / 20);
       this.setData({
-        listCur: that.data.list[num]
+        listCur: that.data.words[num]
       })
     };
   },
 
   //触发全部开始选择
   tStart() {
+    console.log('citySelected index.js tStart');
     this.setData({
       hidden: false
     })
@@ -136,20 +146,22 @@ Page({
 
   //触发结束选择
   tEnd() {
+    console.log('citySelected index.js tEnd');
     this.setData({
       hidden: true,
       listCurID: this.data.listCur
     })
   },
   indexSelect(e) {
+    console.log('citySelected index.js indexSelect', e);
     let that = this;
     let barHeight = this.data.barHeight;
-    let list = this.data.list;
-    let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
-    for (let i = 0; i < list.length; i++) {
+    let words = this.data.words;
+    let scrollY = Math.ceil(words.length * e.detail.y / barHeight);
+    for (let i = 0; i < words.length; i++) {
       if (scrollY < i + 1) {
         that.setData({
-          listCur: list[i],
+          listCur: words[i],
           movableY: i * 20
         })
         return false
@@ -157,7 +169,15 @@ Page({
     }
   },
   //选择地址
-  handleSelectedItem: function(e){
+  handleSelectedItem: function(e) {
     console.log('citySelected index.js handleSelectedItem', e);
+    let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
+    targetPages[0].setData({ //改变首页的地址选择
+      [this.data.options.from]: !e.currentTarget.dataset.subItem ? e.detail.name : e.currentTarget.dataset.subItem.name
+    }, () => {
+      wx.navigateBack({　　　　
+        delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
+      });
+    });
   }
 })

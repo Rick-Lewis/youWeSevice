@@ -3,7 +3,8 @@
     "page/home/index",
     "page/myZone/index",
     "page/order/index",
-    "page/home/citySelected/index"
+    "page/home/citySelected/index",
+    "page/home/siteSelected/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

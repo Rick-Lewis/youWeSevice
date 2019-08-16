@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region: [],
+    region: [], //用户所在的[省, 市, 区]
+    fetchCity: '请选择城市', //用户设置的取车城市
+    fetchSite: '请选择门店', //用户设置的取车门店
+    repayCity: '请选择城市', //用户设置的还车城市
+    repaySite: '请选择门店', //用户设置的还车门店
     swiperList: [{
       id: 0,
       type: 'image',
@@ -113,8 +117,10 @@ Page({
         let city = res.data.result.address_component.city;
         // 区
         let district = res.data.result.address_component.district;
-        this.setData({
-          region: [province, city, district]
+        this.setData({ //初始化相关信息为用户当前所在地址
+          region: [province, city, district],
+          fetchCity: city, 
+          repayCity: city
         })
       }
     })
@@ -125,14 +131,23 @@ Page({
     switch (e.currentTarget.dataset.name) {
       case 'fetchCity':
         wx.navigateTo({
-          url: '/page/home/citySelected/index',
+          url: '/page/home/citySelected/index?from=fetchCity',
         });
         break;
       case 'fetchSite':
+        wx.navigateTo({
+          url: '/page/home/siteSelected/index?from=fetchSite',
+        });
         break;
       case 'repayCity':
+        wx.navigateTo({
+          url: '/page/home/citySelected/index?from=repayCity',
+        });
         break;
       case 'repaySite':
+        wx.navigateTo({
+          url: '/page/home/siteSelected/index?from=repaySite',
+        });
         break;
     }
   },

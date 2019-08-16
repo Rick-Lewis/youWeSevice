@@ -52,12 +52,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 32rpx;
+  padding: 20rpx 20rpx 20rpx 32rpx;
   background-color: var(--white);
 }
 
 .index-container .info-container .location-container .city-container {
-  margin-right: 10rpx;
+  max-width: 300rpx;
+  min-width: 200rpx;
+  margin-right: 20rpx;
   flex: 1;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -79,8 +81,22 @@
   float: right;
 }
 
+.index-container .info-container .location-container .site-container {
+  flex: auto;
+}
+.index-container .info-container .location-container .site-container .text-container {
+  overflow: auto;
+}
 .index-container .info-container .location-container .site-container>view:first-child {
   font-size: 24rpx;
+}
+
+.index-container .info-container .location-container .site-container .text-container text:first-child {
+  float: left;
+}
+
+.index-container .info-container .location-container .site-container .text-container text:last-child {
+  float: right;
 }
 
 /* ==================
