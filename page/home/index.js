@@ -136,7 +136,7 @@ Page({
         break;
       case 'fetchSite':
         wx.navigateTo({
-          url: '/page/home/siteSelected/index?from=fetchSite',
+          url: '/page/home/siteSelected/index?from=fetchSite&title=' + this.data.fetchCity,
         });
         break;
       case 'repayCity':
@@ -146,7 +146,7 @@ Page({
         break;
       case 'repaySite':
         wx.navigateTo({
-          url: '/page/home/siteSelected/index?from=repaySite',
+          url: '/page/home/siteSelected/index?from=repaySite&title=' + this.data.repayCity,
         });
         break;
     }

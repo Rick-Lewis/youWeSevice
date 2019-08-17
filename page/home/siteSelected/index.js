@@ -1,45 +1,65 @@
 // page/home/siteSelected/index.js
 const app = getApp();
+import {
+  cities as origSities
+} from '../citySelected/city';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar,
-    hidden: true
+    options: null, //对应onLoad中的options
+    TabCur: 0,
+    MainCur: 0,
+    VerticalNavTop: 0,
+    sites: [],
+    load: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let list = [];
+    console.log('siteSelected index.js', options);
+    wx.setNavigationBarTitle({
+      title: options.title,
+    });
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    });
+    let storeSite = new Array(26);
+    let words = [];
     for (let i = 0; i < 26; i++) {
-      list[i] = String.fromCharCode(65 + i)
+      words[i] = String.fromCharCode(65 + i);
     }
+    words.forEach((item, index) => {
+      storeSite[index] = {
+        id: index,
+        key: item,
+        list: []
+      }
+    });
+    origSities.forEach((item) => {
+      let firstName = item.pinyin.substring(0, 1);
+      let index = words.indexOf(firstName);
+      storeSite[index].list.push({
+        name: item.name,
+        key: firstName
+      });
+    });
     this.setData({
-      list: list,
-      listCur: list[0]
-    })
+      sites: storeSite,
+      options: options
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    let that = this;
-    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
-      that.setData({
-        boxTop: res.top
-      })
-    }).exec();
-    wx.createSelectorQuery().select('.indexes').boundingClientRect(function (res) {
-      that.setData({
-        barTop: res.top
-      })
-    }).exec()
+    wx.hideLoading();
   },
 
   /**
@@ -83,61 +103,54 @@ Page({
   onShareAppMessage: function () {
 
   },
-  //获取文字信息
-  getCur(e) {
+  tabSelect(e) {
     this.setData({
-      hidden: false,
-      listCur: this.data.list[e.target.id],
+      TabCur: e.currentTarget.dataset.id,
+      MainCur: e.currentTarget.dataset.id,
+      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
     })
   },
-
-  setCur(e) {
-    this.setData({
-      hidden: true,
-      listCur: this.data.listCur
-    })
-  },
-  //滑动选择Item
-  tMove(e) {
-    let y = e.touches[0].clientY,
-      offsettop = this.data.boxTop,
-      that = this;
-    //判断选择区域,只有在选择区才会生效
-    if (y > offsettop) {
-      let num = parseInt((y - offsettop) / 20);
-      this.setData({
-        listCur: that.data.list[num]
-      })
-    };
-  },
-
-  //触发全部开始选择
-  tStart() {
-    this.setData({
-      hidden: false
-    })
-  },
-
-  //触发结束选择
-  tEnd() {
-    this.setData({
-      hidden: true,
-      listCurID: this.data.listCur
-    })
-  },
-  indexSelect(e) {
+  VerticalMain(e) {
+    console.log('siteSelected index.js VerticalMain', e);
     let that = this;
-    let barHeight = this.data.barHeight;
-    let list = this.data.list;
-    let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
-    for (let i = 0; i < list.length; i++) {
-      if (scrollY < i + 1) {
+    let sites = this.data.sites;
+    let tabHeight = 0;
+    if (this.data.load) {
+      for (let i = 0; i < sites.length; i++) {
+        let view = wx.createSelectorQuery().select("#main-" + sites[i].id);
+        view.fields({
+          size: true
+        }, data => {
+          sites[i].top = tabHeight;
+          tabHeight = tabHeight + data.height;
+          sites[i].bottom = tabHeight;
+        }).exec();
+      }
+      that.setData({
+        load: false,
+        sites: sites
+      })
+    }
+    let scrollTop = e.detail.scrollTop + 20;
+    for (let i = 0; i < sites.length; i++) {
+      if (scrollTop > sites[i].top && scrollTop < sites[i].bottom) {
         that.setData({
-          listCur: list[i],
-          movableY: i * 20
+          VerticalNavTop: (sites[i].id - 1) * 50,
+          TabCur: sites[i].id
         })
         return false
       }
     }
+  },
+  handleSelectedItem: function(e){
+    console.log('siteSelected index.js handleSelectedItem', e);
+    let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
+    targetPages[0].setData({ //改变首页的地址选择
+      [this.data.options.from]: !e.currentTarget.dataset.subItem ? e.detail.name : e.currentTarget.dataset.subItem.name
+    }, () => {
+      wx.navigateBack({
+        delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
+      });
+    });
   }
 })

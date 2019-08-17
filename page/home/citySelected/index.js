@@ -22,6 +22,10 @@ Page({
    */
   onLoad: function(options) {
     console.log('citySelected index.js options', options);
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    });
     let storeCity = new Array(22);
     const words = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"];
     words.forEach((item, index) => {
@@ -29,7 +33,7 @@ Page({
         key: item,
         list: []
       }
-    })
+    });
     origCities.forEach((item) => {
       let firstName = item.pinyin.substring(0, 1);
       let index = words.indexOf(firstName);
@@ -53,15 +57,22 @@ Page({
     console.log('citySelected index.js onReady');
     let that = this;
     wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function(res) {
+      console.log('citySelected index.js onReady boundingClientRect');
       that.setData({
         boxTop: res.top
       })
-    }).exec();
+    }).exec(function(res){
+      console.log('citySelected index.js onReady exec');
+    });
     wx.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
+      console.log('citySelected index.js onReady .indexes boundingClientRect');
       that.setData({
         barTop: res.top
       })
-    }).exec();
+    }).exec(function(res){
+      console.log('citySelected index.js onReady .indexes exec');
+      wx.hideLoading();
+    });
   },
 
   /**
