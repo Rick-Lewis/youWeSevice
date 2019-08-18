@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "i-button": "../../dist/button/index"
+    "i-button": "../../dist/button/index",
+    "i-modal": "../../dist/modal/index"
   },
   "navigationBarTitleText": "你的",
   "navigationBarBackgroundColor": "#FFFFFF"

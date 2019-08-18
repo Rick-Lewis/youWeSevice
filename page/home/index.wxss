@@ -105,11 +105,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 32rpx;
+  padding: 0rpx 32rpx;
   background-color: var(--white);
+  min-height: 140rpx;
 }
 
-.index-container .info-container .duration-container .time-container>view:last-child {
+.index-container .info-container .duration-container .time-container picker view:last-child {
   font-size: 12px;
 }
 

@@ -1,6 +1,7 @@
 // page/home/index.js
 Page({
   keys: 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS',
+  weeks: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
   /**
    * 页面的初始数据
    */
@@ -38,7 +39,16 @@ Page({
       id: 6,
       type: 'image',
       url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-    }]
+    }],
+    modalVisible: false, //选择时间模态框显示与否，true为显示
+    timeArray: [],
+    startIndex: [0, 0],
+    endIndex: [0,0],
+    duration: {
+      days: 0,
+      hours: 0,
+      minutes: 0
+    }
   },
 
   /**
@@ -51,6 +61,10 @@ Page({
         console.log('home index.js onLoad wx.getLocation success', res);
         this.getDistrict(res.latitude, res.longitude);
       }
+    });
+    let temp = this.initTimeArray();
+    this.setData({
+      timeArray: temp
     });
   },
 
@@ -119,7 +133,7 @@ Page({
         let district = res.data.result.address_component.district;
         this.setData({ //初始化相关信息为用户当前所在地址
           region: [province, city, district],
-          fetchCity: city, 
+          fetchCity: city,
           repayCity: city
         })
       }
@@ -154,5 +168,96 @@ Page({
   //去取车
   handleSelectCar: function(e) {
     console.log('home index.js handleSelectCar', e);
+  },
+  //初始化租车日期选择组件数据
+  initTimeArray: function() {
+    console.log('home index.js initTimeArray');
+    let today = new Date();
+    let dateTemp = [],
+      timeTemp = [],
+      result = [];
+    for (let i = 0; i < 60; i++) { //未来60天日期的初始化
+      let someday = new Date(); //每次循环初始化，保证未来第i天都是相对于当前日期
+      someday.setDate(today.getDate() + i); //未来第i天
+      let yearTemp = someday.getFullYear();
+      let monthTemp = someday.getMonth() + 1;
+      let dayTemp = someday.getDate();
+      let weekTemp = this.weeks[someday.getDay()];
+      let textTemp = ('0' + monthTemp).slice(-2) + '月' + ('0' + dayTemp).slice(-2) + '日 ';
+      dateTemp.push({
+        year: yearTemp,
+        month: monthTemp,
+        day: dayTemp,
+        week: weekTemp,
+        text: textTemp
+      })
+    }
+    result.push(dateTemp);
+    for (let i = 8; i < 22; i++) { //初始化时间
+      for (let j = 0; j < 2; j++) {
+        let hourTemp = i;
+        let minuteTemp = j * 30;
+        let textTemp = ('0' + hourTemp).slice(-2) + ':' + ('0' + minuteTemp).slice(-2);
+        timeTemp.push({
+          hour: hourTemp,
+          minute: minuteTemp,
+          text: textTemp
+        });
+      }
+    }
+    result.push(timeTemp);
+    return result;
+  },
+  bindStartPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      startIndex: e.detail.value
+    }, () => {
+      let startTemp = Object.assign({}, this.data.timeArray[0][this.data.startIndex[0]], this.data.timeArray[1][this.data.startIndex[1]]);
+      let endTemp = Object.assign({}, this.data.timeArray[0][this.data.endIndex[0]], this.data.timeArray[1][this.data.endIndex[1]]);
+      let temp = this.calcDuration(startTemp, endTemp);
+      this.setData({
+        duration: temp
+      })
+    });
+  },
+  bindStartMultiPickerColumnChange: function(e) {
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+  },
+  bindEndPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      endIndex: e.detail.value
+    }, () => {
+      let startTemp = Object.assign({}, this.data.timeArray[0][this.data.startIndex[0]], this.data.timeArray[1][this.data.startIndex[1]]);
+      let endTemp = Object.assign({}, this.data.timeArray[0][this.data.endIndex[0]], this.data.timeArray[1][this.data.endIndex[1]]);
+      let temp = this.calcDuration(startTemp, endTemp);
+      this.setData({
+        duration: temp
+      })
+    });
+  },
+  bindEndMultiPickerColumnChange: function (e) {
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+  },
+  calcDuration: function(start, end){
+    console.log('home index.js calcDuration', start, end);
+    let result =  {
+      days: 0,
+      hours: 0,
+      minutes: 0
+    };
+    let startDate = new Date(start.year, start.month, start.day);
+    let endDate = new Date(end.year, end.month, end.day);
+    let durTimestamp = (endDate.getTime() - startDate.getTime()) / 1000 + (Number(end.hour * 3600) + Number(end.minute * 60) - (Number(start.hour * 3600) + Number(start.minute * 60)));
+    let daysTemp = parseInt(durTimestamp / (3600 * 24));
+    let hoursTemp = parseInt((durTimestamp - daysTemp * 3600 *24)/3600);
+    let minutesTemp = parseInt((durTimestamp - daysTemp * 3600 * 24 - hoursTemp * 3600) / 60);
+    result = Object.assign({}, result, {
+      days: daysTemp,
+      hours: hoursTemp,
+      minutes: minutesTemp
+    });
+    return result;
   }
 })

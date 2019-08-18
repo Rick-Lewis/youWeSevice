@@ -47,20 +47,24 @@
     <!-- 租车时间 -->
     <view class="duration-container">
       <view class="time-container">
-        <view>08月15日</view>
-        <view>星期四 09:00</view>
+        <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartMultiPickerColumnChange" value="{{startIndex}}" range="{{timeArray}}" range-key="text">
+          <view>{{timeArray[0][startIndex[0]].text}}</view>
+          <view>{{timeArray[0][startIndex[0]].week + ' ' + timeArray[1][startIndex[1]].text}}</view>
+        </picker>
       </view>
       <view class="day-container">
-        <view class="line"></view>
+        <view class="icon-line"></view>
         <view class="content-container">
-          <view>2天</view>
-          <view>23小时</view>
+          <view>{{duration.days}}天</view>
+          <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时<text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text></view>
         </view>
-        <view class="line"></view>
+        <view class="icon-line"></view>
       </view>
       <view class="time-container">
-        <view>08月17日</view>
-        <view>星期六 09:00</view>
+        <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndMultiPickerColumnChange" value="{{endIndex}}" range="{{timeArray}}" range-key="text">
+          <view>{{timeArray[0][endIndex[0]].text}}</view>
+          <view>{{timeArray[0][endIndex[0]].week + ' ' + timeArray[1][endIndex[1]].text}}</view>
+        </picker>
       </view>
     </view>
   </view>
