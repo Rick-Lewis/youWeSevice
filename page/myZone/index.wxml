@@ -1,2 +1,26 @@
 <!--page/myZone/index.wxml-->
-<text>page/myZone/index.wxml</text>
+<view class="my-zone-container">
+  <view class="info-container">
+    <cover-image src="{{!userInfo.headImgUrl ? '/image/default.png' : userInfo.headImgUrl}}"></cover-image>
+    <view class="info-text-container">
+      <view wx:if="{{!!userInfo.nickname || !!userInfo.sex}}" class="info-text-name-container">
+        <text>{{userInfo.nickname}}</text>
+        <image wx:if="{{!!userInfo.sex}}" src="{{genderIcon[userInfo.sex]}}"></image>
+      </view>
+      <text style="{{!userInfo.nickname && !userInfo.sex ? 'margin-top: 6px': ''}}">{{userInfo.phone}}</text>
+      <view class="info-edit-container" bindtap="handleEditInfo">
+        <image src="/image/icon/edit.svg"></image>
+        <text>编辑资料</text>
+      </view>
+    </view>
+  </view>
+  <view class="wallet-container"></view>
+  <view class="cell-group-container">
+    <i-cell-group>
+      <i-cell is-link title="点点滴滴" wx:for="{{3}}" wx:key url="/page/home/carSelected/carDetail/index"></i-cell>
+    </i-cell-group>
+  </view>
+  <view class="btn-container">
+    <i-button type="success" bindtap="handleLogout">退出登录</i-button>
+  </view>
+</view>
