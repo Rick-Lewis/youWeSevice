@@ -1,0 +1,28 @@
+/* page/home/carSelected/index.wxss */
+
+.car-selected-container i-cell-group i-cell .card-container {
+  display: flex;
+}
+
+.car-selected-container i-cell-group i-cell .card-container cover-image {
+  width: 140rpx;
+}
+
+.car-selected-container i-cell-group i-cell .card-container .content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20rpx 0 20rpx 20rpx;
+  flex: 1;
+}
+
+.car-selected-container i-cell-group i-cell .card-container .content-container .title{
+  font-size: 36rpx;
+}
+.car-selected-container i-cell-group i-cell .card-container .content-container .tag{
+  background-color: #e7ebed;
+  padding: 0 10rpx;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+  margin-left: 10rpx;
+}

@@ -1,10 +1,13 @@
 {
   "pages": [
+    "page/order/index",
     "page/home/index",
     "page/myZone/index",
-    "page/order/index",
     "page/home/citySelected/index",
-    "page/home/siteSelected/index"
+    "page/home/siteSelected/index",
+    "page/home/carSelected/index",
+    "page/home/carSelected/carDetail/index",
+    "page/order/orderDetail/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -19,13 +22,13 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "page/home/index",
+        "pagePath": "page/order/index",
         "iconPath": "image/icon_component.png",
         "selectedIconPath": "image/icon_component_HL.png",
         "text": "你的"
       },
       {
-        "pagePath": "page/order/index",
+        "pagePath": "page/home/index",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
         "text": "他的"

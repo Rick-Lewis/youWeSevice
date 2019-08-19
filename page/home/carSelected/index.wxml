@@ -1,0 +1,14 @@
+<!--page/home/carSelected/index.wxml-->
+<view class="car-selected-container">
+  <i-cell-group>
+    <i-cell is-link value="详细信息" wx:for="{{10}}" wx:key url="/page/home/carSelected/carDetail/index">
+      <view class="card-container">
+        <cover-image src="https://i.loli.net/2017/08/21/599a521472424.jpg"></cover-image>
+        <view class="content-container">
+          <view class="title">小样小样小样小样<text class="tag">标签</text></view>
+          <view>小样/小样/小样/小样/小样</view>
+        </view>
+      </view>
+    </i-cell>
+  </i-cell-group>
+</view>

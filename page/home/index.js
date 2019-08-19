@@ -165,9 +165,12 @@ Page({
         break;
     }
   },
-  //去取车
+  //去选车
   handleSelectCar: function(e) {
     console.log('home index.js handleSelectCar', e);
+    wx.navigateTo({
+      url: '/page/home/carSelected/index',
+    });
   },
   //初始化租车日期选择组件数据
   initTimeArray: function() {

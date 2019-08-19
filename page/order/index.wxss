@@ -1,1 +1,62 @@
 /* page/order/index.wxss */
+.order-container .tabs-container{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.order-container .tab-content-container{
+  padding-top: 84rpx;
+}
+.order-container .tab-content-container .order-card-container {
+  background-color: #fff;
+  margin: 20rpx 40rpx 0 40rpx;
+  border-radius: 6rpx;
+  -moz-box-shadow: 0rpx 0rpx 10rpx rgba(0, 0, 0, 0.1); /* 老的 Firefox */
+  box-shadow: 0rpx 0rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.order-container .tab-content-container .order-card-container:last-child {
+  margin-bottom: 20rpx;
+}
+
+.order-container .tab-content-container .order-card-container .header-container {
+  padding: 16rpx;
+  font-size: 28rpx;
+  min-height: 44rpx;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.order-container .tab-content-container .order-card-container .content-container {
+  display: flex;
+  padding: 30rpx 0;
+  margin: 0 16rpx;
+  min-height: 140rpx;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.order-container .tab-content-container .order-card-container .content-container .title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20rpx 0 20rpx 20rpx;
+  flex: 1;
+}
+
+.order-container .tab-content-container .order-card-container .content-container .title-container .title {
+  font-size: 36rpx;
+}
+
+/* .order-container .tab-content-container .order-card-container .content-container .status-container {
+  flex: 1;
+  text-align: right;
+} */
+
+.order-container .tab-content-container .order-card-container .footer-container {
+  padding: 16rpx;
+  min-height: 140rpx;
+}
+
+.order-container .tab-content-container .order-card-container .content-container cover-image {
+  width: 140rpx;
+}
