@@ -67,9 +67,19 @@
 .my-zone-container .wallet-container {
   min-height: 160rpx;
   background-color: #fff;
+  display: flex;
 }
 
-cell-group-container
+.my-zone-container .wallet-container .wallet-item-container{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-zone-container .wallet-container .wallet-item-container view{
+  text-align: center;
+}
 
 .my-zone-container .btn-container {
   margin-top: 60rpx;

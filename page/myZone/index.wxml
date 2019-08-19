@@ -14,7 +14,26 @@
       </view>
     </view>
   </view>
-  <view class="wallet-container"></view>
+  <view class="wallet-container">
+    <view class="wallet-item-container">
+      <view>
+        <view>0</view>
+        <view>余额</view>
+      </view>
+    </view>
+    <view class="wallet-item-container">
+      <view>
+        <view>4</view>
+        <view>优惠券</view>
+      </view>
+    </view>
+    <view class="wallet-item-container">
+      <view>
+        <view>200</view>
+        <view>积分</view>
+      </view>
+    </view>
+  </view>
   <view class="cell-group-container">
     <i-cell-group>
       <i-cell is-link title="点点滴滴" wx:for="{{3}}" wx:key url="/page/home/carSelected/carDetail/index"></i-cell>

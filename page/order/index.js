@@ -93,6 +93,7 @@ Page({
     });
     wx.showLoading({
       title: '加载中...',
+      mask: true
     });
     setTimeout(() => {
       let randomTemp = Math.round(Math.random() * 10);
