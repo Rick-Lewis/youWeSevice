@@ -45,14 +45,14 @@
   height: 1px;
   transform: scaleY(0.5);
   background-color: rgba(0, 0, 0, 0.1);
-  margin: 0 32rpx;
+  margin: 0 20rpx;
 }
 
 .index-container .info-container .location-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 20rpx 20rpx 32rpx;
+  padding: 20rpx;
   background-color: var(--white);
 }
 
@@ -105,7 +105,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0rpx 32rpx;
+  padding: 0rpx 20rpx;
   background-color: var(--white);
   min-height: 140rpx;
 }
@@ -113,11 +113,41 @@
 .index-container .info-container .duration-container .time-container picker view:last-child {
   font-size: 12px;
 }
-
+.index-container .info-container .duration-container .day-container{
+  display: flex;
+  align-items: center;
+}
 .index-container .info-container .duration-container .day-container .content-container {
   text-align: center;
 }
-
+.index-container .info-container .duration-container .day-container .icon-line{
+  width: 60rpx;
+  height: 2rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 0 10rpx;
+  position: relative;
+}
+.index-container .info-container .duration-container .day-container .icon-line.pre-dot::before{
+  content: "";
+  width: 14rpx;
+  height: 14rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 14rpx;
+  position: absolute;
+  left: -14rpx;
+  top: -7rpx;
+}
+.index-container .info-container .duration-container .day-container .icon-line.next-dot::after{
+  content: "";
+  width: 14rpx;
+  height: 14rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 14rpx;
+  position: absolute;
+  right: -14rpx;
+  top: -7rpx;
+}
 /* ==================
           去选车
  ==================== */

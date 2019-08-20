@@ -53,12 +53,12 @@
         </picker>
       </view>
       <view class="day-container">
-        <view class="icon-line"></view>
+        <view class="icon-line pre-dot"></view>
         <view class="content-container">
           <view>{{duration.days}}天</view>
           <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时<text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text></view>
         </view>
-        <view class="icon-line"></view>
+        <view class="icon-line next-dot"></view>
       </view>
       <view class="time-container">
         <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndMultiPickerColumnChange" value="{{endIndex}}" range="{{timeArray}}" range-key="text">
