@@ -1,74 +1,85 @@
 <!--page/home/index.wxml-->
 <view class="index-container">
-  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="50000" duration="500">
-    <swiper-item wx:for="{{swiperList}}" wx:key>
-      <image src="{{item.url}}" mode="aspectFill"></image>
-    </swiper-item>
-  </swiper>
-  <view class="info-container">
-    <!-- 取车地址 -->
-    <view class="location-container" style="margin-top: 15rpx;">
-      <view class="city-container">
-        <view>取车城市</view>
-        <view class="text-container" data-name="fetchCity" bindtap="handleSelectSite">
-          <text style="color: {{fetchCity === '请选择城市'? '#C2CCD1': ''}}">{{fetchCity}}</text>
-          <text class="cuIcon-right"></text>
+  <!-- <i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab key="carRental" title="租车"></i-tab>
+    <i-tab key="rideSharing" title="顺风车"></i-tab>
+  </i-tabs> -->
+  <view class="carRentalContent" wx:if="{{current === 'carRental'}}">
+    <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="50000" duration="500">
+      <swiper-item wx:for="{{swiperList}}" wx:key>
+        <image src="{{item.url}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+    <view class="info-container">
+      <!-- 取车地址 -->
+      <view class="location-container" style="margin-top: 15rpx;">
+        <view class="city-container">
+          <view>取车城市</view>
+          <view class="text-container" data-name="fetchCity" bindtap="handleSelectSite">
+            <text style="color: {{fetchCity === '请选择城市'? '#C2CCD1': ''}}">{{fetchCity}}</text>
+            <text class="cuIcon-right"></text>
+          </view>
+        </view>
+        <view class="site-container">
+          <view>取车门店</view>
+          <view class="text-container" data-name="fetchSite" bindtap="handleSelectSite">
+            <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
+            <text class="cuIcon-right"></text>
+          </view>
         </view>
       </view>
-      <view class="site-container">
-        <view>取车门店</view>
-        <view class="text-container" data-name="fetchSite" bindtap="handleSelectSite">
-          <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
-          <text class="cuIcon-right"></text>
+      <!-- 分割线 -->
+      <view class="line"></view>
+      <!-- 还车地址 -->
+      <view class="location-container">
+        <view class="city-container">
+          <view>还车城市</view>
+          <view class="text-container" data-name="repayCity" bindtap="handleSelectSite">
+            <text style="color: {{repayCity === '请选择城市'? '#C2CCD1': ''}}">{{repayCity}}</text>
+            <text class="cuIcon-right"></text>
+          </view>
+        </view>
+        <view class="site-container">
+          <view>还车门店</view>
+          <view class="text-container" data-name="repaySite" bindtap="handleSelectSite">
+            <text style="color: {{repaySite === '请选择门店'? '#C2CCD1': ''}}">{{repaySite}}</text>
+            <text class="cuIcon-right"></text>
+          </view>
+        </view>
+      </view>
+      <!-- 分割线 -->
+      <view class="line"></view>
+      <!-- 租车时间 -->
+      <view class="duration-container">
+        <view class="time-container">
+          <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartMultiPickerColumnChange" value="{{startIndex}}" range="{{timeArray}}" range-key="text">
+            <view>{{timeArray[0][startIndex[0]].text}}</view>
+            <view>{{timeArray[0][startIndex[0]].week + ' ' + timeArray[1][startIndex[1]].text}}</view>
+          </picker>
+        </view>
+        <view class="day-container">
+          <view class="icon-line pre-dot"></view>
+          <view class="content-container">
+            <view>{{duration.days}}天</view>
+            <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时
+              <text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text>
+            </view>
+          </view>
+          <view class="icon-line next-dot"></view>
+        </view>
+        <view class="time-container">
+          <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndMultiPickerColumnChange" value="{{endIndex}}" range="{{timeArray}}" range-key="text">
+            <view>{{timeArray[0][endIndex[0]].text}}</view>
+            <view>{{timeArray[0][endIndex[0]].week + ' ' + timeArray[1][endIndex[1]].text}}</view>
+          </picker>
         </view>
       </view>
     </view>
-    <!-- 分割线 -->
-    <view class="line"></view>
-    <!-- 还车地址 -->
-    <view class="location-container">
-      <view class="city-container">
-        <view>还车城市</view>
-        <view class="text-container" data-name="repayCity" bindtap="handleSelectSite">
-          <text style="color: {{repayCity === '请选择城市'? '#C2CCD1': ''}}">{{repayCity}}</text>
-          <text class="cuIcon-right"></text>
-        </view>
-      </view>
-      <view class="site-container">
-        <view>还车门店</view>
-        <view class="text-container" data-name="repaySite" bindtap="handleSelectSite">
-          <text style="color: {{repaySite === '请选择门店'? '#C2CCD1': ''}}">{{repaySite}}</text>
-          <text class="cuIcon-right"></text>
-        </view>
-      </view>
-    </view>
-    <!-- 分割线 -->
-    <view class="line"></view>
-    <!-- 租车时间 -->
-    <view class="duration-container">
-      <view class="time-container">
-        <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartMultiPickerColumnChange" value="{{startIndex}}" range="{{timeArray}}" range-key="text">
-          <view>{{timeArray[0][startIndex[0]].text}}</view>
-          <view>{{timeArray[0][startIndex[0]].week + ' ' + timeArray[1][startIndex[1]].text}}</view>
-        </picker>
-      </view>
-      <view class="day-container">
-        <view class="icon-line pre-dot"></view>
-        <view class="content-container">
-          <view>{{duration.days}}天</view>
-          <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时<text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text></view>
-        </view>
-        <view class="icon-line next-dot"></view>
-      </view>
-      <view class="time-container">
-        <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndMultiPickerColumnChange" value="{{endIndex}}" range="{{timeArray}}" range-key="text">
-          <view>{{timeArray[0][endIndex[0]].text}}</view>
-          <view>{{timeArray[0][endIndex[0]].week + ' ' + timeArray[1][endIndex[1]].text}}</view>
-        </picker>
-      </view>
+    <view class="btn-container">
+      <i-button type="success" bindtap="handleSelectCar">去选车</i-button>
     </view>
   </view>
-  <view class="btn-container">
-    <i-button type="success" bindtap="handleSelectCar">去选车</i-button>
+  <view class="rideSharingContent" wx:if="{{current === 'rideSharing'}}">
+    <view>顺风车</view>
   </view>
 </view>

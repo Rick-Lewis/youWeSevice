@@ -20,9 +20,12 @@
 }
 
 .index-container .screen-swiper {
-  min-height: 375rpx;
+  min-height: 300rpx;
+  margin: 20rpx;
 }
-
+/* .index-container .screen-swiper swiper-item{
+  border-radius: 20rpx;
+} */
 .index-container .screen-swiper image, .index-container .swiper-item image {
   width: 100%;
   display: block;

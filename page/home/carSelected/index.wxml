@@ -1,14 +1,33 @@
 <!--page/home/carSelected/index.wxml-->
-<view class="car-selected-container">
-  <i-cell-group>
-    <i-cell is-link value="详细信息" wx:for="{{10}}" wx:key url="/page/home/carSelected/carDetail/index">
-      <view class="card-container">
-        <cover-image src="https://i.loli.net/2017/08/21/599a521472424.jpg"></cover-image>
-        <view class="content-container">
-          <view class="title">小样小样小样小样<text class="tag">标签</text></view>
-          <view>小样/小样/小样/小样/小样</view>
+<view class="VerticalBox">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:100vh">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{sites}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      Tab-{{item.key}}
+    </view>
+  </scroll-view>
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:100vh" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+    <view class="padding-top padding-lr" wx:for="{{sites}}" wx:key id="main-{{index}}">
+      <view class='cu-bar solid-bottom bg-white'>
+        <view class='action'>
+          <text class='cuIcon-title text-green'></text> Tab-{{item.key}} </view>
+      </view>
+      <view class="cu-list menu-avatar">
+        <view class="cu-item" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
+          <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+          <view class="content">
+            <view class="text-grey">{{subItem.name}}</view>
+            <view class="text-gray text-sm flex">
+              <text class="text-cut">
+										<text class="cuIcon-infofill text-red  margin-right-xs"></text> 我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
+              </text>
+            </view>
+          </view>
+          <view class="action">
+            <view class="text-grey text-xs">22:20</view>
+            <view class="cu-tag round bg-grey sm">5</view>
+          </view>
         </view>
       </view>
-    </i-cell>
-  </i-cell-group>
+    </view>
+  </scroll-view>
 </view>

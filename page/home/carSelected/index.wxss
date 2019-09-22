@@ -1,28 +1,38 @@
 /* page/home/carSelected/index.wxss */
+@import "/wxss/colorUi.wxss";
+.VerticalNav.nav {
+  width: 200rpx;
+  white-space: initial;
+}
 
-.car-selected-container i-cell-group i-cell .card-container {
+.VerticalNav.nav .cu-item {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  margin: 0;
+  border: none;
+  height: 50px;
+  position: relative;
+}
+
+.VerticalNav.nav .cu-item.cur {
+  background-color: #f1f1f1;
+}
+.VerticalNav.nav .cu-item.cur::after {
+  content: "";
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 10rpx 0 0 10rpx;
+  position: absolute;
+  background-color: currentColor;
+  top: 0;
+  right: 0rpx;
+  bottom: 0;
+  margin: auto;
+}
+.VerticalBox{
   display: flex;
 }
-
-.car-selected-container i-cell-group i-cell .card-container cover-image {
-  width: 140rpx;
-}
-
-.car-selected-container i-cell-group i-cell .card-container .content-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 20rpx 0 20rpx 20rpx;
-  flex: 1;
-}
-
-.car-selected-container i-cell-group i-cell .card-container .content-container .title{
-  font-size: 36rpx;
-}
-.car-selected-container i-cell-group i-cell .card-container .content-container .tag{
-  background-color: #e7ebed;
-  padding: 0 10rpx;
-  font-size: 24rpx;
-  border-radius: 4rpx;
-  margin-left: 10rpx;
+.VerticalMain{
+  background-color: #f1f1f1;
 }

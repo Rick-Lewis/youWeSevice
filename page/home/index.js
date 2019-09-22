@@ -48,7 +48,8 @@ Page({
       days: 0,
       hours: 0,
       minutes: 0
-    }
+    },
+    current: 'carRental',
   },
 
   /**
@@ -262,5 +263,11 @@ Page({
       minutes: minutesTemp
     });
     return result;
+  },
+  handleChange({ detail }) {
+    console.log('home index.js handleChange detail', detail);
+    this.setData({
+      current: detail.key
+    });
   }
 })
