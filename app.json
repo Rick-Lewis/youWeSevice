@@ -33,7 +33,7 @@
         "pagePath": "page/order/index",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
-        "text": "他的"
+        "text": "订单"
       },
       {
         "pagePath": "page/myZone/index",

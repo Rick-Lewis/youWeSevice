@@ -76,7 +76,7 @@
       </view>
     </view>
     <view class="btn-container">
-      <i-button type="success" bindtap="handleSelectCar">去选车</i-button>
+      <i-button type="success" bindtap="handleSelectCar">立即选车</i-button>
     </view>
   </view>
   <view class="rideSharingContent" wx:if="{{current === 'rideSharing'}}">
