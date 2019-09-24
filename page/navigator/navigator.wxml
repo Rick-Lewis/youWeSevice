@@ -1,0 +1,4 @@
+<!--pages/navigator/navigator.wxml-->
+<view class="navigator-container">
+  <view class="loading">即将进入...</view>
+</view>

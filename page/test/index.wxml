@@ -1,0 +1,5 @@
+<!--page/test/index.wxml-->
+<view>
+  <text>code: </text>
+  <input value="{{code}}"></input>
+</view>
