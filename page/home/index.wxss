@@ -44,11 +44,11 @@
 }
 
 .index-container .info-container .line {
-  width: calc(100% - 64rpx);
+  width: calc(100% - 107rpx);
   height: 1px;
   transform: scaleY(0.5);
   background-color: rgba(0, 0, 0, 0.1);
-  margin: 0 20rpx;
+  margin: 0 97rpx;
 }
 
 .index-container .info-container .location-container {
@@ -60,26 +60,36 @@
 }
 
 .index-container .info-container .location-container .city-container {
-  width: 210rpx;
+  width: 240rpx;
   margin-right: 20rpx;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
 }
-
-.index-container .info-container .location-container .city-container>view:first-child {
-  font-size: 24rpx;
+.index-container .info-container .location-container .city-container .return-circle {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 7rpx solid rgba(104, 104, 104, 1);
+  line-height: 40rpx;
+  text-align: center;
+  color: rgba(104, 104, 104, 1);
+}
+.index-container .info-container .location-container .city-container .fetch-circle {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 7rpx solid rgba(105, 189, 131, 1);
+  line-height: 40rpx;
+  text-align: center;
+  color: rgba(105, 189, 131, 1);
 }
 
 .index-container .info-container .location-container .city-container .text-container {
   overflow: auto;
   padding-right: 10rpx;
-}
-
-.index-container .info-container .location-container .city-container .text-container text:first-child {
+  padding-left: 30rpx;
   float: left;
-}
-
-.index-container .info-container .location-container .city-container .text-container text:last-child {
-  float: right;
 }
 
 .index-container .info-container .location-container .site-container {
@@ -87,17 +97,7 @@
 }
 .index-container .info-container .location-container .site-container .text-container {
   overflow: auto;
-}
-.index-container .info-container .location-container .site-container>view:first-child {
-  font-size: 24rpx;
-}
-
-.index-container .info-container .location-container .site-container .text-container text:first-child {
   float: left;
-}
-
-.index-container .info-container .location-container .site-container .text-container text:last-child {
-  float: right;
 }
 
 /* ==================

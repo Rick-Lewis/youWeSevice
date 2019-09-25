@@ -14,17 +14,15 @@
       <!-- 取车地址 -->
       <view class="location-container" style="margin-top: 15rpx;">
         <view class="city-container">
-          <view>取车城市</view>
+          <view class="return-circle">还</view>
           <view class="text-container" data-name="fetchCity" bindtap="handleSelectSite">
             <text style="color: {{fetchCity === '请选择城市'? '#C2CCD1': ''}}">{{fetchCity}}</text>
             <text class="cuIcon-right"></text>
           </view>
         </view>
         <view class="site-container">
-          <view>取车门店</view>
           <view class="text-container" data-name="fetchSite" bindtap="handleSelectSite">
             <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
-            <text class="cuIcon-right"></text>
           </view>
         </view>
       </view>
@@ -33,17 +31,15 @@
       <!-- 还车地址 -->
       <view class="location-container">
         <view class="city-container">
-          <view>还车城市</view>
+          <view class="fetch-circle">取</view>
           <view class="text-container" data-name="repayCity" bindtap="handleSelectSite">
             <text style="color: {{repayCity === '请选择城市'? '#C2CCD1': ''}}">{{repayCity}}</text>
             <text class="cuIcon-right"></text>
           </view>
         </view>
         <view class="site-container">
-          <view>还车门店</view>
           <view class="text-container" data-name="repaySite" bindtap="handleSelectSite">
             <text style="color: {{repaySite === '请选择门店'? '#C2CCD1': ''}}">{{repaySite}}</text>
-            <text class="cuIcon-right"></text>
           </view>
         </view>
       </view>

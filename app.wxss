@@ -5,6 +5,7 @@ page {
   --grey: #F8F8F8;
   background-color: #F8F8F8;
   height: 100%;
-  font-size: 32rpx;
+  font-size: 28rpx;
+  color: #333333;
   line-height: 1.6;
 }

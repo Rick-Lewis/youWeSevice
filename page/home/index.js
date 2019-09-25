@@ -7,10 +7,10 @@ Page({
    */
   data: {
     region: [], //用户所在的[省, 市, 区]
-    fetchCity: '请选择城市', //用户设置的取车城市
-    fetchSite: '请选择门店', //用户设置的取车门店
-    repayCity: '请选择城市', //用户设置的还车城市
-    repaySite: '请选择门店', //用户设置的还车门店
+    fetchCity: '古丈县', //用户设置的取车城市
+    fetchSite: '县政府店', //用户设置的取车门店
+    repayCity: '古丈县', //用户设置的还车城市
+    repaySite: '县政府店', //用户设置的还车门店
     swiperList: [{
       id: 0,
       type: 'image',
@@ -56,13 +56,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.getLocation({
-      type: 'wgs84',
-      success: res => {
-        console.log('home index.js onLoad wx.getLocation success', res);
-        this.getDistrict(res.latitude, res.longitude);
-      }
-    });
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: res => {
+    //     console.log('home index.js onLoad wx.getLocation success', res);
+    //     this.getDistrict(res.latitude, res.longitude);
+    //   }
+    // });
     let temp = this.initTimeArray();
     this.setData({
       timeArray: temp
@@ -143,6 +143,7 @@ Page({
   //选择去送车地址
   handleSelectSite: function(e) {
     console.log('home index.js handleSelectCar', e);
+    return;
     switch (e.currentTarget.dataset.name) {
       case 'fetchCity':
         wx.navigateTo({

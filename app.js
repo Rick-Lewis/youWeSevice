@@ -90,8 +90,8 @@ App({
           //   console.log('app.js login failure', err);
           // });
           this.globalData.wxCode = res.code;
-          wx.redirectTo({
-            url: '/page/test/index',
+          wx.reLaunch({
+            url: '/page/home/index',
           });
         }
       }
