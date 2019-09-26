@@ -1,106 +1,84 @@
 // page/home/carSelected/index.js
 const app = getApp();
 import {
-  cities as origSities
-} from '../citySelected/city';
+  cars as origCars
+} from '../carSelected/car';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    options: null, //对应onLoad中的options
     TabCur: 0,
     MainCur: 0,
     VerticalNavTop: 0,
-    sites: [],
+    carList: [],
     load: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log('siteSelected index.js', options);
-    wx.setNavigationBarTitle({
-      title: options.title,
-    });
+  onLoad: function(options) {
+    console.log('carSelected index.js', options);
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
-    let storeSite = new Array(26);
-    let words = [];
-    for (let i = 0; i < 26; i++) {
-      words[i] = String.fromCharCode(65 + i);
-    }
-    words.forEach((item, index) => {
-      storeSite[index] = {
-        id: index,
-        key: item,
-        list: []
-      }
-    });
-    origSities.forEach((item) => {
-      let firstName = item.pinyin.substring(0, 1);
-      let index = words.indexOf(firstName);
-      storeSite[index].list.push({
-        name: item.name,
-        key: firstName
-      });
-    });
+    let origCarsTemp = origCars.map((item, index) => Object.assign({}, item, {
+      id: index
+    }));
     this.setData({
-      sites: storeSite,
-      options: options
+      carList: origCarsTemp
     });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     wx.hideLoading();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
   tabSelect(e) {
@@ -111,46 +89,41 @@ Page({
     })
   },
   VerticalMain(e) {
-    console.log('siteSelected index.js VerticalMain', e);
+    // console.log('carSelected index.js VerticalMain', e);
     let that = this;
-    let sites = this.data.sites;
+    let carList = this.data.carList;
     let tabHeight = 0;
     if (this.data.load) {
-      for (let i = 0; i < sites.length; i++) {
-        let view = wx.createSelectorQuery().select("#main-" + sites[i].id);
+      for (let i = 0; i < carList.length; i++) {
+        let view = wx.createSelectorQuery().select("#main-" + carList[i].id);
         view.fields({
           size: true
         }, data => {
-          sites[i].top = tabHeight;
+          carList[i].top = tabHeight;
           tabHeight = tabHeight + data.height;
-          sites[i].bottom = tabHeight;
+          carList[i].bottom = tabHeight;
         }).exec();
       }
       that.setData({
         load: false,
-        sites: sites
+        carList: carList
       })
     }
     let scrollTop = e.detail.scrollTop + 20;
-    for (let i = 0; i < sites.length; i++) {
-      if (scrollTop > sites[i].top && scrollTop < sites[i].bottom) {
+    for (let i = 0; i < carList.length; i++) {
+      if (scrollTop > carList[i].top && scrollTop < carList[i].bottom) {
         that.setData({
-          VerticalNavTop: (sites[i].id - 1) * 50,
-          TabCur: sites[i].id
+          VerticalNavTop: (carList[i].id - 1) * 50,
+          TabCur: carList[i].id
         })
         return false
       }
     }
   },
-  handleSelectedItem: function (e) {
-    console.log('siteSelected index.js handleSelectedItem', e);
-    let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
-    targetPages[0].setData({ //改变首页的地址选择
-      [this.data.options.from]: !e.currentTarget.dataset.subItem ? e.detail.name : e.currentTarget.dataset.subItem.name
-    }, () => {
-      wx.navigateBack({
-        delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
-      });
+  handleSelectedItem: function(e) {
+    console.log('carSelected index.js handleSelectedItem', e);
+    wx.navigateTo({
+      url: '/page/home/carSelected/carDetail/index',
     });
   }
 })

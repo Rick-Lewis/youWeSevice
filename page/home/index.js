@@ -1,4 +1,5 @@
 // page/home/index.js
+const app = getApp();
 Page({
   keys: 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS',
   weeks: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
@@ -6,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region: [], //用户所在的[省, 市, 区]
+    // region: [], //用户所在的[省, 市, 区]
     fetchCity: '古丈县', //用户设置的取车城市
     fetchSite: '县政府店', //用户设置的取车门店
     repayCity: '古丈县', //用户设置的还车城市
@@ -56,6 +57,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    //获取用户信息
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/userInfo',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('home index.js onLoad /rentalcars/wechat/userInfo success');
+    }, err => {
+      console.log('home index.js onLoad /rentalcars/wechat/userInfo failure');
+    });
     // wx.getLocation({
     //   type: 'wgs84',
     //   success: res => {
@@ -118,28 +131,28 @@ Page({
 
   },
   //将坐标转换成地址
-  getDistrict: function(latitude, longitude) {
-    wx.request({
-      url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: res => {
-        console.log('home index.js getDistrict success', res);
-        // 省
-        let province = res.data.result.address_component.province;
-        // 市
-        let city = res.data.result.address_component.city;
-        // 区
-        let district = res.data.result.address_component.district;
-        this.setData({ //初始化相关信息为用户当前所在地址
-          region: [province, city, district],
-          fetchCity: city,
-          repayCity: city
-        })
-      }
-    })
-  },
+  // getDistrict: function(latitude, longitude) {
+  //   wx.request({
+  //     url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
+  //     header: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     success: res => {
+  //       console.log('home index.js getDistrict success', res);
+  //       // 省
+  //       let province = res.data.result.address_component.province;
+  //       // 市
+  //       let city = res.data.result.address_component.city;
+  //       // 区
+  //       let district = res.data.result.address_component.district;
+  //       this.setData({ //初始化相关信息为用户当前所在地址
+  //         region: [province, city, district],
+  //         fetchCity: city,
+  //         repayCity: city
+  //       })
+  //     }
+  //   })
+  // },
   //选择去送车地址
   handleSelectSite: function(e) {
     console.log('home index.js handleSelectCar', e);

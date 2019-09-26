@@ -1,24 +1,27 @@
 /* page/home/carSelected/index.wxss */
 @import "/wxss/colorUi.wxss";
-.VerticalNav.nav {
+.verticalNav.nav {
   width: 200rpx;
   white-space: initial;
 }
 
-.VerticalNav.nav .cu-item {
+.verticalNav.nav .cu-item {
   width: 100%;
   text-align: center;
-  background-color: #fff;
+  background-color: var(--ghostWhite);
   margin: 0;
   border: none;
   height: 50px;
   position: relative;
 }
+.verticalNav.nav .cu-item.backgroud-white{
+  background-color: #fff;
+}
 
-.VerticalNav.nav .cu-item.cur {
+.verticalNav.nav .cu-item.cur {
   background-color: #f1f1f1;
 }
-.VerticalNav.nav .cu-item.cur::after {
+.verticalNav.nav .cu-item.cur::after {
   content: "";
   width: 8rpx;
   height: 30rpx;
@@ -30,9 +33,13 @@
   bottom: 0;
   margin: auto;
 }
-.VerticalBox{
+.verticalBox{
   display: flex;
 }
-.VerticalMain{
+.verticalMain{
   background-color: #f1f1f1;
+}
+.verticalMain .cu-list .list-item-expending{
+  margin-bottom: 10rpx;
+  height: 160rpx;
 }

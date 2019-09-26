@@ -54,15 +54,15 @@
 .index-container .info-container .location-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20rpx;
+  line-height: 1;
+  padding: 30rpx 20rpx 20rpx 20rpx;
   background-color: var(--white);
 }
 
 .index-container .info-container .location-container .city-container {
-  width: 240rpx;
   margin-right: 20rpx;
   display: flex;
+  align-items: center;
 }
 .index-container .info-container .location-container .city-container .return-circle {
   width: 40rpx;
@@ -89,16 +89,18 @@
   overflow: auto;
   padding-right: 10rpx;
   padding-left: 30rpx;
-  float: left;
 }
 
 .index-container .info-container .location-container .site-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex: auto;
 }
-.index-container .info-container .location-container .site-container .text-container {
+/* .index-container .info-container .location-container .site-container .text-container {
   overflow: auto;
   float: left;
-}
+} */
 
 /* ==================
           租车时间

@@ -1,2 +1,10 @@
 <!--page/home/carSelected/carDetail/index.wxml-->
-<text>page/home/carSelected/carDetail/index.wxml</text>
+<view class="car-detail-container">
+  <view class="basic-info">
+    <view class="cu-avatar xl" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+  </view>
+  <view></view>
+  <view></view>
+  <view></view>
+  <text>hello</text>
+</view>

@@ -1,1 +1,8 @@
 /* page/home/carSelected/carDetail/index.wxss */
+
+.car-detail-container .basic-info .cu-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  background-size: cover;
+  background-position: center;
+}

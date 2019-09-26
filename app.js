@@ -15,7 +15,7 @@ App({
     hasLogin: false,
     wxCode: '',
     httpQueue: [],
-    baseUrl: ''
+    baseUrl: 'http://39.108.148.236:8080'
   },
   // http拦截器
   httpInterceptor: function (obj) {
@@ -36,15 +36,13 @@ App({
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
                 // console.log('onLaunch wx.login success', res);
                 this.globalData.wxCode = res.code;
-                let dataTemp = {
-                  code: this.globalData.wxCode,
-                  'loginType': 'WX_APP'
-                };
                 this.httpInterceptor({
-                  url: this.globalData.baseUrl + '/home/wx-mini/login',
-                  data: dataTemp,
+                  url: this.globalData.baseUrl + '/rentalcars/wechat/login',
+                  data: {
+                    code: this.globalData.wxCode
+                  },
                   header: {
-                    'content-type': 'application/x-www-form-urlencoded'
+                    'content-type': 'application/json'
                   },
                   method: 'GET'
                 }).then(res1 => {
@@ -75,23 +73,23 @@ App({
     wx.login({
       success: res => {
         if(res.code){
-          // this.httpInterceptor({
-          //   url: this.globalData.baseUrl,
-          //   data: {
-          //     code: this.globalData.wxCode
-          //   },
-          //   header: {
-          //     'content-type': 'application/x-www-form-urlencoded'
-          //   },
-          //   method: 'GET'
-          // }).then(res => {
-          //   console.log('app.js login success', res);
-          // }, err => {
-          //   console.log('app.js login failure', err);
-          // });
           this.globalData.wxCode = res.code;
-          wx.reLaunch({
-            url: '/page/home/index',
+          this.httpInterceptor({
+            url: this.globalData.baseUrl + '/rentalcars/wechat/login',
+            data: {
+              code: this.globalData.wxCode
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            method: 'GET'
+          }).then(res => {
+            console.log('app.js login success', res);
+            // wx.reLaunch({
+            //   url: '/page/home/index',
+            // });
+          }, err => {
+            console.log('app.js login failure', err);
           });
         }
       }
