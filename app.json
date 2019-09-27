@@ -9,7 +9,8 @@
     "page/home/carSelected/index",
     "page/home/carSelected/carDetail/index",
     "page/order/orderDetail/index",
-    "page/test/index"
+    "page/test/index",
+    "page/home/carSelected/preOrderDetail/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

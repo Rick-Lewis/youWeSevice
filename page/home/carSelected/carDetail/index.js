@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  // 预定详情
+  handleReserveCar: function(){
+    wx.navigateTo({
+      url: '/page/home/carSelected/preOrderDetail/index',
+    });
   }
 })

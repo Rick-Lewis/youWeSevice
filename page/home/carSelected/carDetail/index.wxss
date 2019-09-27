@@ -1,8 +1,86 @@
 /* page/home/carSelected/carDetail/index.wxss */
 
-.car-detail-container .basic-info .cu-avatar {
+.car-detail-container .preview-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 40rpx;
+  background-color: var(--white);
+}
+
+.car-detail-container .preview-info .left {
+  display: flex;
+  align-items: center;
+}
+
+.car-detail-container .preview-info .left .cu-avatar {
   width: 128rpx;
   height: 128rpx;
   background-size: cover;
   background-position: center;
+}
+
+/* 基础信息 */
+.car-detail-container .basic-info .header{
+  padding: 20rpx 40rpx;
+  margin-top: 5rpx;
+  background-color: var(--white);
+}
+.car-detail-container .basic-info .content{
+  padding: 0 60rpx;
+  background-color: var(--white);
+}
+.car-detail-container .basic-info .content .top{
+  display: flex;
+  justify-content: space-between;
+}
+.car-detail-container .basic-info .content .bottom{
+  background-color: var(--white);
+  overflow: auto;
+  padding: 20rpx 0 40rpx 0;
+}
+.car-detail-container .basic-info .content .bottom .tag{
+  float: left;
+  border: 1rpx solid var(--orange);
+  color: var(--orange);
+  padding: 5rpx 10rpx;
+  margin-right: 10rpx;
+}
+.car-detail-container .basic-info .content .bottom .tag:last-child{
+  margin-right: 0;
+}
+
+/* 用户评价 */
+.car-detail-container .evaluate .header{
+  padding: 20rpx 40rpx;
+  margin-top: 5rpx;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+}
+.car-detail-container .evaluate .content{
+  padding: 0 40rpx 40rpx 40rpx;
+  background-color: var(--white);
+}
+.car-detail-container .evaluate .content .list-item{
+  margin-bottom: 20rpx;
+}
+.car-detail-container .evaluate .content .list-item:last-child{
+  margin-bottom: 0;
+}
+
+/* 特殊说明 */
+.car-detail-container .other .header{
+  padding: 20rpx 40rpx;
+  margin-top: 5rpx;
+  background-color: var(--white);
+}
+.car-detail-container .other .content{
+  padding: 0 60rpx 40rpx 60rpx;
+  background-color: var(--white);
+}
+
+/* 立即预订 */
+.car-detail-container .btn-container {
+  margin-top: 60rpx;
 }

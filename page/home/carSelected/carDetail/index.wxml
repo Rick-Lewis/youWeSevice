@@ -1,10 +1,62 @@
 <!--page/home/carSelected/carDetail/index.wxml-->
 <view class="car-detail-container">
-  <view class="basic-info">
-    <view class="cu-avatar" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+  <view class="preview-info">
+    <view class="left">
+      <view class="cu-avatar" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+      <view style="margin-left: 20rpx;">凯迪拉克XTS</view>
+    </view>
+    <view class="right">230元/日均</view>
   </view>
-  <view></view>
-  <view></view>
-  <view></view>
-  <text>hello</text>
+  <view class="basic-info">
+    <view class="header">基础信息</view>
+    <view class="content">
+      <view class="top">
+        <view class="left">
+          <view>
+            <text>发动机：</text>涡轮增压</view>
+          <view>
+            <text>变速箱：</text>自动变速箱</view>
+          <view>
+            <text>油箱容量：</text>50L</view>
+        </view>
+        <view class="right">
+          <view>
+            <text>汽油规格：</text>92/95</view>
+          <view>
+            <text>座位数：</text>5</view>
+          <view>
+            <text>综合油耗：</text>9.0</view>
+        </view>
+      </view>
+      <view class="bottom">
+        <view class="tag">前后雷达</view>
+        <view class="tag">倒车影像</view>
+      </view>
+    </view>
+  </view>
+  <view class="evaluate">
+    <view class="header">
+      <view>用户评价</view>
+      <view style="color: var(--orange)">查看全部
+        <i-icon type="enter" style="margin-left: 10rpx;" />
+      </view>
+    </view>
+    <view class="content">
+      <view class="list-item">
+        <view class="item-header">东莞MMC</view>
+        <view class="item-content">车况很好，超级推荐，老板很热情</view>
+      </view>
+      <view class="list-item">
+        <view class="item-header">东莞MMC</view>
+        <view class="item-content">车况很好，超级推荐，老板很热情</view>
+      </view>
+    </view>
+  </view>
+  <view class="other">
+    <view class="header">特殊说明</view>
+    <view class="content">车身颜色以现场情况而定</view>
+  </view>
+  <view class="btn-container">
+      <i-button type="custom" bindtap="handleReserveCar">立即预定</i-button>
+    </view>
 </view>

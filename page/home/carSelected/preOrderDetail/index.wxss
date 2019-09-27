@@ -1,0 +1,56 @@
+/* page/home/carSelected/preOrderDetail/index.wxss */
+.pre-order-detail-container .preview-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 40rpx;
+  background-color: var(--white);
+}
+
+.pre-order-detail-container .preview-info .left {
+  display: flex;
+  align-items: center;
+}
+
+.pre-order-detail-container .preview-info .left .cu-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  background-size: cover;
+  background-position: center;
+}
+
+/* 取还信息 */
+.pre-order-detail-container .repay-info .header{
+  padding: 20rpx 40rpx;
+  margin-top: 5rpx;
+  background-color: var(--white);
+}
+.pre-order-detail-container .repay-info .content{
+  padding: 0 60rpx;
+  background-color: var(--white);
+}
+
+/* 基本费用 */
+.pre-order-detail-container .price-info .header{
+  padding: 20rpx 40rpx;
+  margin-top: 5rpx;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+}
+.pre-order-detail-container .price-info .content{
+  padding: 0 40rpx 40rpx 40rpx;
+  background-color: var(--white);
+}
+
+/* 取车须知 */
+.pre-order-detail-container .other .header{
+  padding: 20rpx 40rpx;
+  margin-top: 5rpx;
+  background-color: var(--white);
+}
+
+/* 立即预订 */
+.pre-order-detail-container .btn-container {
+  margin-top: 60rpx;
+}

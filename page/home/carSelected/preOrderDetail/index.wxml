@@ -1,0 +1,33 @@
+<!--page/home/carSelected/preOrderDetail/index.wxml-->
+<view class="pre-order-detail-container">
+  <view class="preview-info">
+    <view class="left">
+      <view class="cu-avatar" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+      <view style="margin-left: 20rpx;">
+        <view>凯迪拉克XTS</view>
+        <view>2.0T自动 | 5座 | 油耗9.0L</view>
+      </view>
+    </view>
+    <view class="right">230元/日均</view>
+  </view>
+  <view class="repay-info">
+    <view class="header">取还信息</view>
+    <view class="content">
+    </view>
+  </view>
+  <view class="price-info">
+    <view class="header">
+      <view>基本费用</view>
+    </view>
+    <view class="content">
+    </view>
+  </view>
+  <view class="other">
+    <view class="header">取车须知
+      <i-icon type="enter" size="20" style="float: right;" />
+    </view>
+  </view>
+  <view class="btn-container">
+    <i-button type="custom" bindtap="handlePayment">立即预定</i-button>
+  </view>
+</view>

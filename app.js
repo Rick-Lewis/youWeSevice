@@ -90,6 +90,9 @@ App({
             });
           }, err => {
             console.log('app.js login failure', err);
+            wx.reLaunch({
+              url: '/page/home/index',
+            });
           });
         }
       }

@@ -3,5 +3,5 @@
     "i-icon": "../../dist/icon/index",
     "i-button": "../../dist/button/index"
   },
-  "navigationBarTitleText": "车辆详情"
+  "navigationBarTitleText": "租车下单"
 }
