@@ -3,6 +3,6 @@
     "i-tabs": "../../dist/tabs/index",
     "i-tab": "../../dist/tab/index"
   },
-  "navigationBarTitleText": "他的",
+  "navigationBarTitleText": "订单",
   "navigationBarBackgroundColor": "#FFFFFF"
 }

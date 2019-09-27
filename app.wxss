@@ -3,9 +3,13 @@ page {
   --white: #FFFFFF;
   --black: #000000;
   --grey: #F8F8F8;
+  --orange: #FF6633;
   background-color: #F8F8F8;
   height: 100%;
   font-size: 28rpx;
   color: #333333;
   line-height: 1.6;
+}
+button{
+  background-color: var(--orange) !important;
 }

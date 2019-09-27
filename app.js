@@ -85,9 +85,9 @@ App({
             method: 'GET'
           }).then(res => {
             console.log('app.js login success', res);
-            // wx.reLaunch({
-            //   url: '/page/home/index',
-            // });
+            wx.reLaunch({
+              url: '/page/home/index',
+            });
           }, err => {
             console.log('app.js login failure', err);
           });
