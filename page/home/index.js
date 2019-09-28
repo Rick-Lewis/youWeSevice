@@ -61,7 +61,8 @@ Page({
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/userInfo',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'token': app.globalData.token
       },
       method: 'GET'
     }).then(res => {

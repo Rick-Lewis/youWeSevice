@@ -15,7 +15,8 @@ App({
     hasLogin: false,
     wxCode: '',
     httpQueue: [],
-    baseUrl: 'http://39.108.148.236:8080'
+    baseUrl: 'http://39.108.148.236:8080',
+    token: ''
   },
   // http拦截器
   httpInterceptor: function (obj) {
@@ -85,14 +86,15 @@ App({
             method: 'GET'
           }).then(res => {
             console.log('app.js login success', res);
-            wx.reLaunch({
-              url: '/page/home/index',
-            });
+            this.globalData.token = res.data.data
+            // wx.reLaunch({
+            //   url: '/page/home/index',
+            // });
           }, err => {
             console.log('app.js login failure', err);
-            wx.reLaunch({
-              url: '/page/home/index',
-            });
+            // wx.reLaunch({
+            //   url: '/page/home/index',
+            // });
           });
         }
       }

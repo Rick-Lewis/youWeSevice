@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "i-icon": "../../dist/icon/index",
-    "i-button": "../../dist/button/index"
+    "i-button": "../../dist/button/index",
+    "i-checkbox": "../../component/checkbox/index"
   },
   "navigationBarTitleText": "租车下单"
 }

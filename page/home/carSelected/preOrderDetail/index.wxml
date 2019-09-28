@@ -27,6 +27,12 @@
       <i-icon type="enter" size="20" style="float: right;" />
     </view>
   </view>
+  <view class="protocol">
+    <i-checkbox i-class="checkbox" checked="{{checked}}" bindchange="handleCheckBoxChange"></i-checkbox>
+    <view>已仔细阅读并同意
+      <text style="color: var(--orange)">《租车服务合同》</text>
+    </view>
+  </view>
   <view class="btn-container">
     <i-button type="custom" bindtap="handlePayment">立即预定</i-button>
   </view>

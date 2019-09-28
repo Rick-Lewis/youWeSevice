@@ -1,0 +1,4 @@
+<view class="i-class i-checkbox" catchtap="checkboxChange">
+  <radio value="{{value}}" checked="{{checked}}" color="{{checked?color:''}}" disabled="{{disabled}}" class="i-checkbox-radio {{positionCls}}" />
+  <view class="i-checkbox-title">{{value}}</view>
+</view>

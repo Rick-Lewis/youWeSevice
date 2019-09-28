@@ -15,11 +15,13 @@
         <view class="cu-item list-item-expending" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
           <view class="cu-avatar xl" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg); left: 20rpx;"></view>
           <view class="content" style="left: 160rpx;">
-            <view class="text-grey">{{subItem.name}}</view>
+            <view>{{subItem.name}}</view>
             <view class="text-gray text-sm flex">
               {{subItem.type}} | {{subItem.volume}} | {{subItem.oil}}
             </view>
-            <view>{{subItem.price}}</view>
+            <view>{{subItem.price}}/
+              <text class="text-gray">日均</text>
+            </view>
           </view>
         </view>
       </view>
