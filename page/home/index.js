@@ -227,6 +227,7 @@ Page({
     result.push(timeTemp);
     return result;
   },
+  // 开始时间选择
   bindStartPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -243,6 +244,7 @@ Page({
   bindStartMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
   },
+  // 结束时间选择
   bindEndPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -259,6 +261,7 @@ Page({
   bindEndMultiPickerColumnChange: function (e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
   },
+  // 计算时间间隔
   calcDuration: function(start, end){
     console.log('home index.js calcDuration', start, end);
     let result =  {
@@ -279,6 +282,7 @@ Page({
     });
     return result;
   },
+  // tab切换
   handleChange({ detail }) {
     console.log('home index.js handleChange detail', detail);
     this.setData({

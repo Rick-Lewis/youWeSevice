@@ -5,7 +5,7 @@ Page({
    * Page initial data
    */
   data: {
-    checked: false
+    checked: false // 协议复选框，默认为不选
   },
 
   /**
@@ -63,12 +63,17 @@ Page({
   onShareAppMessage: function() {
 
   },
+  // 勾选协议事件回调
   handleCheckBoxChange: function({
     detail = {}
   }) {
     this.setData({
       checked: detail.current
     });
+  },
+  // 协议点击回调
+  handleProtocolClick: function(){
+    console.log('preOrderDetail index.js handleProtocolClick');
   },
   // 立即预定
   handlePayment: function() {

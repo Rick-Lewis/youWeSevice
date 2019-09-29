@@ -1,11 +1,11 @@
 <!--page/home/carSelected/index.wxml-->
 <view class="verticalBox">
-  <scroll-view class="verticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:100vh">
-    <view class="cu-item {{index==TabCur?'text-green backgroud-white':''}}" wx:for="{{carList}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+  <scroll-view class="verticalNav nav" scroll-y scroll-with-animation scroll-top="{{verticalNavTop}}" style="height:100vh">
+    <view class="cu-item {{index==tabCur?'text-green backgroud-white':''}}" wx:for="{{carList}}" wx:key bindtap='tabSelect' data-id="{{index}}">
       {{item.tag}}
     </view>
   </scroll-view>
-  <scroll-view class="verticalMain" scroll-y scroll-with-animation style="height:100vh" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+  <scroll-view class="verticalMain" scroll-y scroll-with-animation style="height:100vh" scroll-into-view="main-{{mainCur}}" bindscroll="verticalMain">
     <view wx:for="{{carList}}" wx:key id="main-{{index}}">
       <view class='cu-bar solid-bottom bg-white' style="{{index !== 0 ? 'margin-top: 20rpx;': ''}}">
         <view class='action'>

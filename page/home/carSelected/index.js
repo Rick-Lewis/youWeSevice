@@ -9,9 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    TabCur: 0,
-    MainCur: 0,
-    VerticalNavTop: 0,
+    tabCur: 0,
+    mainCur: 0,
+    verticalNavTop: 0,
     carList: [],
     load: true
   },
@@ -81,15 +81,17 @@ Page({
   onShareAppMessage: function() {
 
   },
+  // tab切换
   tabSelect(e) {
     this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      MainCur: e.currentTarget.dataset.id,
-      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+      tabCur: e.currentTarget.dataset.id,
+      mainCur: e.currentTarget.dataset.id,
+      verticalNavTop: (e.currentTarget.dataset.id - 1) * 50
     })
   },
-  VerticalMain(e) {
-    // console.log('carSelected index.js VerticalMain', e);
+  // 页面右边内容滚动事件回调
+  verticalMain(e) {
+    // console.log('carSelected index.js verticalMain', e);
     let that = this;
     let carList = this.data.carList;
     let tabHeight = 0;
@@ -113,13 +115,14 @@ Page({
     for (let i = 0; i < carList.length; i++) {
       if (scrollTop > carList[i].top && scrollTop < carList[i].bottom) {
         that.setData({
-          VerticalNavTop: (carList[i].id - 1) * 50,
-          TabCur: carList[i].id
+          verticalNavTop: (carList[i].id - 1) * 50,
+          tabCur: carList[i].id
         })
         return false
       }
     }
   },
+  // 选择车辆回调
   handleSelectedItem: function(e) {
     console.log('carSelected index.js handleSelectedItem', e);
     wx.navigateTo({

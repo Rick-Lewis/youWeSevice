@@ -12,9 +12,9 @@ Page({
     options: null, //对应onLoad中的options
     origCities: [], //未分类的城市列表
     cities: [], //按字母分类的城市列表
-    listCur: '',
+    listCur: '', //选择的字母（放大效果显示）
     words: [], //字母表
-    hidden: true
+    hidden: true //选择的字母是否显示，默认不显示
   },
 
   /**
