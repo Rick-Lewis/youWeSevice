@@ -29,6 +29,18 @@ Page({
       title: '加载中...',
       mask: true
     });
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/store/all',
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('siteSelected index.js /rentalcars/wechat/store/all success');
+    }, err => {
+      console.log('siteSelected index.js /rentalcars/wechat/store/all failure');
+    });
     let storeSite = new Array(26);
     let words = [];
     for (let i = 0; i < 26; i++) {

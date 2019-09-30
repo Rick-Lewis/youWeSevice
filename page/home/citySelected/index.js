@@ -26,6 +26,18 @@ Page({
       title: '加载中...',
       mask: true
     });
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/city/all',
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('citySelected index.js /rentalcars/wechat/city/all success');
+    }, err => {
+      console.log('citySelected index.js /rentalcars/wechat/city/all failure');
+    });
     let storeCity = new Array(22);
     const words = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"];
     words.forEach((item, index) => {

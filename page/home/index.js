@@ -157,7 +157,6 @@ Page({
   //选择去送车地址
   handleSelectSite: function(e) {
     console.log('home index.js handleSelectCar', e);
-    return;
     switch (e.currentTarget.dataset.name) {
       case 'fetchCity':
         wx.navigateTo({
