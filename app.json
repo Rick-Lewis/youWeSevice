@@ -1,6 +1,5 @@
 {
   "pages": [
-    "page/home/carSelected/preOrderDetail/index",
     "page/navigator/navigator",
     "page/home/index",
     "page/myZone/index",
@@ -9,6 +8,7 @@
     "page/home/siteSelected/index",
     "page/home/carSelected/index",
     "page/home/carSelected/carDetail/index",
+    "page/home/carSelected/preOrderDetail/index",
     "page/order/orderDetail/index",
     "page/test/index"
   ],

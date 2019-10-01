@@ -1,13 +1,17 @@
 /* page/order/index.wxss */
-.order-container .tabs-container{
-  position:fixed;
+
+.order-container .tabs-container {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 11;
 }
-.order-container .tab-content-container{
+
+.order-container .tab-content-container {
   padding-top: 84rpx;
 }
+
 .order-container .tab-content-container .order-card-container {
   background-color: #fff;
   margin: 20rpx 40rpx 0 40rpx;
@@ -24,39 +28,130 @@
   padding: 16rpx;
   font-size: 28rpx;
   min-height: 44rpx;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--grey);
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .order-container .tab-content-container .order-card-container .content-container {
   display: flex;
-  padding: 30rpx 0;
-  margin: 0 16rpx;
-  min-height: 140rpx;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+  background-color: var(--white);
+  border-bottom: 1rpx solid var(--grey);
 }
 
-.order-container .tab-content-container .order-card-container .content-container .title-container {
+.order-container .tab-content-container .order-card-container .content-container .left {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 20rpx 0 20rpx 20rpx;
-  flex: 1;
+  align-items: center;
 }
 
-.order-container .tab-content-container .order-card-container .content-container .title-container .title {
-  font-size: 36rpx;
+.order-container .tab-content-container .order-card-container .content-container .left .cu-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  background-size: cover;
+  background-position: center;
 }
 
-/* .order-container .tab-content-container .order-card-container .content-container .status-container {
-  flex: 1;
-  text-align: right;
-} */
+.order-container .tab-content-container .order-card-container .content-container .left .plate-number {
+  background-color: var(--blue);
+  display: inline-block;
+  padding: 0 10rpx;
+  border-radius: 5rpx;
+  color: var(--white);
+}
 
 .order-container .tab-content-container .order-card-container .footer-container {
-  padding: 16rpx;
+  padding: 16rpx 20rpx 16rpx 16rpx;
   min-height: 140rpx;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top{
+  padding-bottom: 16rpx;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view::before {
+  content: '';
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 7rpx;
+  background-color: rgba(105, 189, 131, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view.duration::before {
+  background-color: rgba(105, 189, 131, 1);
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view.fetch-site::before {
+  background-color: rgba(104, 104, 104, 1);
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view.return-site::before {
+  background-color: rgba(105, 189, 131, 1);
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view.duration {
+  justify-content: space-between;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view>text:first-child {
+  margin-left: 25rpx;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view.fetch-site .fetch-circle {
+  width: 24rpx;
+  height: 24rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 4rpx solid rgba(105, 189, 131, 1);
+  line-height: 24rpx;
+  text-align: center;
+  color: rgba(105, 189, 131, 1);
+  font-size: 18rpx;
+  margin-left: 10rpx;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .top>view.return-site .return-circle {
+  width: 24rpx;
+  height: 24rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 4rpx solid rgba(104, 104, 104, 1);
+  line-height: 24rpx;
+  text-align: center;
+  color: rgba(104, 104, 104, 1);
+  font-size: 18rpx;
+  margin-left: 10rpx;
 }
 
 .order-container .tab-content-container .order-card-container .content-container cover-image {
   width: 140rpx;
+}
+
+.order-container .tab-content-container .order-card-container .footer-container .bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1rpx solid var(--grey);
+  padding-top: 16rpx;
+}
+.order-container .tab-content-container .order-card-container .footer-container .bottom .evaluate{
+  width: 160rpx;
+  padding: 5rpx 10rpx;
+  border-radius:160rpx;
+  border: 1rpx solid var(--grey);
+  text-align: center;
 }

@@ -8,9 +8,9 @@ Page({
    */
   data: {
     // region: [], //用户所在的[省, 市, 区]
-    fetchCity: '古丈县', //用户设置的取车城市
+    fetchCity: '古丈', //用户设置的取车城市
     fetchSite: '县政府店', //用户设置的取车门店
-    repayCity: '古丈县', //用户设置的还车城市
+    repayCity: '古丈', //用户设置的还车城市
     repaySite: '县政府店', //用户设置的还车门店
     swiperList: [{
       id: 0,

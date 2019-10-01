@@ -9,19 +9,19 @@ Page({
     tabList: [{
       key: 0,
       name: 'tab0',
-      title: '选项0'
+      title: '待付款'
     }, {
       key: 1,
       name: 'tab1',
-      title: '选项1'
+      title: '已付款'
     }, {
       key: 2,
       name: 'tab2',
-      title: '选项2'
+      title: '已完成'
     }, {
       key: 3,
       name: 'tab3',
-      title: '选项3'
+      title: '全部'
     }],
     orderList: [1,2,3]
   },

@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "i-searchbar": "../../../dist/searchbar/index"
+    "i-searchbar": "../../../component/searchbar/index"
   }
 }

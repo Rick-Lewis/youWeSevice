@@ -2,7 +2,7 @@
 <view class="city-selected-container">
   <i-searchbar class="i-searchbar-container" items="{{origCities}}" bind:mychoiceevent="handleSelectedItem"></i-searchbar>
   <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:100vh" enable-back-to-top="true">
-    <block wx:for="{{cities}}" wx:key>
+    <block wx:for="{{cities}}" wx:if="{{item.list.length !== 0}}" wx:key>
       <view class="padding indexItem-{{item.key}}" id="indexes-{{item.key}}" data-index="{{item.key}}">{{item.key}}</view>
       <view class="cu-list menu-avatar no-padding">
         <view class="cu-item" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">

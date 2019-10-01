@@ -30,7 +30,7 @@ Page({
       mask: true
     });
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/store/all',
+      url: app.globalData.baseUrl + '/rentalcars/store/all',
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token

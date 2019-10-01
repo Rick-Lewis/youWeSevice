@@ -4,11 +4,9 @@ page {
   --black: #000000;
   --grey: #F8F8F8;
   --orange: #FF6633;
+  --blue: #1886ff;
   background-color: #F8F8F8;
   font-size: 28rpx;
   color: #333333;
   line-height: 1.6;
-}
-button{
-  background-color: var(--orange) !important;
 }

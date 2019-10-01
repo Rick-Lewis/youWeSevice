@@ -1,9 +1,9 @@
 <!--page/home/index.wxml-->
 <view class="index-container">
-  <!-- <i-tabs current="{{ current }}" bindchange="handleChange">
+  <i-tabs current="{{ current }}" bindchange="handleChange">
     <i-tab key="carRental" title="租车"></i-tab>
     <i-tab key="rideSharing" title="顺风车"></i-tab>
-  </i-tabs> -->
+  </i-tabs>
   <view class="carRentalContent" wx:if="{{current === 'carRental'}}">
     <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="50000" duration="500">
       <swiper-item wx:for="{{swiperList}}" wx:key>

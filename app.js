@@ -87,14 +87,14 @@ App({
           }).then(res => {
             console.log('app.js login success', res);
             this.globalData.token = res.data.data
-            // wx.reLaunch({
-            //   url: '/page/home/index',
-            // });
+            wx.switchTab({
+              url: '/page/home/index',
+            });
           }, err => {
             console.log('app.js login failure', err);
-            // wx.reLaunch({
-            //   url: '/page/home/index',
-            // });
+            wx.switchTab({
+              url: '/page/home/index',
+            });
           });
         }
       }
