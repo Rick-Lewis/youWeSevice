@@ -3,15 +3,17 @@ const app = getApp();
 Page({
   keys: 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS',
   weeks: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+  fetchDistrictAdcode: '',
+  repayDistrictAdcode: '',
   /**
    * 页面的初始数据
    */
   data: {
     // region: [], //用户所在的[省, 市, 区]
-    fetchCity: '古丈', //用户设置的取车城市
-    fetchSite: '县政府店', //用户设置的取车门店
-    repayCity: '古丈', //用户设置的还车城市
-    repaySite: '县政府店', //用户设置的还车门店
+    fetchDistrict: '请选择城市', //用户设置的取车城市
+    fetchSite: '请选择门店', //用户设置的取车门店
+    repayDistrict: '请选择城市', //用户设置的还车城市
+    repaySite: '请选择门店', //用户设置的还车门店
     swiperList: [{
       id: 0,
       type: 'image',
@@ -42,10 +44,10 @@ Page({
       url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
     }],
     modalVisible: false, //选择时间模态框显示与否，true为显示
-    timeArray: [],
-    startIndex: [0, 0],
-    endIndex: [0,0],
-    duration: {
+    timeArray: [], //picker组件数据源
+    startIndex: [0, 0], //开始时间选中的picker组件对应的下标
+    endIndex: [0, 0], //结束时间选中的picker组件对应的下标
+    duration: { //租车时间
       days: 0,
       hours: 0,
       minutes: 0
@@ -59,25 +61,32 @@ Page({
   onLoad: function(options) {
     //获取用户信息
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/userInfo',
+      url: app.globalData.baseUrl + '/rentalcars/wechat/info/user',
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
       },
       method: 'GET'
     }).then(res => {
-      console.log('home index.js onLoad /rentalcars/wechat/userInfo success');
+      console.log('home index.js onLoad /rentalcars/wechat/info/user success', res);
+      if(!!res.data.data.telephone){
+        app.globalData.isPhoneAuth = true;
+      }
     }, err => {
-      console.log('home index.js onLoad /rentalcars/wechat/userInfo failure');
+      console.log('home index.js onLoad /rentalcars/wechat/info/user failure', err);
     });
-    // wx.getLocation({
-    //   type: 'wgs84',
-    //   success: res => {
-    //     console.log('home index.js onLoad wx.getLocation success', res);
-    //     this.getDistrict(res.latitude, res.longitude);
-    //   }
-    // });
+    wx.getLocation({
+      type: 'wgs84',
+      success: res => {
+        console.log('home index.js onLoad wx.getLocation success', res);
+        this.getDistrict(res.latitude, res.longitude);
+      }
+    });
     let temp = this.initTimeArray();
+    app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+      startTime: temp[this.data.startIndex[0], this.data.startIndex[1]],
+      endTime: temp[this.data.endIndex[0], this.data.endIndex[1]]
+    });
     this.setData({
       timeArray: temp
     });
@@ -132,57 +141,77 @@ Page({
 
   },
   //将坐标转换成地址
-  // getDistrict: function(latitude, longitude) {
-  //   wx.request({
-  //     url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
-  //     header: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     success: res => {
-  //       console.log('home index.js getDistrict success', res);
-  //       // 省
-  //       let province = res.data.result.address_component.province;
-  //       // 市
-  //       let city = res.data.result.address_component.city;
-  //       // 区
-  //       let district = res.data.result.address_component.district;
-  //       this.setData({ //初始化相关信息为用户当前所在地址
-  //         region: [province, city, district],
-  //         fetchCity: city,
-  //         repayCity: city
-  //       })
-  //     }
-  //   })
-  // },
+  getDistrict: function(latitude, longitude) {
+    wx.request({
+      url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: res => {
+        console.log('home index.js getDistrict success', res);
+        // 省
+        let province = res.data.result.ad_info.province;
+        // 市
+        let city = res.data.result.ad_info.city;
+        // 区
+        let district = res.data.result.ad_info.district;
+        this.fetchDistrictAdcode = res.data.result.ad_info.adcode;
+        this.repayDistrictAdcode = res.data.result.ad_info.adcode;
+        this.setData({ //初始化相关信息为用户当前所在地址
+          // region: [province, city, district],
+          fetchDistrict: district,
+          repayDistrict: district
+        })
+      }
+    })
+  },
   //选择去送车地址
   handleSelectSite: function(e) {
     console.log('home index.js handleSelectCar', e);
     switch (e.currentTarget.dataset.name) {
-      case 'fetchCity':
+      case 'fetchDistrict':
         wx.navigateTo({
-          url: '/page/home/citySelected/index?from=fetchCity',
+          url: '/page/home/citySelected/index?from=fetchDistrict',
         });
         break;
       case 'fetchSite':
         wx.navigateTo({
-          url: '/page/home/siteSelected/index?from=fetchSite&title=' + this.data.fetchCity,
+          url: '/page/home/siteSelected/index?from=fetchSite&title=' + this.data.fetchDistrict + '&adcode=' + this.fetchDistrictAdcode,
         });
         break;
-      case 'repayCity':
+      case 'repayDistrict':
         wx.navigateTo({
-          url: '/page/home/citySelected/index?from=repayCity',
+          url: '/page/home/citySelected/index?from=repayDistrict',
         });
         break;
       case 'repaySite':
         wx.navigateTo({
-          url: '/page/home/siteSelected/index?from=repaySite&title=' + this.data.repayCity,
+          url: '/page/home/siteSelected/index?from=repaySite&title=' + this.data.repayDistrict + '&adcode=' + this.repayDistrictAdcode,
         });
         break;
     }
   },
-  //去选车
+  //立即选车
   handleSelectCar: function(e) {
     console.log('home index.js handleSelectCar', e);
+    app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+      fetchDistrict: {
+        district: this.data.fetchDistrict,
+        adcode: this.fetchDistrictAdcode
+      },
+      repayDistrict: {
+        district: this.data.repayDistrict,
+        adcode: this.repayDistrictAdcode
+      },
+      startTime: {
+        day: this.data.timeArray[0][this.data.startIndex[0]],
+        time: this.data.timeArray[1][this.data.startIndex[1]]
+      },
+      endTime: {
+        day: this.data.timeArray[0][this.data.endIndex[0]],
+        time: this.data.timeArray[1][this.data.endIndex[1]]
+      }
+    });
     wx.navigateTo({
       url: '/page/home/carSelected/index',
     });

@@ -1,33 +1,11 @@
 <!--page/home/siteSelected/index.wxml-->
-<view class="VerticalBox">
-  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:100vh">
-    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{sites}}" wx:key bindtap='tabSelect' data-id="{{index}}">
-      Tab-{{item.key}}
-    </view>
-  </scroll-view>
-  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:100vh" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
-    <view class="padding-top padding-lr" wx:for="{{sites}}" wx:key id="main-{{index}}">
-      <view class='cu-bar solid-bottom bg-white'>
-        <view class='action'>
-          <text class='cuIcon-title text-green'></text> Tab-{{item.key}} </view>
-      </view>
-      <view class="cu-list menu-avatar">
-        <view class="cu-item" wx:for="{{item.list}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
-          <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-          <view class="content">
-            <view class="text-grey">{{subItem.name}}</view>
-            <view class="text-gray text-sm flex">
-              <text class="text-cut">
-										<text class="cuIcon-infofill text-red  margin-right-xs"></text> 我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
-              </text>
-            </view>
-          </view>
-          <view class="action">
-            <view class="text-grey text-xs">22:20</view>
-            <view class="cu-tag round bg-grey sm">5</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </scroll-view>
+<view class="site-selected-container">
+  <i-cell-group wx:if="{{sites.length > 0}}">
+    <i-cell title="{{item.name}}" wx:for="{{sites}}" wx:key>
+      <view>地址：{{item.address}}</view>
+      <view>电话：{{item.telephone}}</view>
+      <i-icon type="customerservice" size="30" slot="footer" data-phone-number="{{item.telephone}}" bindtap="handleCall" />
+    </i-cell>
+  </i-cell-group>
+  <view wx:else style="text-align: center; margin-top: 10rpx;">~没有更多了~</view>
 </view>

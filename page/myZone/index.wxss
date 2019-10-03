@@ -46,7 +46,12 @@
   align-items: center;
   justify-content: center;
   line-height: 1.5;
-  padding-top: 4rpx;
+  padding-top: 12rpx;
+  background-color: transparent;
+  width: 196rpx;
+}
+.my-zone-container .info-container .info-edit-container::after{
+  content: none;
 }
 
 .my-zone-container .info-container .info-edit-container image {
@@ -83,4 +88,18 @@
 
 .my-zone-container .btn-container {
   margin-top: 60rpx;
+}
+
+.my-zone-container .phone-auth-container .logo-container{
+  text-align: center;
+}
+.my-zone-container .phone-auth-container .logo-container cover-image{
+  width: 144rpx;
+  height: 144rpx;
+  margin: 0 auto;
+  margin-top: 180rpx;
+  margin-bottom: 20rpx;
+}
+.my-zone-container .phone-auth-container .btn-container {
+  margin-top: 100rpx;
 }

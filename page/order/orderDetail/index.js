@@ -5,7 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    timeArray: [],
+    startIndex: [0, 0],
+    endIndex: [0, 0],
+    duration: {
+      days: 0,
+      hours: 0,
+      minutes: 0
+    }
   },
 
   /**

@@ -1,0 +1,15 @@
+/* page/myZone/phoneAuth/index.wxss */
+
+.phone-auth-container .logo-container{
+  text-align: center;
+}
+.phone-auth-container .logo-container cover-image{
+  width: 144rpx;
+  height: 144rpx;
+  margin: 0 auto;
+  margin-top: 180rpx;
+  margin-bottom: 20rpx;
+}
+.phone-auth-container .btn-container {
+  margin-top: 100rpx;
+}

@@ -21,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('citySelected index.js options', options);
+    console.log('citySelected index.js options', options, app.globalData.orderSubmit);
     wx.showLoading({
       title: '加载中...',
       mask: true
@@ -44,12 +44,11 @@ Page({
     }).then(res => {
       console.log('citySelected index.js /rentalcars/wechat/city/all success', res);
       res.data.forEach((item) => {
-        let firstName = item.pingyin.substring(0, 1).toUpperCase();
+        let firstName = item.pinyin.substring(0, 1).toUpperCase();
         let index = words.indexOf(firstName);
-        storeCity[index].list.push({
-          name: item.name,
+        storeCity[index].list.push(Object.assign({}, item, {
           key: firstName
-        });
+        }));
       });
       this.setData({
         origCities: origCities,
@@ -73,7 +72,7 @@ Page({
       that.setData({
         boxTop: res.top
       })
-    }).exec(function(res){
+    }).exec(function(res) {
       console.log('citySelected index.js onReady exec');
     });
     wx.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
@@ -81,7 +80,7 @@ Page({
       that.setData({
         barTop: res.top
       })
-    }).exec(function(res){
+    }).exec(function(res) {
       console.log('citySelected index.js onReady .indexes exec');
       wx.hideLoading();
     });
@@ -195,10 +194,17 @@ Page({
   handleSelectedItem: function(e) {
     console.log('citySelected index.js handleSelectedItem', e);
     let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
+    let subItemTemp = e.currentTarget.dataset.subItem;
     targetPages[0].setData({ //改变首页的地址选择
-      [this.data.options.from]: !e.currentTarget.dataset.subItem ? e.detail.name : e.currentTarget.dataset.subItem.name
+      [this.data.options.from]: subItemTemp.name
     }, () => {
-      wx.navigateBack({　　　　
+      app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+        [this.data.options.from]: Object.assign({}, app.globalData.orderSubmit[this.data.options.from], {
+          district: subItemTemp.name,
+          adcode: subItemTemp.code
+        })
+      });
+      wx.navigateBack({
         delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
       });
     });

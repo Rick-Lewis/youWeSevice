@@ -1,1 +1,135 @@
 /* page/order/orderDetail/index.wxss */
+/* ==================
+         车辆信息
+ ==================== */
+.order-detail-container .basic-info {
+  background-color: #fff;
+  margin: 20rpx 40rpx 0 40rpx;
+  border-radius: 6rpx;
+  -moz-box-shadow: 0rpx 0rpx 10rpx rgba(0, 0, 0, 0.1); /* 老的 Firefox */
+  box-shadow: 0rpx 0rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.order-detail-container .basic-info:last-child {
+  margin-bottom: 20rpx;
+}
+
+.order-detail-container .basic-info .header-container {
+  padding: 16rpx;
+  font-size: 28rpx;
+  min-height: 44rpx;
+  border-bottom: 1px solid var(--grey);
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-detail-container .basic-info .content-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+  background-color: var(--white);
+  border-bottom: 1rpx solid var(--grey);
+}
+
+.order-detail-container .basic-info .content-container .left {
+  display: flex;
+  align-items: center;
+}
+
+.order-detail-container .basic-info .content-container .left .cu-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  background-size: cover;
+  background-position: center;
+}
+
+.order-detail-container .basic-info .content-container .left .plate-number {
+  background-color: var(--blue);
+  display: inline-block;
+  padding: 0 10rpx;
+  border-radius: 5rpx;
+  color: var(--white);
+}
+
+.order-detail-container .basic-info .footer-container {
+  padding: 16rpx 20rpx 16rpx 16rpx;
+}
+
+.order-detail-container .basic-info .content-container cover-image {
+  width: 140rpx;
+}
+
+.order-detail-container .basic-info .footer-container {
+  display: flex;
+  align-items: center;
+  padding-top: 16rpx;
+}
+
+.order-detail-container .basic-info .footer-container text:first-child {
+  min-width: 84rpx;
+}
+
+.order-detail-container .basic-info .footer-container text:nth-child(2) {
+  min-width: 126rpx;
+}
+
+.order-detail-container .basic-info .footer-container text:last-child {
+  flex: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==================
+          租车时间
+ ==================== */
+
+ .order-detail-container .at-info .duration-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rpx 20rpx;
+  background-color: var(--white);
+  min-height: 140rpx;
+}
+
+ .order-detail-container .at-info .duration-container .time-container view:last-child {
+  font-size: 12px;
+}
+ .order-detail-container .at-info .duration-container .day-container{
+  display: flex;
+  align-items: center;
+}
+ .order-detail-container .at-info .duration-container .day-container .content-container {
+  text-align: center;
+}
+ .order-detail-container .at-info .duration-container .day-container .icon-line{
+  width: 60rpx;
+  height: 2rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 0 10rpx;
+  position: relative;
+}
+ .order-detail-container .at-info .duration-container .day-container .icon-line.pre-dot::before{
+  content: "";
+  width: 14rpx;
+  height: 14rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 14rpx;
+  position: absolute;
+  left: -14rpx;
+  top: -7rpx;
+}
+ .order-detail-container .at-info .duration-container .day-container .icon-line.next-dot::after{
+  content: "";
+  width: 14rpx;
+  height: 14rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 14rpx;
+  position: absolute;
+  right: -14rpx;
+  top: -7rpx;
+}

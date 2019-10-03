@@ -18,6 +18,7 @@
         </view>
       </view>
     </block>
+    <view wx:if="{{item.list.length === 0}}" style="text-align: center;">~没有更多了~</view>
   </scroll-view>
   <view class="indexBar" style="height:calc(100vh - 48px)">
     <view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">

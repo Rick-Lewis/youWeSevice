@@ -1,45 +1,43 @@
 <!--page/myZone/index.wxml-->
 <view class="my-zone-container">
-  <view class="info-container">
-    <cover-image src="{{!userInfo.headImgUrl ? '/image/default.png' : userInfo.headImgUrl}}"></cover-image>
-    <view class="info-text-container">
-      <view wx:if="{{!!userInfo.nickname || !!userInfo.sex}}" class="info-text-name-container">
-        <text>{{userInfo.nickname}}</text>
-        <image wx:if="{{!!userInfo.sex}}" src="{{genderIcon[userInfo.sex]}}"></image>
-      </view>
-      <text style="{{!userInfo.nickname && !userInfo.sex ? 'margin-top: 6px': ''}}">{{userInfo.phone}}</text>
-      <view class="info-edit-container" bindtap="handleEditInfo">
+  <view wx:if="{{isPhoneAuth}}">
+    <view class="info-container">
+      <button class="info-edit-container" open-type="getUserInfo" bindgetuserinfo="getUserInfo" wx:if="{{!userInfo}}">
+        <cover-image src="{{!userInfo.avatarUrl ? '/image/default.png' : userInfo.avatarUrl}}"></cover-image>
+      </button>
+      <cover-image src="{{!userInfo.avatarUrl ? '/image/default.png' : userInfo.avatarUrl}}" wx:else ></cover-image>
+      <view class="info-text-container">
+        <view wx:if="{{!!userInfo.nickName}}" class="info-text-name-container">
+          <text>{{userInfo.nickName}}</text>
+        </view>
+        <button class="info-edit-container" open-type="getUserInfo" bindgetuserinfo="getUserInfo" wx:if="{{!userInfo}}">
+          <image src="/image/icon/edit.svg"></image>
+          <text>完善资料</text>
+        </button>
+        <text style="{{!userInfo.nickName ? 'margin-top: 6px': ''}}" wx:if="isPhoneAuth">{{userInfo.phone}}</text>
+        <!-- <view class="info-edit-container" bindtap="handleEditInfo">
         <image src="/image/icon/edit.svg"></image>
-        <text>编辑资料</text>
+        <text>完善资料</text>
+      </view> -->
       </view>
     </view>
+    <view class="cell-group-container">
+      <i-cell-group>
+        <i-cell is-link title="联系客服" bind:click="conCusService"></i-cell>
+        <i-cell is-link title="软件版本" url="/page/home/carSelected/carDetail/index"></i-cell>
+      </i-cell-group>
+    </view>
+    <!-- <view class="btn-container" wx:if="{{!isPhoneAuth}}">
+      <i-button type="custom" bindtap="handlePhoneAuth">授权微信登录</i-button>
+    </view> -->
   </view>
-  <view class="wallet-container">
-    <view class="wallet-item-container">
-      <view>
-        <view>0</view>
-        <view>余额</view>
-      </view>
+  <view class="phone-auth-container" wx:else="{{!isPhoneAuth}}">
+    <view class="logo-container">
+      <cover-image src="../../image/logo.png"></cover-image>
+      <text>一帆租车</text>
     </view>
-    <view class="wallet-item-container">
-      <view>
-        <view>4</view>
-        <view>优惠券</view>
-      </view>
+    <view class="btn-container">
+      <i-button type="custom" open-type="getPhoneNumber" bind:getphonenumber="handleGetPhoneNumber">授权微信登录</i-button>
     </view>
-    <view class="wallet-item-container">
-      <view>
-        <view>200</view>
-        <view>积分</view>
-      </view>
-    </view>
-  </view>
-  <view class="cell-group-container">
-    <i-cell-group>
-      <i-cell is-link title="点点滴滴" wx:for="{{3}}" wx:key url="/page/home/carSelected/carDetail/index"></i-cell>
-    </i-cell-group>
-  </view>
-  <view class="btn-container">
-    <i-button type="success" bindtap="handleLogout">退出登录</i-button>
   </view>
 </view>

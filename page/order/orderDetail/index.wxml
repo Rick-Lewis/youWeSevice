@@ -1,2 +1,49 @@
 <!--page/order/orderDetail/index.wxml-->
-<text>page/order/orderDetail/index.wxml</text>
+<view class="order-detail-container">
+  <view class="basic-info">
+    <view class="header-container">
+      <text>订单编号:78578575554567854548787854</text>
+      <text>已完成</text>
+    </view>
+    <view class="content-container">
+      <view class="left">
+        <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
+        <view style="margin-left: 20rpx;">
+          <view>凯迪拉克XTS</view>
+          <view class="plate-number">湘GQ2159</view>
+          <view>2.0T自动 | 5座 | 油耗9.0L</view>
+        </view>
+      </view>
+      <view class="right">230元/日均</view>
+    </view>
+    <view class="footer-container">
+      <text>已评价</text>
+      <text>（4.5星）</text>
+      <text>车很干净，还车取车也方便，就是价格稍微贵了点</text>
+    </view>
+  </view>
+  <view class="at-info">
+    <!-- 租车时间 -->
+    <view class="duration-container">
+      <view class="time-container">
+        <view>{{timeArray[0][startIndex[0]].text}}</view>
+        <view>{{timeArray[0][startIndex[0]].week + ' ' + timeArray[1][startIndex[1]].text}}</view>
+      </view>
+      <view class="day-container">
+        <view class="icon-line pre-dot"></view>
+        <view class="content-container">
+          <view>{{duration.days}}天</view>
+          <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时
+            <text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text>
+          </view>
+        </view>
+        <view class="icon-line next-dot"></view>
+      </view>
+      <view class="time-container">
+        <view>{{timeArray[0][endIndex[0]].text}}</view>
+        <view>{{timeArray[0][endIndex[0]].week + ' ' + timeArray[1][endIndex[1]].text}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="price-info"></view>
+</view>

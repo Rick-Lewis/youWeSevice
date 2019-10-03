@@ -12,11 +12,13 @@ App({
     console.log('App Hide');
   },
   globalData: {
-    hasLogin: false,
     wxCode: '',
     httpQueue: [],
     baseUrl: 'http://39.108.148.236:8080',
-    token: ''
+    token: '',
+    orderSubmit: null, //订车数据
+    isPhoneAuth: false, //是否授权手机号
+    isUserInfoAuth: false //是否授权用户信息
   },
   // http拦截器
   httpInterceptor: function (obj) {
@@ -24,19 +26,15 @@ App({
       let objTemp = Object.assign({}, obj, {
         success: function (res) {
           console.log('app httpInterceptor promise success', res);
-          resolve(res);
-        }.bind(this),
-        fail: function (err) {
-          console.log('app httpInterceptor promise fail', err);
-          if (err.code === 1) { //认证失效，刷新请求
+          if (res.data.code === -1) { //认证失效，刷新请求
             this.globalData.accessToken = '';
             this.globalData.httpQueue.push(objTemp);
             // 登录
             wx.login({
-              success: res => {
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                // console.log('onLaunch wx.login success', res);
-                this.globalData.wxCode = res.code;
+              success: res1 => {
+                // 发送 res1.code 到后台换取 openId, sessionKey, unionId
+                // console.log('onLaunch wx.login success', res1);
+                this.globalData.wxCode = res1.code;
                 this.httpInterceptor({
                   url: this.globalData.baseUrl + '/rentalcars/wechat/login',
                   data: {
@@ -46,15 +44,15 @@ App({
                     'content-type': 'application/json'
                   },
                   method: 'GET'
-                }).then(res1 => {
-                  if (res1.data.code === 0) {
-                    this.globalData.accessToken = res1.data.data;
-                    this.globalData.trackInfo.userInfo = res1.data.data;
+                }).then(res2 => {
+                  if (res2.data.code === 0) {
+                    this.globalData.accessToken = res2.data.data;
+                    this.globalData.trackInfo.userInfo = res2.data.data;
                     for (let i = 0; i < this.globalData.httpQueue.length; i++) {
                       wx.request(this.globalData.httpQueue[i]);
                     }
                   } else {
-                    rejected(res1);
+                    rejected(res2);
                   }
                 }, err1 => {
                   rejected(err1);
@@ -62,8 +60,12 @@ App({
               }
             });
           } else {
-            rejected(err);
+            resolve(res);
           }
+        }.bind(this),
+        fail: function (err) {
+          console.log('app httpInterceptor promise fail', err);
+          rejected(err);
         }
       });
       wx.request(objTemp);

@@ -10,7 +10,8 @@
     "page/home/carSelected/carDetail/index",
     "page/home/carSelected/preOrderDetail/index",
     "page/order/orderDetail/index",
-    "page/test/index"
+    "page/test/index",
+    "page/myZone/phoneAuth/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

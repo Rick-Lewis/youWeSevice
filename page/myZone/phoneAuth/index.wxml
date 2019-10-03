@@ -1,0 +1,10 @@
+<!--page/myZone/phoneAuth/index.wxml-->
+<view class="phone-auth-container">
+  <view class="logo-container">
+    <cover-image src="../../../image/logo.png"></cover-image>
+    <text>一帆租车</text>
+  </view>
+  <view class="btn-container">
+    <i-button type="custom" open-type="getPhoneNumber" bind:getphonenumber="handleGetPhoneNumber">授权微信登录</i-button>
+  </view>
+</view>
