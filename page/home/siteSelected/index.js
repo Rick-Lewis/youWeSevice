@@ -95,18 +95,27 @@ Page({
   onShareAppMessage: function() {
 
   },
+  // 选择门店
   handleSelectedItem: function(e) {
     console.log('siteSelected index.js handleSelectedItem', e);
     let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
+    let subItemTemp = e.currentTarget.dataset.subItem;
+    targetPages[0][this.data.options.from + 'Id'] = subItemTemp.id;
     targetPages[0].setData({ //改变首页的地址选择
-      [this.data.options.from]: !e.currentTarget.dataset.subItem ? e.detail.name : e.currentTarget.dataset.subItem.name
+      [this.data.options.from]: subItemTemp.name
     }, () => {
+      // app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+      //   [this.data.options.from]: Object.assign({}, app.globalData.orderSubmit[this.data.options.from], {
+      //     site: subItemTemp.name,
+      //     id: subItemTemp.id
+      //   })
+      // });
       wx.navigateBack({
         delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
       });
     });
   },
-  handleCall: function(e){
+  handleCall: function(e) {
     console.log('siteSelected index.js handleCall', e);
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phoneNumber,

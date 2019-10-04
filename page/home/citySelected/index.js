@@ -195,15 +195,16 @@ Page({
     console.log('citySelected index.js handleSelectedItem', e);
     let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
     let subItemTemp = e.currentTarget.dataset.subItem;
+    targetPages[0][this.data.options.from + 'Adcode'] = subItemTemp.code
     targetPages[0].setData({ //改变首页的地址选择
       [this.data.options.from]: subItemTemp.name
     }, () => {
-      app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
-        [this.data.options.from]: Object.assign({}, app.globalData.orderSubmit[this.data.options.from], {
-          district: subItemTemp.name,
-          adcode: subItemTemp.code
-        })
-      });
+      // app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+      //   [this.data.options.from]: Object.assign({}, app.globalData.orderSubmit[this.data.options.from], {
+      //     district: subItemTemp.name,
+      //     adcode: subItemTemp.code
+      //   })
+      // });
       wx.navigateBack({
         delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
       });

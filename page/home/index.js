@@ -3,13 +3,15 @@ const app = getApp();
 Page({
   keys: 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS',
   weeks: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
-  fetchDistrictAdcode: '',
-  repayDistrictAdcode: '',
+  fetchDistrictAdcode: '', // 取车地区码
+  repayDistrictAdcode: '', // 还车地区码
+  fetchSiteId: '', // 取车门店码
+  repaySiteId: '', // 还车门店码
   /**
    * 页面的初始数据
    */
   data: {
-    // region: [], //用户所在的[省, 市, 区]
+    // region: [], // 用户所在的[省, 市, 区]
     fetchDistrict: '请选择城市', //用户设置的取车城市
     fetchSite: '请选择门店', //用户设置的取车门店
     repayDistrict: '请选择城市', //用户设置的还车城市
@@ -69,7 +71,7 @@ Page({
       method: 'GET'
     }).then(res => {
       console.log('home index.js onLoad /rentalcars/wechat/info/user success', res);
-      if(!!res.data.data.telephone){
+      if (!!res.data.data.telephone) {
         app.globalData.isPhoneAuth = true;
       }
     }, err => {
@@ -84,8 +86,14 @@ Page({
     });
     let temp = this.initTimeArray();
     app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
-      startTime: temp[this.data.startIndex[0], this.data.startIndex[1]],
-      endTime: temp[this.data.endIndex[0], this.data.endIndex[1]]
+      fetchTime: {
+        day: temp[0][this.data.startIndex[0]],
+        time: temp[1][this.data.startIndex[1]]
+      },
+      repayTime: {
+        day: temp[0][this.data.endIndex[0]],
+        time: temp[1][this.data.endIndex[1]]
+      }
     });
     this.setData({
       timeArray: temp
@@ -194,27 +202,58 @@ Page({
   //立即选车
   handleSelectCar: function(e) {
     console.log('home index.js handleSelectCar', e);
-    app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
-      fetchDistrict: {
-        district: this.data.fetchDistrict,
-        adcode: this.fetchDistrictAdcode
-      },
-      repayDistrict: {
-        district: this.data.repayDistrict,
-        adcode: this.repayDistrictAdcode
-      },
-      startTime: {
-        day: this.data.timeArray[0][this.data.startIndex[0]],
-        time: this.data.timeArray[1][this.data.startIndex[1]]
-      },
-      endTime: {
-        day: this.data.timeArray[0][this.data.endIndex[0]],
-        time: this.data.timeArray[1][this.data.endIndex[1]]
+    if (this.data.fetchDistrict && this.data.fetchDistrict !== '请选择城市' && this.data.repayDistrict && this.data.repayDistrict !== '请选择城市' && this.data.fetchSite && this.data.fetchSite !== '请选择门店' && this.data.repaySite && this.data.repaySite !== '请选择门店' && (this.data.duration.days >= 0 && this.data.duration.hours >= 0 && this.data.duration.minutes >= 0) && !(this.data.duration.days === 0 && this.data.duration.hours === 0 && this.data.duration.minutes === 0)) { // 表单选择完成
+      app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+        fetchDistrict: {
+          district: this.data.fetchDistrict,
+          adcode: this.fetchDistrictAdcode
+        },
+        fetchSite: {
+          site: this.data.fetchSite,
+          id: this.fetchSiteId
+        },
+        repayDistrict: {
+          district: this.data.repayDistrict,
+          adcode: this.repayDistrictAdcode
+        },
+        repaySite: {
+          site: this.data.repaySite,
+          id: this.repaySiteId
+        },
+        fetchTime: {
+          day: this.data.timeArray[0][this.data.startIndex[0]],
+          time: this.data.timeArray[1][this.data.startIndex[1]]
+        },
+        repayTime: {
+          day: this.data.timeArray[0][this.data.endIndex[0]],
+          time: this.data.timeArray[1][this.data.endIndex[1]]
+        },
+        duration: this.data.duration
+      });
+      wx.navigateTo({
+        url: '/page/home/carSelected/index',
+      });
+    } else {
+      if (!this.data.fetchDistrict || this.data.fetchDistrict === '请选择城市' || !this.data.repayDistrict || this.data.repayDistrict === '请选择城市' || !this.data.fetchSite || this.data.fetchSite === '请选择门店' || !this.data.repaySite || this.data.repaySite === '请选择门店') {
+        wx.showToast({
+          title: '请选择相应的门店信息',
+          icon: 'none'
+        });
+      } else if ((this.data.duration.days === 0 && this.data.duration.hours === 0 && this.data.duration.minutes === 0) || (this.data.duration.days < 0 || this.data.duration.hours === 0 && this.data.duration.minutes === 0)) {
+        wx.showToast({
+          title: '选择的时间需要大于0',
+          icon: 'none'
+        });
+      } else {
+        wx.showToast({
+          title: '请选择相应的门店信息',
+          icon: 'none'
+        });
       }
-    });
-    wx.navigateTo({
-      url: '/page/home/carSelected/index',
-    });
+    }
+    // wx.navigateTo({
+    //   url: '/page/home/carSelected/index',
+    // });
   },
   //初始化租车日期选择组件数据
   initTimeArray: function() {
@@ -266,14 +305,14 @@ Page({
       let temp = this.calcDuration(startTemp, endTemp);
       this.setData({
         duration: temp
-      })
+      });
     });
   },
   bindStartMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
   },
   // 结束时间选择
-  bindEndPickerChange: function (e) {
+  bindEndPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       endIndex: e.detail.value
@@ -286,13 +325,13 @@ Page({
       })
     });
   },
-  bindEndMultiPickerColumnChange: function (e) {
+  bindEndMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
   },
   // 计算时间间隔
-  calcDuration: function(start, end){
+  calcDuration: function(start, end) {
     console.log('home index.js calcDuration', start, end);
-    let result =  {
+    let result = {
       days: 0,
       hours: 0,
       minutes: 0
@@ -301,17 +340,19 @@ Page({
     let endDate = new Date(end.year, end.month, end.day);
     let durTimestamp = (endDate.getTime() - startDate.getTime()) / 1000 + (Number(end.hour * 3600) + Number(end.minute * 60) - (Number(start.hour * 3600) + Number(start.minute * 60)));
     let daysTemp = parseInt(durTimestamp / (3600 * 24));
-    let hoursTemp = parseInt((durTimestamp - daysTemp * 3600 *24)/3600);
+    let hoursTemp = parseInt((durTimestamp - daysTemp * 3600 * 24) / 3600);
     let minutesTemp = parseInt((durTimestamp - daysTemp * 3600 * 24 - hoursTemp * 3600) / 60);
     result = Object.assign({}, result, {
       days: daysTemp,
-      hours: hoursTemp,
-      minutes: minutesTemp
+      hours: daysTemp === 0 ? hoursTemp : Math.abs(hoursTemp),
+      minutes: daysTemp === 0 && hoursTemp === 0 ? minutesTemp : Math.abs(minutesTemp)
     });
     return result;
   },
   // tab切换
-  handleChange({ detail }) {
+  handleChange({
+    detail
+  }) {
     console.log('home index.js handleChange detail', detail);
     this.setData({
       current: detail.key

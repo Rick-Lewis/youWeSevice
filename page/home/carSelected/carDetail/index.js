@@ -1,4 +1,5 @@
 // page/home/carSelected/carDetail/index.js
+const app = getApp();
 Page({
 
   /**
@@ -12,7 +13,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/detail/' + options.id,
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('carDetail index.js onLoad /rentalcars/wechat/vehicle/detail/list success', res);
+    }, err => {
+      console.log('carDetail index.js onLoad /rentalcars/wechat/vehicle/detail/list failure', err);
+    });
   },
 
   /**

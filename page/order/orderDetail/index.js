@@ -1,4 +1,5 @@
 // page/order/orderDetail/index.js
+const app = getApp();
 Page({
 
   /**

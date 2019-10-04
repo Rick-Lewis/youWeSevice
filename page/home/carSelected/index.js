@@ -25,12 +25,53 @@ Page({
       title: '加载中...',
       mask: true
     });
-    let origCarsTemp = origCars.map((item, index) => Object.assign({}, item, {
-      id: index
-    }));
-    this.setData({
-      carList: origCarsTemp
+    //获取车辆分类标签信息
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list',
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('carSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all success', res);
+      let carList = [];
+      for (let i = 0; i < res.data.length; i++) {
+        if (carList.length === 0) { // 写入第一个元素
+          let carItem = {
+            category_name: '',
+            list: []
+          }
+          carItem.category_name = res.data[i].category_name;
+          carItem.list.push(res.data[i]);
+          carList.push(carItem);
+        } else {
+          let indexTemp = carList.findIndex(item => item.category_name === res.data[i].category_name);
+          if (indexTemp !== -1){
+            carList[indexTemp].list.push(res.data[i]);
+          }else{
+            let carItem = {
+              category_name: '',
+              list: []
+            }
+            carItem.category_name = res.data[i].category_name;
+            carItem.list.push(res.data[i]);
+            carList.push(carItem);
+          }
+        }
+      };
+      this.setData({
+        carList: carList
+      });
+    }, err => {
+      console.log('carSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all failure', err);
     });
+    // let origCarsTemp = origCars.map((item, index) => Object.assign({}, item, {
+    //   id: index
+    // }));
+    // this.setData({
+    //   carList: origCarsTemp
+    // });
   },
 
   /**
@@ -125,8 +166,11 @@ Page({
   // 选择车辆回调
   handleSelectedItem: function(e) {
     console.log('carSelected index.js handleSelectedItem', e);
+    app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+      carDetail: e.currentTarget.dataset.subItem
+    });
     wx.navigateTo({
-      url: '/page/home/carSelected/carDetail/index',
+      url: '/page/home/carSelected/preOrderDetail/index',
     });
   }
 })

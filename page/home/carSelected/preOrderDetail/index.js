@@ -1,4 +1,5 @@
 // page/home/carSelected/preOrderDetail/index.js
+const app = getApp();
 Page({
 
   /**
@@ -12,7 +13,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function(options) {
-
+    console.log('preOrderDetail index.js onLoad', options, app.globalData.orderSubmit);
+    this.setData({
+      orderSubmit: app.globalData.orderSubmit
+    });
   },
 
   /**
@@ -74,6 +78,13 @@ Page({
   // 协议点击回调
   handleProtocolClick: function(){
     console.log('preOrderDetail index.js handleProtocolClick');
+  },
+  // 车辆详情
+  handleSelectedItem: function (e) {
+    console.log('preOrderDetail index.js handleSelectedItem', e);
+    wx.navigateTo({
+      url: '/page/home/carSelected/carDetail/index?id=' + app.globalData.orderSubmit.carDetail.id,
+    });
   },
   // 立即预定
   handlePayment: function() {

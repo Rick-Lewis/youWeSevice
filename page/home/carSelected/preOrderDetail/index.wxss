@@ -29,8 +29,41 @@
 }
 
 .pre-order-detail-container .repay-info .content {
-  padding: 0 60rpx;
+  padding: 0 40rpx 20rpx 40rpx;
   background-color: var(--white);
+}
+.pre-order-detail-container .repay-info .content .common{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pre-order-detail-container .repay-info .content .common .left view:first-child{
+  position: relative;
+}
+.pre-order-detail-container .repay-info .content .common .left view:first-child text{
+  margin-left: 20rpx;
+}
+.pre-order-detail-container .repay-info .content .fetch .left view:first-child::before{
+  content: '';
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 10rpx;
+  background-color: rgba(104, 104, 104, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+.pre-order-detail-container .repay-info .content .repay .left view:first-child::before{
+  content: '';
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 10rpx;
+  background-color: rgba(105, 189, 131, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
 }
 
 /* 基本费用 */

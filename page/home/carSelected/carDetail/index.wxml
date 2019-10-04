@@ -56,7 +56,7 @@
     <view class="header">特殊说明</view>
     <view class="content">车身颜色以现场情况而定</view>
   </view>
-  <view class="btn-container">
-      <i-button type="custom" bindtap="handleReserveCar">立即预定</i-button>
-    </view>
+  <!-- <view class="btn-container">
+    <i-button type="custom" bindtap="handleReserveCar">立即预定</i-button>
+  </view> -->
 </view>

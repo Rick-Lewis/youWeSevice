@@ -11,25 +11,8 @@
       </swiper-item>
     </swiper>
     <view class="info-container">
-      <!-- 取车地址 -->
-      <view class="location-container" style="margin-top: 15rpx;">
-        <view class="city-container" data-name="fetchDistrict" bindtap="handleSelectSite">
-          <view class="return-circle">还</view>
-          <view class="text-container">
-            <text style="color: {{fetchDistrict === '请选择城市'? '#C2CCD1': ''}}">{{fetchDistrict}}</text>
-            <text class="cuIcon-right"></text>
-          </view>
-        </view>
-        <view class="site-container" data-name="fetchSite" bindtap="handleSelectSite">
-          <view class="text-container">
-            <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
-          </view>
-        </view>
-      </view>
-      <!-- 分割线 -->
-      <view class="line"></view>
       <!-- 还车地址 -->
-      <view class="location-container">
+      <view class="location-container" style="margin-top: 15rpx;">
         <view class="city-container" data-name="repayDistrict" bindtap="handleSelectSite">
           <view class="fetch-circle">取</view>
           <view class="text-container">
@@ -40,6 +23,23 @@
         <view class="site-container" data-name="repaySite" bindtap="handleSelectSite">
           <view class="text-container">
             <text style="color: {{repaySite === '请选择门店'? '#C2CCD1': ''}}">{{repaySite}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 分割线 -->
+      <view class="line"></view>
+      <!-- 取车地址 -->
+      <view class="location-container">
+        <view class="city-container" data-name="fetchDistrict" bindtap="handleSelectSite">
+          <view class="return-circle">还</view>
+          <view class="text-container">
+            <text style="color: {{fetchDistrict === '请选择城市'? '#C2CCD1': ''}}">{{fetchDistrict}}</text>
+            <text class="cuIcon-right"></text>
+          </view>
+        </view>
+        <view class="site-container" data-name="fetchSite" bindtap="handleSelectSite">
+          <view class="text-container">
+            <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
           </view>
         </view>
       </view>
