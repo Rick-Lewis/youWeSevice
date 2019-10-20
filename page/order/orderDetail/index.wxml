@@ -1,20 +1,26 @@
 <!--page/order/orderDetail/index.wxml-->
+<wxs module="util1">
+  var sub = function(val, start, end) {
+    return val.substring(start, end);
+  }
+  module.exports.sub = sub;
+</wxs>
 <view class="order-detail-container">
   <view class="basic-info">
     <view class="header-container">
-      <text>订单编号:78578575554567854548787854</text>
-      <text>已完成</text>
+      <text>订单编号：{{orderDetail.order_no}}</text>
+      <text>{{ORDER_STATUS[orderDetail.status + '']}}</text>
     </view>
     <view class="content-container">
       <view class="left">
         <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
         <view style="margin-left: 20rpx;">
-          <view>凯迪拉克XTS</view>
+          <view>{{item.modal_name}}</view>
           <view class="plate-number">湘GQ2159</view>
-          <view>2.0T自动 | 5座 | 油耗9.0L</view>
+          <view>{{orderDetail.let_litre}} | {{orderDetail.seat_count}}座</view>
         </view>
       </view>
-      <view class="right">230元/日均</view>
+      <view class="right">{{orderDetail.price_unit}}元/天</view>
     </view>
     <view class="footer-container">
       <text>已评价</text>
@@ -26,13 +32,13 @@
     <!-- 租车时间 -->
     <view class="duration-container">
       <view class="time-container">
-        <view>{{timeArray[0][startIndex[0]].text}}</view>
-        <view>{{timeArray[0][startIndex[0]].week + ' ' + timeArray[1][startIndex[1]].text}}</view>
+        <view>{{util1.sub(orderDetail.time_start + '', 0, orderDetail.time_start.length - 9)}}</view>
+        <view>{{util1.sub(orderDetail.time_start + '', 10, orderDetail.time_start.length - 3)}}</view>
       </view>
       <view class="day-container">
         <view class="icon-line pre-dot"></view>
         <view class="content-container">
-          <view>{{duration.days}}天</view>
+          <view>{{orderDetail.days}}天</view>
           <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时
             <text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text>
           </view>
@@ -40,10 +46,40 @@
         <view class="icon-line next-dot"></view>
       </view>
       <view class="time-container">
-        <view>{{timeArray[0][endIndex[0]].text}}</view>
-        <view>{{timeArray[0][endIndex[0]].week + ' ' + timeArray[1][endIndex[1]].text}}</view>
+        <view>{{util1.sub(orderDetail.time_end + '', 0, orderDetail.time_end.length - 9)}}</view>
+        <view>{{util1.sub(orderDetail.time_end + '', 10, orderDetail.time_end.length - 3)}}</view>
+      </view>
+    </view>
+    <!-- 租车地址 -->
+    <view class="address-container">
+      <view>
+        <view class="fetch-circle">取</view>
+        <view>{{orderDetail.store_pick_up_name}}</view>
+      </view>
+      <view style="margin-top: 10rpx;">
+        <view class="return-circle">还</view>
+        <view>{{orderDetail.store_drop_off_name}}</view>
       </view>
     </view>
   </view>
-  <view class="price-info"></view>
+  <view class="price-info">
+    <view class="price-detail">
+      <view>
+      <view>车辆租赁及服务费</view>
+      <view>{{}}</view>
+      </view>
+      <view>
+      <view>基础服务费</view>
+      <view>{{}}</view>
+      </view>
+      <view>
+      <view>保险费</view>
+      <view>{{}}</view>
+      </view>
+    </view>
+    <view class="total">
+      <text>共计：</text>
+      <text style="color: var(--orange)">¥{{orderDetail.price_total}}</text>
+    </view>
+  </view>
 </view>

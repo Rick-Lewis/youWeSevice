@@ -77,7 +77,7 @@
 }
 
 .pre-order-detail-container .price-info .content {
-  padding: 0 40rpx 40rpx 40rpx;
+  padding: 0 40rpx 40rpx 60rpx;
   background-color: var(--white);
 }
 

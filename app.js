@@ -14,7 +14,7 @@ App({
   globalData: {
     wxCode: '',
     httpQueue: [],
-    baseUrl: 'http://39.108.148.236:8080',
+    baseUrl: 'https://39.108.148.236',
     token: '',
     orderSubmit: null, //订车数据
     isPhoneAuth: false, //是否授权手机号
@@ -47,9 +47,12 @@ App({
                 }).then(res2 => {
                   if (res2.data.code === 0) {
                     this.globalData.accessToken = res2.data.data;
-                    this.globalData.trackInfo.userInfo = res2.data.data;
                     for (let i = 0; i < this.globalData.httpQueue.length; i++) {
-                      wx.request(this.globalData.httpQueue[i]);
+                      app.httpInterceptor(this.globalData.httpQueue[i]).then(res => {
+                        resolve(res);
+                      }, err => {
+                        rejected(err);
+                      });
                     }
                   } else {
                     rejected(res2);

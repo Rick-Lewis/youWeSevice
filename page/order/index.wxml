@@ -1,45 +1,54 @@
 <!--page/order/index.wxml-->
+<wxs module="util">
+  var sub = function(val, start, end) {
+    return val.substring(start, end);
+  }
+  module.exports.sub = sub;
+</wxs>
 <view class="order-container">
   <i-tabs current="{{current}}" bindchange="handleTabChange" class="tabs-container">
     <i-tab wx:for="{{tabList}}" wx:key key="{{item.key}}" title="{{item.title}}"></i-tab>
   </i-tabs>
   <view class="tab-content-container">
-    <view class="order-card-container" wx:for="{{orderList}}" wx:key bindtap="handleOrderSelect">
+    <view wx:if="{{orderList.length === 0}}" style="text-align: center;">~没有更多了~</view>
+    <view class="order-card-container" wx:for="{{orderList}}" wx:key data-order="{{item}}" bindtap="handleOrderSelect">
       <view class="header-container">
-        <text>订单编号:78578575554567854548787854</text>
-        <text>已完成</text>
+        <text>订单编号：{{item.order_no}}</text>
+        <text>{{ORDER_STATUS[item.status + '']}}</text>
       </view>
       <view class="content-container">
         <view class="left">
           <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
           <view style="margin-left: 20rpx;">
-            <view>凯迪拉克XTS</view>
+            <view>{{item.modal_name}}</view>
             <view class="plate-number">湘GQ2159</view>
-            <view>2.0T自动 | 5座 | 油耗9.0L</view>
+            <view>{{item.let_litre}} | {{item.seat_count}}座</view>
           </view>
         </view>
-        <view class="right">230元/日均</view>
+        <view class="right">{{item.price_unit}}元/天</view>
       </view>
       <view class="footer-container">
         <view class="top">
           <view class="duration">
-            <text>2019-10-01 08:00至2019-10-07 07:43</text>
-            <text>7天</text>
+            <text>{{util.sub(item.time_start, 0, item.time_start.length - 3)}}至{{util.sub(item.time_end, 0, item.time_end.length - 3)}}</text>
+            <text>{{item.days}}天</text>
           </view>
           <view class="fetch-site">
-            <text>古丈县政府店</text>
+            <text>{{item.store_pick_up_name}}</text>
             <view class="fetch-circle">取</view>
           </view>
           <view class="return-site">
-            <text>古丈县政府店</text>
+            <text>{{item.store_drop_off_name}}</text>
             <view class="return-circle">还</view>
           </view>
         </view>
         <view class="bottom">
-          <view class="evaluate">评价</view>
+          <view class="evaluate" wx:if="{{item.status === 3}}" bindtap="handleEvaluate">评价</view>
+          <view class="evaluate" wx:if="{{item.status === 0}}" data-order-no="{{item.order_no}}" catchtap="handlePayment">付款</view>
+          <view wx:else></view>
           <view class="total">
             <text>共计：</text>
-            <text style="color: var(--orange)">¥1666</text>
+            <text style="color: var(--orange)">¥{{item.price_total}}</text>
           </view>
         </view>
       </view>

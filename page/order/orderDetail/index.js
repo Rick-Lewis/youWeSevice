@@ -13,6 +13,14 @@ Page({
       days: 0,
       hours: 0,
       minutes: 0
+    },
+    orderDetail: null,
+    ORDER_STATUS: {
+      '-1': '已取消',
+      '0': '未支付',
+      '1': '待取车',
+      '2': '进行中',
+      '3': '已完成'
     }
   },
 
@@ -20,7 +28,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('orderDetail index.js onLoad', options);
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/detail/' + options.orderNo,
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('orderDetail index.js onLoad /rentalcars/wechat/order/rental/detail/{orderno} success', res);
+      this.setData({
+        orderDetail: res.data
+      });
+    }, err => {
+      console.log('orderDetail index.js onLoad /rentalcars/wechat/order/rental/detail/{orderno} failure', err);
+    });
   },
 
   /**

@@ -1,7 +1,9 @@
 /* page/order/orderDetail/index.wxss */
+
 /* ==================
          车辆信息
  ==================== */
+
 .order-detail-container .basic-info {
   background-color: #fff;
   margin: 20rpx 40rpx 0 40rpx;
@@ -86,26 +88,38 @@
           租车时间
  ==================== */
 
- .order-detail-container .at-info .duration-container {
+.order-detail-container .at-info {
+  margin: 20rpx 40rpx 0 40rpx;
+  padding: 0 20rpx;
+  background-color: #fff;
+}
+
+.order-detail-container .at-info .duration-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0rpx 20rpx;
   background-color: var(--white);
   min-height: 140rpx;
 }
 
- .order-detail-container .at-info .duration-container .time-container view:last-child {
+.order-detail-container .at-info .duration-container .time-container {
+  text-align: center;
+}
+
+.order-detail-container .at-info .duration-container .time-container view:last-child {
   font-size: 12px;
 }
- .order-detail-container .at-info .duration-container .day-container{
+
+.order-detail-container .at-info .duration-container .day-container {
   display: flex;
   align-items: center;
 }
- .order-detail-container .at-info .duration-container .day-container .content-container {
+
+.order-detail-container .at-info .duration-container .day-container .content-container {
   text-align: center;
 }
- .order-detail-container .at-info .duration-container .day-container .icon-line{
+
+.order-detail-container .at-info .duration-container .day-container .icon-line {
   width: 60rpx;
   height: 2rpx;
   background-color: rgba(0, 0, 0, 0.1);
@@ -113,7 +127,8 @@
   margin: 0 10rpx;
   position: relative;
 }
- .order-detail-container .at-info .duration-container .day-container .icon-line.pre-dot::before{
+
+.order-detail-container .at-info .duration-container .day-container .icon-line.pre-dot::before {
   content: "";
   width: 14rpx;
   height: 14rpx;
@@ -123,7 +138,8 @@
   left: -14rpx;
   top: -7rpx;
 }
- .order-detail-container .at-info .duration-container .day-container .icon-line.next-dot::after{
+
+.order-detail-container .at-info .duration-container .day-container .icon-line.next-dot::after {
   content: "";
   width: 14rpx;
   height: 14rpx;
@@ -132,4 +148,41 @@
   position: absolute;
   right: -14rpx;
   top: -7rpx;
+}
+
+.order-detail-container .at-info .address-container {
+  background-color: #fff;
+  border-top: 1rpx solid var(--grey);
+  padding: 20rpx 0;
+}
+
+.order-detail-container .at-info .address-container>view {
+  display: flex;
+}
+
+.order-detail-container .at-info .address-container .return-circle {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 7rpx solid rgba(104, 104, 104, 1);
+  line-height: 40rpx;
+  text-align: center;
+  color: rgba(104, 104, 104, 1);
+}
+
+.order-detail-container .at-info .address-container .fetch-circle {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 7rpx solid rgba(105, 189, 131, 1);
+  line-height: 40rpx;
+  text-align: center;
+  color: rgba(105, 189, 131, 1);
+}
+.order-detail-container .price-info {
+  margin: 20rpx 40rpx 0 40rpx;
+  padding: 0 20rpx;
+  background-color: #fff;
 }
