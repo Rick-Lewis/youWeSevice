@@ -10,7 +10,7 @@
     <i-tab wx:for="{{tabList}}" wx:key key="{{item.key}}" title="{{item.title}}"></i-tab>
   </i-tabs>
   <view class="tab-content-container">
-    <view wx:if="{{orderList.length === 0}}" style="text-align: center;">~没有更多了~</view>
+    <view wx:if="{{orderList.length === 0}}" style="text-align: center; margin-top: 5px;">~没有更多了~</view>
     <view class="order-card-container" wx:for="{{orderList}}" wx:key data-order="{{item}}" bindtap="handleOrderSelect">
       <view class="header-container">
         <text>订单编号：{{item.order_no}}</text>

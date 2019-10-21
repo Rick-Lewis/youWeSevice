@@ -71,8 +71,12 @@ Page({
       method: 'GET'
     }).then(res => {
       console.log('home index.js onLoad /rentalcars/wechat/info/user success', res);
-      if (!!res.data.data.telephone) {
+      app.globalData.userInfo = res.data.data;
+      if (!!app.globalData.userInfo.telephone) {
         app.globalData.isPhoneAuth = true;
+      }
+      if (!!app.globalData.userInfo.nickName){
+        app.globalData.isUserInfoAuth = true;
       }
     }, err => {
       console.log('home index.js onLoad /rentalcars/wechat/info/user failure', err);

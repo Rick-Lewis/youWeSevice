@@ -38,6 +38,19 @@ Page({
    */
   onLoad: function(options) {
     console.log('order index.js onLoad', options);
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
       data: {
@@ -58,20 +71,6 @@ Page({
     }, err => {
       console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
     });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
   },
 
   /**

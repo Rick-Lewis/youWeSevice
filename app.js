@@ -18,7 +18,8 @@ App({
     token: '',
     orderSubmit: null, //订车数据
     isPhoneAuth: false, //是否授权手机号
-    isUserInfoAuth: false //是否授权用户信息
+    isUserInfoAuth: false, //是否授权用户信息
+    userInfo: null //用户信息
   },
   // http拦截器
   httpInterceptor: function (obj) {
@@ -48,7 +49,7 @@ App({
                   if (res2.data.code === 0) {
                     this.globalData.accessToken = res2.data.data;
                     for (let i = 0; i < this.globalData.httpQueue.length; i++) {
-                      app.httpInterceptor(this.globalData.httpQueue[i]).then(res => {
+                      this.httpInterceptor(this.globalData.httpQueue[i]).then(res => {
                         resolve(res);
                       }, err => {
                         rejected(err);

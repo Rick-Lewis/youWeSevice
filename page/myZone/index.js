@@ -27,7 +27,13 @@ Page({
           userInfo: res.userInfo
         });
       },
-      fail: err => {}
+      fail: err => {
+        if (app.globalData.isUserInfoAuth){
+          this.setData({
+            userInfo: app.globalData.userInfo
+          });
+        }
+      }
     });
   },
 
