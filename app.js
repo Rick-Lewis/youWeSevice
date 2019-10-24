@@ -49,7 +49,13 @@ App({
                   if (res2.data.code === 0) {
                     this.globalData.accessToken = res2.data.data;
                     for (let i = 0; i < this.globalData.httpQueue.length; i++) {
-                      this.httpInterceptor(this.globalData.httpQueue[i]).then(res => {
+                      let objTemp = Object.assign({}, this.globalData.httpQueue[i], {
+                        header: {
+                          'content-type': 'application/json',
+                          'token': this.globalData.accessToken
+                        }
+                      });
+                      this.httpInterceptor(objTemp).then(res => {
                         resolve(res);
                       }, err => {
                         rejected(err);

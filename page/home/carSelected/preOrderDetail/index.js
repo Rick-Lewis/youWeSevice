@@ -114,51 +114,62 @@ Page({
   // 立即预定
   handlePayment: function() {
     console.log('preOrderDetail index.js handlePayment');
-    if (this.data.checked){
-      let temp = {
-        time_start: '' + app.globalData.orderSubmit.fetchTime.day.year + '-' + app.globalData.orderSubmit.fetchTime.day.month + '-' + app.globalData.orderSubmit.fetchTime.day.day + ' ' + app.globalData.orderSubmit.fetchTime.time.text + ':00',
-        time_end: '' + app.globalData.orderSubmit.repayTime.day.year + '-' + app.globalData.orderSubmit.repayTime.day.month + '-' + app.globalData.orderSubmit.repayTime.day.day + ' ' + app.globalData.orderSubmit.repayTime.time.text + ':00',
-        days: app.globalData.orderSubmit.duration.days,
-        model_id: app.globalData.orderSubmit.carDetail.id,
-        store_pick_up: app.globalData.orderSubmit.fetchSite.id,
-        store_drop_off: app.globalData.orderSubmit.repaySite.id
-      };
-      app.httpInterceptor({
-        url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/create',
-        data: temp,
-        header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'token': app.globalData.token
-        },
-        method: 'POST'
-      }).then(res => {
-        console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/create success', res);
-        if (res.data.code === 0) {
-          wx.requestPayment({
-            timeStamp: res.data.data.timeStamp,
-            nonceStr: res.data.data.nonceStr,
-            package: res.data.data.package,
-            paySign: res.data.data.paySign,
-            signType: res.data.data.signType,
-            success: res => {
-              console.log('preOrderDetail index.js onLoad requestPayment success', res);
-              wx.switchTab({
-                url: '/page/order/index',
-              });
-            },
-            fail: err => {
-              console.log('preOrderDetail index.js onLoad requestPayment fail', err);
-            }
-          });
-        } else {
-          wx.showToast({
-            title: res.data.data,
-          });
-        }
-      }, err => {
-        console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/create failure', res);
-      });
-    }else{
+    if (this.data.checked) {
+      if (app.globalData.isPhoneAuth) {
+        let temp = {
+          time_start: '' + app.globalData.orderSubmit.fetchTime.day.year + '-' + app.globalData.orderSubmit.fetchTime.day.month + '-' + app.globalData.orderSubmit.fetchTime.day.day + ' ' + app.globalData.orderSubmit.fetchTime.time.text + ':00',
+          time_end: '' + app.globalData.orderSubmit.repayTime.day.year + '-' + app.globalData.orderSubmit.repayTime.day.month + '-' + app.globalData.orderSubmit.repayTime.day.day + ' ' + app.globalData.orderSubmit.repayTime.time.text + ':00',
+          days: app.globalData.orderSubmit.duration.days,
+          model_id: app.globalData.orderSubmit.carDetail.id,
+          store_pick_up: app.globalData.orderSubmit.fetchSite.id,
+          store_drop_off: app.globalData.orderSubmit.repaySite.id
+        };
+        app.httpInterceptor({
+          url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/create',
+          data: temp,
+          header: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'token': app.globalData.token
+          },
+          method: 'POST'
+        }).then(res => {
+          console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/create success', res);
+          if (res.data.code === 0) {
+            wx.requestPayment({
+              timeStamp: res.data.data.timeStamp,
+              nonceStr: res.data.data.nonceStr,
+              package: res.data.data.package,
+              paySign: res.data.data.paySign,
+              signType: res.data.data.signType,
+              success: res => {
+                console.log('preOrderDetail index.js onLoad requestPayment success', res);
+                wx.showLoading();
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '/page/order/index',
+                  }, () => {
+                    wx.hideLoading();
+                  });
+                }, 1500);
+              },
+              fail: err => {
+                console.log('preOrderDetail index.js onLoad requestPayment fail', err);
+              }
+            });
+          } else {
+            wx.showToast({
+              title: res.data.data,
+            });
+          }
+        }, err => {
+          console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/create failure', res);
+        });
+      } else {
+        wx.navigateTo({
+          url: '/page/myZone/phoneAuth/index?from=preOrderDetail',
+        });
+      }
+    } else {
       wx.showModal({
         title: '提示',
         content: '请勾选同意《租车服务合同》',
@@ -168,7 +179,7 @@ Page({
     }
   },
   // 取车须知
-  fetchNotice: function(){
+  fetchNotice: function() {
     wx.showModal({
       showCancel: false,
       title: '取车须知',
