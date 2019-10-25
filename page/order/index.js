@@ -30,7 +30,8 @@ Page({
       '1': '待取车',
       '2': '进行中',
       '3': '已完成'
-    }
+    },
+    currentStatus: ''
   },
 
   /**
@@ -54,7 +55,7 @@ Page({
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
       data: {
-        status: '',
+        status: currentStatus,
         pageIndex: 1,
         pageSize: 20
       },
@@ -121,7 +122,7 @@ Page({
         statusTemp = '';
       break;
       case '1':
-        statusTemp = '2';
+        statusTemp = '0,1,2';
         break;
       case '2':
         statusTemp = '3';
@@ -131,7 +132,8 @@ Page({
         break;
     }
     this.setData({
-      current: e.detail.key
+      current: e.detail.key,
+      currentStatus: statusTemp
     });
     wx.showLoading({
       title: '加载中...',
@@ -182,6 +184,32 @@ Page({
           signType: res.data.data.paySign.signType,
           success: res => {
             console.log('order index.js onLoad requestPayment success', res);
+            wx.showLoading({
+              title: '加载中...',
+              mask: true
+            });
+            app.httpInterceptor({
+              url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
+              data: {
+                status: this.data.currentStatus,
+                pageIndex: 1,
+                pageSize: 20
+              },
+              header: {
+                'content-type': 'application/json',
+                'token': app.globalData.token
+              },
+              method: 'GET'
+            }).then(res => {
+              console.log('order index.js onLoad /rentalcars/wechat/order/rental/page success', res);
+              this.setData({
+                orderList: res.data.dataSource
+              });
+              wx.hideLoading();
+            }, err => {
+              console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
+              wx.hideLoading();
+            });
           },
           fail: err => {
             console.log('order index.js onLoad requestPayment fail', err);
