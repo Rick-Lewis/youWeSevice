@@ -115,21 +115,7 @@ Page({
   },
   handleTabChange: function(e) {
     console.log('order index.js handleTabChange', e);
-    let statusTemp = '';
-    switch (e.detail.key){
-      case '0':
-        statusTemp = '';
-      break;
-      case '1':
-        statusTemp = '2';
-        break;
-      case '2':
-        statusTemp = '3';
-        break;
-      case '3':
-        statusTemp = '-1';
-        break;
-    }
+    let statusTemp = this.handleSwitchStatus(e.detail.key);
     this.setData({
       current: e.detail.key
     });
@@ -182,6 +168,33 @@ Page({
           signType: res.data.data.paySign.signType,
           success: res => {
             console.log('order index.js onLoad requestPayment success', res);
+            let statusTemp = this.handleSwitchStatus(this.data.current);
+            wx.showLoading({
+              title: '加载中...',
+              mask: true
+            });
+            app.httpInterceptor({
+              url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
+              data: {
+                status: statusTemp,
+                pageIndex: 1,
+                pageSize: 20
+              },
+              header: {
+                'content-type': 'application/json',
+                'token': app.globalData.token
+              },
+              method: 'GET'
+            }).then(res => {
+              console.log('order index.js onLoad /rentalcars/wechat/order/rental/page success', res);
+              this.setData({
+                orderList: res.data.dataSource
+              });
+              wx.hideLoading();
+            }, err => {
+              console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
+              wx.hideLoading();
+            });
           },
           fail: err => {
             console.log('order index.js onLoad requestPayment fail', err);
@@ -196,5 +209,23 @@ Page({
       console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay failure', res);
     });
   },
-  handleEvaluate: function() {}
+  handleEvaluate: function() {},
+  handleSwitchStatus: function(val){
+    let result = '';
+    switch (val) {
+      case '0':
+        result = '';
+        break;
+      case '1':
+        result = '2';
+        break;
+      case '2':
+        result = '3';
+        break;
+      case '3':
+        result = '-1';
+        break;
+    }
+    return result;
+  }
 })

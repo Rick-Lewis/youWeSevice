@@ -135,27 +135,78 @@ Page({
         }).then(res => {
           console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/create success', res);
           if (res.data.code === 0) {
-            wx.requestPayment({
-              timeStamp: res.data.data.timeStamp,
-              nonceStr: res.data.data.nonceStr,
-              package: res.data.data.package,
-              paySign: res.data.data.paySign,
-              signType: res.data.data.signType,
-              success: res => {
-                console.log('preOrderDetail index.js onLoad requestPayment success', res);
-                wx.showLoading();
-                setTimeout(() => {
+            if (!!res.data.data.timeStamp && !!res.data.data.nonceStr && !!res.data.data.package && !!res.data.data.paySign && !!res.data.data.signType) {
+              wx.requestPayment({
+                timeStamp: res.data.data.timeStamp,
+                nonceStr: res.data.data.nonceStr,
+                package: res.data.data.package,
+                paySign: res.data.data.paySign,
+                signType: res.data.data.signType,
+                success: res => {
+                  console.log('preOrderDetail index.js onLoad requestPayment success', res);
+                  wx.showLoading();
+                  setTimeout(() => {
+                    wx.switchTab({
+                      url: '/page/order/index',
+                    }, () => {
+                      wx.hideLoading();
+                    });
+                  }, 1500);
+                },
+                fail: err => {
+                  console.log('preOrderDetail index.js onLoad requestPayment fail', err);
                   wx.switchTab({
                     url: '/page/order/index',
-                  }, () => {
-                    wx.hideLoading();
                   });
-                }, 1500);
-              },
-              fail: err => {
-                console.log('preOrderDetail index.js onLoad requestPayment fail', err);
-              }
-            });
+                }
+              });
+            } else {
+              app.httpInterceptor({
+                url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/pay',
+                data: {
+                  order_no: res.data.data.order_no
+                },
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded',
+                  'token': app.globalData.token
+                },
+                method: 'GET'
+              }).then(res => {
+                console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay success', res);
+                if (res.data.code === 0) {
+                  wx.requestPayment({
+                    timeStamp: res.data.data.paySign.timeStamp,
+                    nonceStr: res.data.data.paySign.nonceStr,
+                    package: res.data.data.paySign.package,
+                    paySign: res.data.data.paySign.paySign,
+                    signType: res.data.data.paySign.signType,
+                    success: res => {
+                      console.log('preOrderDetail index.js onLoad requestPayment success', res);
+                      wx.showLoading();
+                      setTimeout(() => {
+                        wx.switchTab({
+                          url: '/page/order/index',
+                        }, () => {
+                          wx.hideLoading();
+                        });
+                      }, 1500);
+                    },
+                    fail: err => {
+                      console.log('preOrderDetail index.js onLoad requestPayment fail', err);
+                      wx.switchTab({
+                        url: '/page/order/index',
+                      });
+                    }
+                  });
+                } else {
+                  wx.showToast({
+                    title: res.data.data,
+                  });
+                }
+              }, err => {
+                console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay failure', res);
+              });
+            }
           } else {
             wx.showToast({
               title: res.data.data,
