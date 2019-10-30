@@ -16,11 +16,12 @@
           <view class="cu-avatar xl" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg); left: 20rpx;"></view>
           <view class="content" style="left: 160rpx; width: auto;">
             <view>{{subItem.name}}</view>
-            <view class="text-gray text-sm flex">
+            <view class="text-gray text-sm flex" style="color: var(--font-grey)">
               {{subItem.gearbox}} | {{subItem.seat_count}}座 | {{subItem.let_litre}}
             </view>
-            <view>{{subItem.standard_price}}元/
-              <text class="text-gray">日均</text>
+            <view>
+              <text style="color: var(--font-red)">{{subItem.standard_price}}元</text>/
+              <text style="color: var(--font-grey)">日均</text>
             </view>
           </view>
         </view>

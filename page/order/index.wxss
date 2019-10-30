@@ -25,13 +25,14 @@
 }
 
 .order-container .tab-content-container .order-card-container .header-container {
-  padding: 16rpx;
-  font-size: 28rpx;
+  padding: 10rpx 16rpx;
+  font-size: 24rpx;
   min-height: 44rpx;
   border-bottom: 1px solid var(--grey);
-
+  color: var(--font-grey);
   display: flex;
   justify-content: space-between;
+  line-height: 44rpx;
 }
 
 .order-container .tab-content-container .order-card-container .content-container {

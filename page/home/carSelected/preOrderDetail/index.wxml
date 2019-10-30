@@ -5,10 +5,10 @@
       <view class="cu-avatar" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
       <view style="margin-left: 20rpx;">
         <view>{{orderSubmit.carDetail.name}}</view>
-        <view>{{orderSubmit.carDetail.let_litre + orderSubmit.carDetail.gearbox + ' | ' + orderSubmit.carDetail.seat_count + '座 | 油耗' + orderSubmit.carDetail.oil_litre + 'L'}}</view>
+        <view class="text-sm" style="color: var(--font-grey)">{{orderSubmit.carDetail.let_litre + orderSubmit.carDetail.gearbox + ' | ' + orderSubmit.carDetail.seat_count + '座 | 油耗' + orderSubmit.carDetail.oil_litre + 'L'}}</view>
       </view>
     </view>
-    <view class="right">{{orderSubmit.carDetail.standard_price + '元/日均'}}</view>
+    <view class="right"><text style="color: var(--font-red)">{{orderSubmit.carDetail.standard_price}}</text>元/日均</view>
   </view>
   <view class="repay-info">
     <view class="header">取还信息</view>
@@ -18,7 +18,7 @@
           <view>
             <text>{{orderSubmit.fetchSite.site}}</text>
           </view>
-          <view>{{orderSubmit.fetchTime.day.text + '（' + orderSubmit.fetchTime.day.week + '）' + orderSubmit.fetchTime.time.text}}</view>
+          <view class="text-sm" style="color: var(--font-grey)">{{orderSubmit.fetchTime.day.text + '（' + orderSubmit.fetchTime.day.week + '）' + orderSubmit.fetchTime.time.text}}</view>
         </view>
         <view class="right">到店取车</view>
       </view>
@@ -27,7 +27,7 @@
           <view>
             <text>{{orderSubmit.repaySite.site}}</text>
           </view>
-          <view>{{orderSubmit.repayTime.day.text + '（' + orderSubmit.repayTime.day.week + '）' + orderSubmit.repayTime.time.text}}</view>
+          <view class="text-sm" style="color: var(--font-grey)">{{orderSubmit.repayTime.day.text + '（' + orderSubmit.repayTime.day.week + '）' + orderSubmit.repayTime.time.text}}</view>
         </view>
         <view class="right">到店还车</view>
       </view>

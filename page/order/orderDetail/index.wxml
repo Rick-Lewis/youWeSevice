@@ -17,10 +17,11 @@
         <view style="margin-left: 20rpx;">
           <view>{{item.modal_name}}</view>
           <view class="plate-number">湘GQ2159</view>
-          <view>{{orderDetail.let_litre}} | {{orderDetail.seat_count}}座</view>
+          <view class="text-sm" style="color: var(--font-grey)">{{orderDetail.let_litre}} | {{orderDetail.seat_count}}座</view>
         </view>
       </view>
-      <view class="right">{{orderDetail.price_unit}}元/天</view>
+      <view style="color: var(--font-grey)">
+        <text style="color: var(--font-red)">{{orderDetail.price_unit}}</text>元/天</view>
     </view>
     <view class="footer-container">
       <text>已评价</text>
@@ -33,21 +34,21 @@
     <view class="duration-container">
       <view class="time-container">
         <view>{{util1.sub(orderDetail.time_start + '', 0, orderDetail.time_start.length - 9)}}</view>
-        <view>{{util1.sub(orderDetail.time_start + '', 10, orderDetail.time_start.length - 3)}}</view>
+        <view style="color: var(--font-grey)">{{util1.sub(orderDetail.time_start + '', 10, orderDetail.time_start.length - 3)}}</view>
       </view>
       <view class="day-container">
         <view class="icon-line pre-dot"></view>
         <view class="content-container">
-          <view>{{orderDetail.days}}天</view>
-          <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}">{{duration.hours}}小时
-            <text wx:if="{{duration.minutes !== 0}}">{{duration.minutes}}分钟</text>
+          <view><text style="color: var(--font-red)">{{orderDetail.days}}</text>天</view>
+          <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}"><text style="color: var(--font-red)">{{duration.hours}}</text>小时
+            <text wx:if="{{duration.minutes !== 0}}"><text style="color: var(--font-red)">{{duration.minutes}}</text>分钟</text>
           </view>
         </view>
         <view class="icon-line next-dot"></view>
       </view>
       <view class="time-container">
         <view>{{util1.sub(orderDetail.time_end + '', 0, orderDetail.time_end.length - 9)}}</view>
-        <view>{{util1.sub(orderDetail.time_end + '', 10, orderDetail.time_end.length - 3)}}</view>
+        <view style="color: var(--font-grey)">{{util1.sub(orderDetail.time_end + '', 10, orderDetail.time_end.length - 3)}}</view>
       </view>
     </view>
     <!-- 租车地址 -->
@@ -65,16 +66,16 @@
   <view class="price-info">
     <view class="price-detail">
       <view>
-      <view>车辆租赁及服务费</view>
-      <view>{{}}</view>
+        <view>车辆租赁及服务费</view>
+        <view>{{}}</view>
       </view>
       <view>
-      <view>基础服务费</view>
-      <view>{{}}</view>
+        <view>基础服务费</view>
+        <view>{{}}</view>
       </view>
       <view>
-      <view>保险费</view>
-      <view>{{}}</view>
+        <view>保险费</view>
+        <view>{{}}</view>
       </view>
     </view>
     <view class="total">

@@ -17,12 +17,14 @@
 }
 
 .order-detail-container .basic-info .header-container {
-  padding: 16rpx;
-  font-size: 28rpx;
+  padding: 10rpx 16rpx;
+  font-size: 24rpx;
   min-height: 44rpx;
   border-bottom: 1px solid var(--grey);
   display: flex;
+  color: var(--font-grey);
   justify-content: space-between;
+  line-height: 44rpx;
 }
 
 .order-detail-container .basic-info .content-container {
@@ -57,6 +59,8 @@
 
 .order-detail-container .basic-info .footer-container {
   padding: 16rpx 20rpx 16rpx 16rpx;
+  color: var(--font-grey);
+  font-size: 24rpx;
 }
 
 .order-detail-container .basic-info .content-container cover-image {
@@ -107,7 +111,7 @@
 }
 
 .order-detail-container .at-info .duration-container .time-container view:last-child {
-  font-size: 12px;
+  font-size: 24rpx;
 }
 
 .order-detail-container .at-info .duration-container .day-container {
