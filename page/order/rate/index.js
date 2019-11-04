@@ -97,8 +97,29 @@ Page({
       method: 'POST'
     }).then(res => {
       console.log('rate index.js bindFormSubmit');
+      if(res.data.code === 0){
+        wx.showToast({
+          title: '提交成功',
+          success: function(){
+            wx.navigateBack();
+          }
+        });
+      }else{
+        wx.showToast({
+          title: '提交失败',
+          success: function () {
+            wx.navigateBack();
+          }
+        });
+      }
     }, err => {
       console.log('rate index.js bindFormSubmit');
+      wx.showToast({
+        title: '提交失败',
+        success: function () {
+          wx.navigateBack();
+        }
+      });
     });
   }
 })
