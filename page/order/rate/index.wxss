@@ -1,0 +1,9 @@
+/* page/order/rate/index.wxss */
+
+.rate-container .textarea{
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 24rpx 30rpx;
+  margin-top: 10rpx;
+  width: 100%;
+}

@@ -110,7 +110,7 @@ Page({
   handleOrderSelect: function(e) {
     console.log('order index.js handleOrderSelect', e);
     wx.navigateTo({
-      url: '/page/order/orderDetail/index?orderNo=' + e.currentTarget.dataset.order.order_no,
+      url: '/page/order/orderDetail/index?orderNo=' + e.currentTarget.dataset.orderNo,
     });
   },
   handleTabChange: function(e) {
@@ -209,7 +209,12 @@ Page({
       console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay failure', res);
     });
   },
-  handleEvaluate: function() {},
+  handleEvaluate: function(e) {
+    console.log('order index.js handleEvaluate', e);
+    wx.navigateTo({
+      url: '/page/order/rate/index?orderNo=' + e.currentTarget.dataset.orderNo,
+    });
+  },
   handleSwitchStatus: function(val){
     let result = '';
     switch (val) {

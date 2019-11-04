@@ -1,0 +1,13 @@
+<!--page/order/rate/index.wxml-->
+<view class="rate-container">
+  <i-cell-group>
+    <i-cell title="等级">
+      <i-rate bind:change="onChange" value="{{starIndex}}" size="32">
+      </i-rate>
+    </i-cell>
+  </i-cell-group>
+  <form>
+    <textarea placeholder="请留下您的建议" name="textarea" class="textarea" bindinput="bindinput"/>
+    <i-button type="custom" bindtap="bindFormSubmit">提交</i-button>
+  </form>
+</view>

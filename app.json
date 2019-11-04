@@ -11,7 +11,8 @@
     "page/home/carSelected/preOrderDetail/index",
     "page/order/orderDetail/index",
     "page/test/index",
-    "page/myZone/phoneAuth/index"
+    "page/myZone/phoneAuth/index",
+    "page/order/rate/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

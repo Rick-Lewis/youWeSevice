@@ -11,7 +11,7 @@
   </i-tabs>
   <view class="tab-content-container">
     <view wx:if="{{orderList.length === 0}}" style="text-align: center; margin-top: 5px;">~没有更多了~</view>
-    <view class="order-card-container" wx:for="{{orderList}}" wx:key data-order="{{item}}" bindtap="handleOrderSelect">
+    <view class="order-card-container" wx:for="{{orderList}}" wx:key data-order-no="{{item.order_no}}" bindtap="handleOrderSelect">
       <view class="header-container">
         <text>订单编号：{{item.order_no}}</text>
         <text>{{ORDER_STATUS[item.status + '']}}</text>
@@ -43,7 +43,7 @@
           </view>
         </view>
         <view class="bottom">
-          <view class="evaluate" wx:if="{{item.status === 3}}" bindtap="handleEvaluate">评价</view>
+          <view class="evaluate" wx:if="{{item.status === 3}}" data-order-no="{{item.order_no}}"  catchtap="handleEvaluate">评价</view>
           <view class="evaluate" wx:if="{{item.status === 0}}" data-order-no="{{item.order_no}}" catchtap="handlePayment">付款</view>
           <view wx:else></view>
           <view class="total">

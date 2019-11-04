@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "i-rate": "../../../dist/rate/index",
+    "i-cell-group": "../../../dist/cell-group/index",
+    "i-cell": "../../../dist/cell/index",
+    "i-button": "../../dist/button/index"
+  },
+  "navigationBarTitleText": "评价"
+}
