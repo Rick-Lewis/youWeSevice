@@ -14,7 +14,7 @@ App({
   globalData: {
     wxCode: '',
     httpQueue: [],
-    baseUrl: 'https://39.108.148.236',
+    baseUrl: 'https://www.901fan.com',
     token: '',
     orderSubmit: null, //订车数据
     isPhoneAuth: false, //是否授权手机号
