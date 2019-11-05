@@ -51,10 +51,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let statusTemp = this.handleSwitchStatus(this.data.current);
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
       data: {
-        status: '',
+        status: statusTemp,
         pageIndex: 1,
         pageSize: 20
       },
@@ -144,6 +145,12 @@ Page({
     }, err => {
       console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
       wx.hideLoading();
+      this.setData({
+        orderList: []
+      });
+      wx.showToast({
+        title: '操作失败',
+      });
     });
   },
   handlePayment: function(e) {
