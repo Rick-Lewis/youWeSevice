@@ -7,5 +7,5 @@
       <i-icon type="customerservice" size="30" slot="footer" data-phone-number="{{item.telephone}}" bindtap="handleCall" />
     </i-cell>
   </i-cell-group>
-  <view wx:else style="text-align: center; margin-top: 10rpx;">~没有更多了~</view>
+  <view wx:else style="text-align: center; margin-top: 10rpx;">~ 没有更多了 ~</view>
 </view>

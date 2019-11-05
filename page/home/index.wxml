@@ -76,6 +76,6 @@
     </view>
   </view>
   <view class="rideSharingContent" wx:if="{{current === 'rideSharing'}}">
-    <view style="text-align: center;">敬请期待</view>
+    <view style="text-align: center; margin-top: 5px;">~ 敬请期待 ~</view>
   </view>
 </view>
