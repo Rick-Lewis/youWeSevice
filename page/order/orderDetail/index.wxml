@@ -8,22 +8,22 @@
 <view class="order-detail-container">
   <view class="basic-info">
     <view class="header-container">
-      <text>订单编号：{{orderDetail.order_no}}</text>
-      <text>{{ORDER_STATUS[orderDetail.status + '']}}</text>
+      <text>订单编号：{{orderDetail.order.order_no}}</text>
+      <text>{{ORDER_STATUS[orderDetail.order.status + '']}}</text>
     </view>
     <view class="content-container">
       <view class="left">
         <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
         <view style="margin-left: 20rpx;">
-          <view>{{item.modal_name}}</view>
-          <view class="plate-number">湘GQ2159</view>
-          <view class="text-sm" style="color: var(--font-grey)">{{orderDetail.let_litre}} | {{orderDetail.seat_count}}座</view>
+          <view>{{orderDetail.model.name}}</view>
+          <view class="plate-number">{{orderDetail.order.plate_num}}</view>
+          <view class="text-sm" style="color: var(--font-grey)">{{orderDetail.model.let_litre}} | {{orderDetail.model.seat_count}}座</view>
         </view>
       </view>
       <view style="color: var(--font-grey)">
-        <text style="color: var(--font-red)">{{orderDetail.price_unit}}</text>元/天</view>
+        <text style="color: var(--font-red)">{{orderDetail.order.price_unit}}</text>元/天</view>
     </view>
-    <view class="footer-container">
+    <view class="footer-container" wx:if="{{!!comment}}">
       <text>已评价</text>
       <text>（4.5星）</text>
       <text>车很干净，还车取车也方便，就是价格稍微贵了点</text>
@@ -33,54 +33,48 @@
     <!-- 租车时间 -->
     <view class="duration-container">
       <view class="time-container">
-        <view>{{util1.sub(orderDetail.time_start + '', 0, orderDetail.time_start.length - 9)}}</view>
-        <view style="color: var(--font-grey)">{{util1.sub(orderDetail.time_start + '', 10, orderDetail.time_start.length - 3)}}</view>
+        <view>{{util1.sub(orderDetail.order.time_start + '', 0, orderDetail.order.time_start.length - 9)}}</view>
+        <view style="color: var(--font-grey)">{{util1.sub(orderDetail.order.time_start + '', 10, orderDetail.order.time_start.length - 3)}}</view>
       </view>
       <view class="day-container">
         <view class="icon-line pre-dot"></view>
         <view class="content-container">
-          <view><text style="color: var(--font-red)">{{orderDetail.days}}</text>天</view>
-          <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}"><text style="color: var(--font-red)">{{duration.hours}}</text>小时
-            <text wx:if="{{duration.minutes !== 0}}"><text style="color: var(--font-red)">{{duration.minutes}}</text>分钟</text>
-          </view>
+          <view>
+            <text style="color: var(--font-red)">{{orderDetail.order.days}}</text>天</view>
         </view>
         <view class="icon-line next-dot"></view>
       </view>
       <view class="time-container">
-        <view>{{util1.sub(orderDetail.time_end + '', 0, orderDetail.time_end.length - 9)}}</view>
-        <view style="color: var(--font-grey)">{{util1.sub(orderDetail.time_end + '', 10, orderDetail.time_end.length - 3)}}</view>
+        <view>{{util1.sub(orderDetail.order.time_end + '', 0, orderDetail.order.time_end.length - 9)}}</view>
+        <view style="color: var(--font-grey)">{{util1.sub(orderDetail.order.time_end + '', 10, orderDetail.order.time_end.length - 3)}}</view>
       </view>
     </view>
     <!-- 租车地址 -->
     <view class="address-container">
       <view>
         <view class="fetch-circle">取</view>
-        <view>{{orderDetail.store_pick_up_name}}</view>
+        <view>{{orderDetail.order.store_pick_up_name}}</view>
       </view>
       <view style="margin-top: 10rpx;">
         <view class="return-circle">还</view>
-        <view>{{orderDetail.store_drop_off_name}}</view>
+        <view>{{orderDetail.order.store_drop_off_name}}</view>
       </view>
     </view>
   </view>
   <view class="price-info">
     <view class="price-detail">
       <view>
-        <view>车辆租赁及服务费</view>
-        <view>{{}}</view>
+        <text>押金：</text>
+        <text>¥{{orderDetail.feeList.deposit}}</text>
       </view>
       <view>
-        <view>基础服务费</view>
-        <view>{{}}</view>
-      </view>
-      <view>
-        <view>保险费</view>
-        <view>{{}}</view>
+        <text>保险费：</text>
+        <text>¥{{orderDetail.feeList.insurance_fee}}</text>
       </view>
     </view>
-    <view class="total">
+    <view>
       <text>共计：</text>
-      <text style="color: var(--orange)">¥{{orderDetail.price_total}}</text>
+      <text style="color: var(--orange)">¥{{orderDetail.feeList.rental_fee}}</text>
     </view>
   </view>
 </view>

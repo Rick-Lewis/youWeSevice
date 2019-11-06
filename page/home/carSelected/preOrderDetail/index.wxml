@@ -40,7 +40,7 @@
     <view class="content">
       <view>保险费：¥{{preOrder.feeList.insurance_fee}}</view>
       <view>租车费：¥{{preOrder.feeList.rental_fee}}</view>
-      <view>总计：¥{{preOrder.order.price_total}}</view>
+      <view style="color: var(--orange)">总计：¥{{preOrder.order.price_total}}</view>
     </view>
   </view>
   <view class="other">

@@ -20,8 +20,8 @@
         <view class="left">
           <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
           <view style="margin-left: 20rpx;">
-            <view>{{item.modal_name}}</view>
-            <view class="plate-number">湘GQ2159</view>
+            <view>{{item.model_name}}</view>
+            <view class="plate-number">{{item.plate_num}}</view>
             <view class="text-sm" style="color: var(--font-grey)">{{item.let_litre}} | {{item.seat_count}}座</view>
           </view>
         </view>

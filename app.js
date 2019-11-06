@@ -27,50 +27,54 @@ App({
       let objTemp = Object.assign({}, obj, {
         success: function (res) {
           console.log('app httpInterceptor promise success', res);
-          if (res.data.code === -1) { //认证失效，刷新请求
-            this.globalData.accessToken = '';
-            this.globalData.httpQueue.push(objTemp);
-            // 登录
-            wx.login({
-              success: res1 => {
-                // 发送 res1.code 到后台换取 openId, sessionKey, unionId
-                // console.log('onLaunch wx.login success', res1);
-                this.globalData.wxCode = res1.code;
-                this.httpInterceptor({
-                  url: this.globalData.baseUrl + '/rentalcars/wechat/login',
-                  data: {
-                    code: this.globalData.wxCode
-                  },
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  method: 'GET'
-                }).then(res2 => {
-                  if (res2.data.code === 0) {
-                    this.globalData.accessToken = res2.data.data;
-                    for (let i = 0; i < this.globalData.httpQueue.length; i++) {
-                      let objTemp = Object.assign({}, this.globalData.httpQueue[i], {
-                        header: {
-                          'content-type': 'application/json',
-                          'token': this.globalData.accessToken
-                        }
-                      });
-                      this.httpInterceptor(objTemp).then(res => {
-                        resolve(res);
-                      }, err => {
-                        rejected(err);
-                      });
+          if (res.statusCode !== 500 && res.statusCode !== 404){
+            if (res.data.code === -1) { //认证失效，刷新请求
+              this.globalData.accessToken = '';
+              this.globalData.httpQueue.push(objTemp);
+              // 登录
+              wx.login({
+                success: res1 => {
+                  // 发送 res1.code 到后台换取 openId, sessionKey, unionId
+                  // console.log('onLaunch wx.login success', res1);
+                  this.globalData.wxCode = res1.code;
+                  this.httpInterceptor({
+                    url: this.globalData.baseUrl + '/rentalcars/wechat/login',
+                    data: {
+                      code: this.globalData.wxCode
+                    },
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    method: 'GET'
+                  }).then(res2 => {
+                    if (res2.data.code === 0) {
+                      this.globalData.accessToken = res2.data.data;
+                      for (let i = 0; i < this.globalData.httpQueue.length; i++) {
+                        let objTemp = Object.assign({}, this.globalData.httpQueue[i], {
+                          header: {
+                            'content-type': 'application/json',
+                            'token': this.globalData.accessToken
+                          }
+                        });
+                        this.httpInterceptor(objTemp).then(res => {
+                          resolve(res);
+                        }, err => {
+                          rejected(err);
+                        });
+                      }
+                    } else {
+                      rejected(res2);
                     }
-                  } else {
-                    rejected(res2);
-                  }
-                }, err1 => {
-                  rejected(err1);
-                });
-              }
-            });
-          } else {
-            resolve(res);
+                  }, err1 => {
+                    rejected(err1);
+                  });
+                }
+              });
+            } else {
+              resolve(res);
+            }
+          }else{
+            rejected(res);
           }
         }.bind(this),
         fail: function (err) {
