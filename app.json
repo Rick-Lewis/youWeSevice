@@ -12,7 +12,8 @@
     "page/order/orderDetail/index",
     "page/test/index",
     "page/myZone/phoneAuth/index",
-    "page/order/rate/index"
+    "page/order/rate/index",
+    "page/web/web"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -21,9 +22,9 @@
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
-    "color": "#7A7E83",
+    "color": "#000",
     "selectedColor": "#3cc51f",
-    "borderStyle": "black",
+    "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [
       {

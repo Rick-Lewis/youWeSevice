@@ -103,6 +103,9 @@ Page({
   // 协议点击回调
   handleProtocolClick: function() {
     console.log('preOrderDetail index.js handleProtocolClick');
+    wx.navigateTo({
+      url: '/page/web/web',
+    });
   },
   // 车辆详情
   handleSelectedItem: function(e) {

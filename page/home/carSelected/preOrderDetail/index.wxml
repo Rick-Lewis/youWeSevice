@@ -8,7 +8,8 @@
         <view class="text-sm" style="color: var(--font-grey)">{{orderSubmit.carDetail.let_litre + orderSubmit.carDetail.gearbox + ' | ' + orderSubmit.carDetail.seat_count + '座 | 油耗' + orderSubmit.carDetail.oil_litre + 'L'}}</view>
       </view>
     </view>
-    <view class="right"><text style="color: var(--font-red)">{{orderSubmit.carDetail.standard_price}}</text>元/日均</view>
+    <view class="right">
+      <text style="color: var(--font-red)">{{orderSubmit.carDetail.standard_price}}</text>元/日均</view>
   </view>
   <view class="repay-info">
     <view class="header">取还信息</view>
@@ -38,9 +39,18 @@
       <view>基本费用</view>
     </view>
     <view class="content">
-      <view>保险费：¥{{preOrder.feeList.insurance_fee}}</view>
-      <view>租车费：¥{{preOrder.feeList.rental_fee}}</view>
-      <view style="color: var(--orange)">总计：¥{{preOrder.order.price_total}}</view>
+      <view>
+        <text>保险费：</text>
+        <text style="float: right;">¥{{preOrder.feeList.insurance_fee}}</text>
+      </view>
+      <view>
+        <text>租车费：</text>
+        <text style="float: right;">¥{{preOrder.feeList.rental_fee}}</text>
+      </view>
+      <view style="color: var(--orange)">
+        <text>总计：</text>
+        <text style="float: right;">¥{{preOrder.order.price_total}}</text>
+      </view>
     </view>
   </view>
   <view class="other">

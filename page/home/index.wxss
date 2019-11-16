@@ -23,9 +23,9 @@
   min-height: 300rpx;
   margin: 20rpx;
 }
-/* .index-container .screen-swiper swiper-item{
-  border-radius: 20rpx;
-} */
+.index-container .screen-swiper swiper-item{
+  border-radius: 8rpx;
+}
 .index-container .screen-swiper image, .index-container .swiper-item image {
   width: 100%;
   display: block;
@@ -39,12 +39,12 @@
  ==================== */
 
 .index-container .info-container {
-  background-color: var(--white);
+  /* background-color: var(--white); */
   margin: 0 10px;
 }
 
 .index-container .info-container .line {
-  width: calc(100% - 107rpx);
+  width: calc(100% - 97rpx);
   height: 1px;
   transform: scaleY(0.5);
   background-color: rgba(0, 0, 0, 0.1);
@@ -57,6 +57,7 @@
   line-height: 1;
   padding: 30rpx 20rpx 20rpx 20rpx;
   background-color: var(--white);
+  border-radius: 8rpx;
 }
 
 .index-container .info-container .location-container .city-container {
@@ -74,6 +75,7 @@
   text-align: center;
   color: rgba(104, 104, 104, 1);
   box-sizing: content-box;
+  font-size: 24rpx;
 }
 .index-container .info-container .location-container .city-container .return-circle {
   width: 40rpx;
@@ -85,6 +87,7 @@
   text-align: center;
   color: rgba(105, 189, 131, 1);
   box-sizing: content-box;
+  font-size: 24rpx;
 }
 
 .index-container .info-container .location-container .city-container .text-container {
@@ -115,6 +118,8 @@
   padding: 0rpx 20rpx;
   background-color: var(--white);
   min-height: 140rpx;
+  margin-top: 10rpx;
+  border-radius: 8rpx;
 }
 
 .index-container .info-container .duration-container .time-container picker view:last-child {

@@ -6,11 +6,12 @@
   </i-tabs>
   <view class="carRentalContent" wx:if="{{current === 'carRental'}}">
     <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="50000" duration="500">
-      <swiper-item wx:for="{{swiperList}}" wx:key>
+      <swiper-item wx:for="{{swiperList}}" wx:key data-item="{{item}}" bindtap="handleToWeb">
         <image src="{{item.url}}" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
     <view class="info-container">
+    <view style="background-color: var(--white); border-radius: 8rpx;">
       <!-- 还车地址 -->
       <view class="location-container" style="margin-top: 15rpx;">
         <view class="city-container" data-name="repayDistrict" bindtap="handleSelectSite">
@@ -30,21 +31,22 @@
       <view class="line"></view>
       <!-- 取车地址 -->
       <view class="location-container">
-        <view class="city-container" data-name="fetchDistrict" bindtap="handleSelectSite">
+        <view class="city-container" data-name="repayDistrict">
           <view class="return-circle">还</view>
           <view class="text-container">
-            <text style="color: {{fetchDistrict === '请选择城市'? '#C2CCD1': ''}}">{{fetchDistrict}}</text>
+            <text style="color: {{repayDistrict === '请选择城市'? '#C2CCD1': ''}}">{{repayDistrict}}</text>
             <text class="cuIcon-right"></text>
           </view>
         </view>
-        <view class="site-container" data-name="fetchSite" bindtap="handleSelectSite">
+        <view class="site-container" data-name="repaySite">
           <view class="text-container">
-            <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
+            <text style="color: {{repaySite === '请选择门店'? '#C2CCD1': ''}}">{{repaySite}}</text>
           </view>
         </view>
       </view>
       <!-- 分割线 -->
-      <view class="line"></view>
+      <!-- <view class="line"></view> -->
+      </view>
       <!-- 租车时间 -->
       <view class="duration-container">
         <view class="time-container">
@@ -57,8 +59,8 @@
           <view class="icon-line pre-dot"></view>
           <view class="content-container">
             <view style="color:var(--font-grey);"><text style="color: var(--font-red);">{{duration.days}}</text>天</view>
-            <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}"><text style="color: var(--font-red)">{{duration.hours}}</text>小时
-              <text wx:if="{{duration.minutes !== 0}}"><text style="color: var(--font-red)">{{duration.minutes}}</text>分钟</text>
+            <view wx:if="{{duration.hours !== 0 || duration.minutes !== 0}}" style="color:var(--font-grey);"><text style="color: var(--font-red)">{{duration.hours}}</text>小时
+              <text wx:if="{{duration.minutes !== 0}}" style="color:var(--font-grey);"><text style="color: var(--font-red)">{{duration.minutes}}</text>分钟</text>
             </view>
           </view>
           <view class="icon-line next-dot"></view>

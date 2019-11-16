@@ -47,10 +47,10 @@ Page({
     }],
     modalVisible: false, //选择时间模态框显示与否，true为显示
     timeArray: [], //picker组件数据源
-    startIndex: [0, 0], //开始时间选中的picker组件对应的下标
-    endIndex: [0, 0], //结束时间选中的picker组件对应的下标
+    startIndex: [0, 4], //开始时间选中的picker组件对应的下标
+    endIndex: [2, 4], //结束时间选中的picker组件对应的下标
     duration: { //租车时间
-      days: 0,
+      days: 2,
       hours: 0,
       minutes: 0
     },
@@ -60,7 +60,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     //获取用户信息
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/info/user',
@@ -75,7 +75,7 @@ Page({
       if (!!app.globalData.userInfo.telephone) {
         app.globalData.isPhoneAuth = true;
       }
-      if (!!app.globalData.userInfo.nickName){
+      if (!!app.globalData.userInfo.nickName) {
         app.globalData.isUserInfoAuth = true;
       }
     }, err => {
@@ -107,53 +107,53 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
   //将坐标转换成地址
-  getDistrict: function(latitude, longitude) {
+  getDistrict: function (latitude, longitude) {
     wx.request({
       url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${this.keys}`,
       header: {
@@ -178,7 +178,7 @@ Page({
     })
   },
   //选择去送车地址
-  handleSelectSite: function(e) {
+  handleSelectSite: function (e) {
     console.log('home index.js handleSelectCar', e);
     switch (e.currentTarget.dataset.name) {
       case 'fetchDistrict':
@@ -204,7 +204,7 @@ Page({
     }
   },
   //立即选车
-  handleSelectCar: function(e) {
+  handleSelectCar: function (e) {
     console.log('home index.js handleSelectCar', e);
     if (this.data.fetchDistrict && this.data.fetchDistrict !== '请选择城市' && this.data.repayDistrict && this.data.repayDistrict !== '请选择城市' && this.data.fetchSite && this.data.fetchSite !== '请选择门店' && this.data.repaySite && this.data.repaySite !== '请选择门店' && (this.data.duration.days >= 0 && this.data.duration.hours >= 0 && this.data.duration.minutes >= 0) && !(this.data.duration.days === 0 && this.data.duration.hours === 0 && this.data.duration.minutes === 0)) { // 表单选择完成
       app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
@@ -260,7 +260,7 @@ Page({
     // });
   },
   //初始化租车日期选择组件数据
-  initTimeArray: function() {
+  initTimeArray: function () {
     console.log('home index.js initTimeArray');
     let today = new Date();
     let dateTemp = [],
@@ -299,8 +299,17 @@ Page({
     return result;
   },
   // 开始时间选择
-  bindStartPickerChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindStartPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    if (e.detail.value[0] > this.data.endIndex[0]) {
+      this.setData({
+        endIndex: [e.detail.value[0] + 2, e.detail.value[1]]
+      });
+    } else if (e.detail.value[0] === this.data.endIndex[0] && e.detail.value[1] >= this.data.endIndex[1]){
+      this.setData({
+        endIndex: [e.detail.value[0] + 2, e.detail.value[1]]
+      });
+    }
     this.setData({
       startIndex: e.detail.value
     }, () => {
@@ -312,11 +321,11 @@ Page({
       });
     });
   },
-  bindStartMultiPickerColumnChange: function(e) {
+  bindStartMultiPickerColumnChange: function (e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
   },
   // 结束时间选择
-  bindEndPickerChange: function(e) {
+  bindEndPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       endIndex: e.detail.value
@@ -329,11 +338,11 @@ Page({
       })
     });
   },
-  bindEndMultiPickerColumnChange: function(e) {
+  bindEndMultiPickerColumnChange: function (e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
   },
   // 计算时间间隔
-  calcDuration: function(start, end) {
+  calcDuration: function (start, end) {
     console.log('home index.js calcDuration', start, end);
     let result = {
       days: 0,
@@ -360,6 +369,12 @@ Page({
     console.log('home index.js handleChange detail', detail);
     this.setData({
       current: detail.key
+    });
+  },
+  handleToWeb(e) {
+    console.log('home index.js handleToWeb', e);
+    wx.navigateTo({
+      url: '/page/web/web',
     });
   }
 })
