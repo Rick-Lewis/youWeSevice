@@ -7,6 +7,7 @@ Page({
    */
   data: {
     checked: false, // 协议复选框，默认为不选
+    visible: false,
     preOrder: null //基本费用
   },
 
@@ -234,18 +235,26 @@ Page({
   },
   // 取车须知
   fetchNotice: function() {
-    wx.showModal({
-      showCancel: false,
-      title: '取车须知',
-      content: '1、需下单会员本人取车  2、取车时请携带：二代身份证、驾驶证',
-      confirmText: '我知道了',
-      success(res) {
-        if (res.confirm) {
-          console.log('用户点击确定');
-        } else if (res.cancel) {
-          console.log('用户点击取消');
-        }
-      }
+    this.setData({
+      visible: true
+    });
+    // wx.showModal({
+    //   showCancel: false,
+    //   title: '取车须知',
+    //   content: '1、需下单会员本人取车2、取车时请携带：二代身份证、驾驶证',
+    //   confirmText: '我知道了',
+    //   success(res) {
+    //     if (res.confirm) {
+    //       console.log('用户点击确定');
+    //     } else if (res.cancel) {
+    //       console.log('用户点击取消');
+    //     }
+    //   }
+    // });
+  },
+  handleOk: function(){
+    this.setData({
+      visible: false
     });
   }
 })

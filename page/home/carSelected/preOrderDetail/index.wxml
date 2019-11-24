@@ -41,11 +41,11 @@
     <view class="content">
       <view>
         <text>保险费：</text>
-        <text style="float: right;">¥{{preOrder.feeList.insurance_fee}}</text>
+        <text style="float: right;">¥{{preOrder.fee_list.insurance_fee}}</text>
       </view>
       <view>
         <text>租车费：</text>
-        <text style="float: right;">¥{{preOrder.feeList.rental_fee}}</text>
+        <text style="float: right;">¥{{preOrder.fee_list.rental_fee}}</text>
       </view>
       <view style="color: var(--orange)">
         <text>总计：</text>
@@ -68,4 +68,8 @@
   <view class="btn-container">
     <i-button type="custom" disabled="{{true}}" bindtap="handlePayment">立即预定</i-button>
   </view>
+  <i-modal title="取车须知" visible="{{ visible }}" show-cancel="{{false}}" bind:ok="handleOk">
+    <view>1、需下单会员本人取车</view>
+    <view>2、取车时请携带：二代身份证、驾驶证</view>
+</i-modal>
 </view>

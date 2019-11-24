@@ -187,6 +187,6 @@
 }
 .order-detail-container .price-info {
   margin: 20rpx 40rpx 0 40rpx;
-  padding: 0 20rpx;
+  padding: 20rpx;
   background-color: #fff;
 }

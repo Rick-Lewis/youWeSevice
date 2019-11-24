@@ -2,7 +2,8 @@
   "usingComponents": {
     "i-icon": "../../dist/icon/index",
     "i-button": "../../dist/button/index",
-    "i-checkbox": "../../component/checkbox/index"
+    "i-checkbox": "../../component/checkbox/index",
+    "i-modal": "../../dist/modal/index"
   },
   "navigationBarTitleText": "租车下单"
 }

@@ -6,6 +6,7 @@
     "page/order/index",
     "page/home/citySelected/index",
     "page/home/siteSelected/index",
+    "page/home/carSelected/carList/index",
     "page/home/carSelected/index",
     "page/home/carSelected/carDetail/index",
     "page/home/carSelected/preOrderDetail/index",

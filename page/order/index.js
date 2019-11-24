@@ -26,11 +26,13 @@ Page({
     orderList: [],
     ORDER_STATUS: {
       '-1': '已取消',
-      '0': '未支付',
+      '0': '待支付',
       '1': '待取车',
-      '2': '进行中',
-      '3': '已完成'
-    }
+      '2': '退款中',
+      '3': '进行中',
+      '4': '已完成'
+    },
+    baseUrl: ''
   },
 
   /**
@@ -38,6 +40,9 @@ Page({
    */
   onLoad: function(options) {
     console.log('order index.js onLoad', options);
+    this.setData({
+      baseUrl: app.globalData.baseUrl
+    });
   },
 
   /**

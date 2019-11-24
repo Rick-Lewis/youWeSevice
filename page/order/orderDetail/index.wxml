@@ -13,7 +13,7 @@
     </view>
     <view class="content-container">
       <view class="left">
-        <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
+        <view class="cu-avatar" style="background-image:url({{baseUrl + orderDetail.model.image}});"></view>
         <view style="margin-left: 20rpx;">
           <view>{{orderDetail.model.name}}</view>
           <view class="plate-number">{{orderDetail.order.plate_num}}</view>
@@ -65,16 +65,16 @@
     <view class="price-detail">
       <view>
         <text>押金：</text>
-        <text>¥{{orderDetail.feeList.deposit}}</text>
+        <text style="float: right;">¥{{orderDetail.fee_list.deposit}}</text>
       </view>
       <view>
         <text>保险费：</text>
-        <text>¥{{orderDetail.feeList.insurance_fee}}</text>
+        <text style="float: right;">¥{{orderDetail.fee_list.insurance_fee}}</text>
       </view>
     </view>
     <view>
       <text>共计：</text>
-      <text style="color: var(--orange)">¥{{orderDetail.feeList.rental_fee}}</text>
+      <text style="color: var(--orange);float: right;">¥{{orderDetail.fee_list.rental_fee}}</text>
     </view>
   </view>
 </view>

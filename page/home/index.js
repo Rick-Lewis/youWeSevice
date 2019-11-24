@@ -169,11 +169,13 @@ Page({
         let district = res.data.result.ad_info.district;
         this.fetchDistrictAdcode = res.data.result.ad_info.adcode;
         this.repayDistrictAdcode = res.data.result.ad_info.adcode;
-        this.setData({ //初始化相关信息为用户当前所在地址
-          // region: [province, city, district],
-          fetchDistrict: district,
-          repayDistrict: district
-        })
+        if (district){
+          this.setData({ //初始化相关信息为用户当前所在地址
+            // region: [province, city, district],
+            fetchDistrict: district,
+            repayDistrict: district
+          });
+        }
       }
     })
   },
@@ -235,7 +237,7 @@ Page({
         duration: this.data.duration
       });
       wx.navigateTo({
-        url: '/page/home/carSelected/index',
+        url: '/page/home/carSelected/carList/index',
       });
     } else {
       if (!this.data.fetchDistrict || this.data.fetchDistrict === '请选择城市' || !this.data.repayDistrict || this.data.repayDistrict === '请选择城市' || !this.data.fetchSite || this.data.fetchSite === '请选择门店' || !this.data.repaySite || this.data.repaySite === '请选择门店') {

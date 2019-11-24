@@ -18,7 +18,7 @@
       </view>
       <view class="content-container">
         <view class="left">
-          <view class="cu-avatar" style="background-image:url(https://i.loli.net/2017/08/21/599a521472424.jpg);"></view>
+          <view class="cu-avatar" style="background-image:url({{baseUrl + item.model_image}});"></view>
           <view style="margin-left: 20rpx;">
             <view>{{item.model_name}}</view>
             <view class="plate-number">{{item.plate_num}}</view>

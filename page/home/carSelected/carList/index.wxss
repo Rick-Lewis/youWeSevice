@@ -1,0 +1,179 @@
+/* page/home/carSelected/carList/index.wxss */
+
+.car-list-container .header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 11;
+}
+
+.car-list-container .header-container .center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-list-container .header-container .center image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 10rpx;
+}
+
+.car-list-container .header-container view:first-child {
+  flex: 1;
+  height: 100%;
+  text-align: center;
+}
+
+.car-list-container .header-container .line {
+  height: 50rpx;
+  flex-basis: 2rpx;
+  background-color: #eee;
+}
+
+.car-list-container .header-container view:last-child {
+  flex: 1;
+  text-align: center;
+}
+
+.car-list-container .list-container {
+  padding-top: 80rpx;
+  margin-top: 20rpx;
+  height: calc(100vh - 80rpx);
+}
+
+.car-list-container .list-container .item-container {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+  margin: 0 20rpx;
+}
+
+.car-list-container .list-container .item-container:not(:last-child) {
+  margin-bottom: 10rpx;
+}
+
+.car-list-container .list-container .item-container .cu-avatar {
+  width: 200rpx;
+  height: 110rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.car-list-container .list-container .item-container .content {
+  padding: 20rpx;
+  font-size: 24rpx;
+}
+
+.car-list-container .list-container .item-container .content .title {
+  font-size: 32rpx;
+}
+
+.car-list-container .list-container .item-container .content view:not(:last-child) {
+  margin-bottom: 4rpx;
+}
+
+.modal .mask-container {
+  position: fixed;
+  top: 80rpx;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 40px);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.modal .main-container {
+  position: fixed;
+  top: 80rpx;
+  left: 0;
+  width: 100vw;
+  background-color: #fff;
+  transform: translateY(-473px);
+  border-top: 2rpx solid #eee;
+}
+
+.modal .main-container .filter-container {
+  padding: 20rpx;
+  height: 770rpx;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.modal .main-container .filter-container .title {
+  margin-bottom: 18rpx;
+  color: #999;
+}
+
+.modal .main-container .filter-container .content:not(:last-child) {
+  margin-bottom: 20rpx;
+}
+
+.modal .main-container .btn-container {
+  display: flex;
+  background-color: #fff;
+  height: 88rpx;
+}
+
+.modal .main-container .btn-container i-button {
+  width: 50%;
+}
+
+.modal .main-container .btn-container i-button:last-child button {
+  background: #f74d00 !important;
+  color: #fff !important;
+}
+
+.modal .main-container .btn-container button {
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+radio {
+  color: #999;
+  background-color: #eee;
+  border-radius: 8rpx;
+  width: 160rpx;
+  height: 68rpx;
+  text-align: center;
+  line-height: 68rpx;
+  margin-bottom: 24rpx;
+}
+
+radio:not(:last-child) {
+  margin-right: 16rpx;
+}
+
+radio[aria-checked = true] {
+  background-color: #f74d00;
+  color: #fff;
+}
+
+/* 未选中的 背景样式 */
+
+radio .wx-radio-input {
+  display: none;
+}
+
+/* 选中后的 背景样式 */
+
+radio .wx-radio-input.wx-radio-input-checked {
+  display: none;
+}
+
+/* 选中后的 对勾样式 */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  content: none;
+}

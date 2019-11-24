@@ -37,7 +37,7 @@ Page({
       },
       method: 'GET'
     }).then(res => {
-      console.log('siteSelected index.js /rentalcars/wechat/store/list success');
+      console.log('siteSelected index.js /rentalcars/wechat/store/list success', res);
       this.setData({
         sites: res.data,
         options: options
@@ -101,6 +101,7 @@ Page({
     let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
     let subItemTemp = e.currentTarget.dataset.subItem;
     targetPages[0][this.data.options.from + 'Id'] = subItemTemp.id;
+    targetPages[0]['fetchSiteId'] = subItemTemp.id;
     targetPages[0].setData({ //改变首页的地址选择
       [this.data.options.from]: subItemTemp.name,
       fetchSite: subItemTemp.name
