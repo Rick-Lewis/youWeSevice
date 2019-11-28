@@ -179,7 +179,7 @@ Page({
       }
     })
   },
-  //选择去送车地址
+  //选择取送车地址
   handleSelectSite: function(e) {
     console.log('home index.js handleSelectCar', e);
     switch (e.currentTarget.dataset.name) {
@@ -189,6 +189,13 @@ Page({
         });
         break;
       case 'fetchSite':
+        if (!this.data.fetchDistrict || this.data.fetchDistrict === '请选择城市') {
+          wx.showToast({
+            title: '请选择城市',
+            icon: 'none'
+          });
+          return;
+        }
         wx.navigateTo({
           url: '/page/home/siteSelected/index?from=fetchSite&title=' + this.data.fetchDistrict + '&adcode=' + this.fetchDistrictAdcode,
         });

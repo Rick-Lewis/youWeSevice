@@ -8,7 +8,8 @@ Page({
   data: {
     checked: false, // 协议复选框，默认为不选
     visible: false,
-    preOrder: null //基本费用
+    preOrder: null, //基本费用
+    baseUrl: ''
   },
 
   /**
@@ -17,7 +18,8 @@ Page({
   onLoad: function(options) {
     console.log('preOrderDetail index.js onLoad', options, app.globalData.orderSubmit);
     this.setData({
-      orderSubmit: app.globalData.orderSubmit
+      orderSubmit: app.globalData.orderSubmit,
+      baseUrl: app.globalData.baseUrl
     });
     let temp = {
       time_start: '' + app.globalData.orderSubmit.fetchTime.day.year + '-' + app.globalData.orderSubmit.fetchTime.day.month + '-' + app.globalData.orderSubmit.fetchTime.day.day + ' ' + app.globalData.orderSubmit.fetchTime.time.text + ':00',

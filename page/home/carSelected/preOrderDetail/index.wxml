@@ -2,7 +2,7 @@
 <view class="pre-order-detail-container">
   <view class="preview-info" bindtap="handleSelectedItem">
     <view class="left">
-      <view class="cu-avatar" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+      <view class="cu-avatar" style="background-image:url({{baseUrl + orderSubmit.carDetail.image}});"></view>
       <view style="margin-left: 20rpx;">
         <view>{{orderSubmit.carDetail.name}}</view>
         <view class="text-sm" style="color: var(--font-grey)">{{orderSubmit.carDetail.let_litre + orderSubmit.carDetail.gearbox + ' | ' + orderSubmit.carDetail.seat_count + '座 | 油耗' + orderSubmit.carDetail.oil_litre + 'L'}}</view>

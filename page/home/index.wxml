@@ -12,24 +12,24 @@
     </swiper>
     <view class="info-container">
     <view style="background-color: var(--white); border-radius: 8rpx;">
-      <!-- 还车地址 -->
+      <!-- 取车地址 -->
       <view class="location-container" style="margin-top: 15rpx;">
-        <view class="city-container" data-name="repayDistrict" bindtap="handleSelectSite">
+        <view class="city-container" data-name="fetchDistrict" bindtap="handleSelectSite">
           <view class="fetch-circle">取</view>
           <view class="text-container">
-            <text style="color: {{repayDistrict === '请选择城市'? '#C2CCD1': ''}}">{{repayDistrict}}</text>
+            <text style="color: {{fetchDistrict === '请选择城市'? '#C2CCD1': ''}}">{{fetchDistrict}}</text>
             <text class="cuIcon-right"></text>
           </view>
         </view>
-        <view class="site-container" data-name="repaySite" bindtap="handleSelectSite">
+        <view class="site-container" data-name="fetchSite" bindtap="handleSelectSite">
           <view class="text-container">
-            <text style="color: {{repaySite === '请选择门店'? '#C2CCD1': ''}}">{{repaySite}}</text>
+            <text style="color: {{fetchSite === '请选择门店'? '#C2CCD1': ''}}">{{fetchSite}}</text>
           </view>
         </view>
       </view>
       <!-- 分割线 -->
       <view class="line"></view>
-      <!-- 取车地址 -->
+      <!-- 还车地址 -->
       <view class="location-container">
         <view class="city-container" data-name="repayDistrict">
           <view class="return-circle">还</view>
