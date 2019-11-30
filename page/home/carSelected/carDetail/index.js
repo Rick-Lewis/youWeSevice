@@ -6,24 +6,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    baseUrl: '',
+    modelDetail: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      baseUrl: app.globalData.baseUrl
+    });
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/detail/' + options.id,
+      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/' + options.id,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
       },
       method: 'GET'
     }).then(res => {
-      console.log('carDetail index.js onLoad /rentalcars/wechat/vehicle/detail/list success', res);
+      console.log('carDetail index.js onLoad /wechat/vehicle/model/{id} success', res);
+      this.setData({
+        modelDetail: res.data
+      });
     }, err => {
-      console.log('carDetail index.js onLoad /rentalcars/wechat/vehicle/detail/list failure', err);
+      console.log('carDetail index.js onLoad /wechat/vehicle/model/{id} failure', err);
     });
   },
 

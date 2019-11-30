@@ -16,35 +16,7 @@ Page({
     fetchSite: '请选择门店', //用户设置的取车门店
     repayDistrict: '请选择城市', //用户设置的还车城市
     repaySite: '请选择门店', //用户设置的还车门店
-    swiperList: [{
-      id: 0,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-    }, {
-      id: 1,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
-    }, {
-      id: 2,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-    }, {
-      id: 3,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-    }, {
-      id: 4,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
-    }, {
-      id: 5,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg'
-    }, {
-      id: 6,
-      type: 'image',
-      url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-    }],
+    swiperList: [],
     modalVisible: false, //选择时间模态框显示与否，true为显示
     timeArray: [], //picker组件数据源
     startIndex: [0, 4], //开始时间选中的picker组件对应的下标
@@ -61,6 +33,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    //获取用户信息
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/banner/list',
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('home index.js onLoad /rentalcars/wechat/banner/list success', res);
+      this.setData({
+        swiperList: res.data
+      });
+    }, err => {
+      console.log('home index.js onLoad /rentalcars/wechat/banner/list failure', err);
+    });
     //获取用户信息
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/info/user',
@@ -100,7 +88,8 @@ Page({
       }
     });
     this.setData({
-      timeArray: temp
+      timeArray: temp,
+      baseUrl: app.globalData.baseUrl
     });
   },
 
@@ -166,9 +155,23 @@ Page({
         // 市
         let city = res.data.result.ad_info.city;
         // 区
-        let district = res.data.result.ad_info.district;
-        this.fetchDistrictAdcode = res.data.result.ad_info.adcode;
-        this.repayDistrictAdcode = res.data.result.ad_info.adcode;
+        let district = res.data.result.ad_info.city;
+        // this.fetchDistrictAdcode = res.data.result.ad_info.adcode;
+        // this.repayDistrictAdcode = res.data.result.ad_info.adcode;
+        app.httpInterceptor({
+          url: app.globalData.baseUrl + '/rentalcars/wechat/district/city/' + res.data.result.ad_info.adcode,
+          header: {
+            'content-type': 'application/json',
+            'token': app.globalData.token
+          },
+          method: 'GET'
+        }).then(res => {
+          console.log('home index.js onLoad /rentalcars/wechat/district/city/{code} success', res);
+          this.fetchDistrictAdcode = res.data.parent;
+          this.repayDistrictAdcode = res.data.parent;
+        }, err => {
+          console.log('home index.js onLoad /rentalcars/wechat/district/city/{code} failure', err);
+        });
         if (district) {
           this.setData({ //初始化相关信息为用户当前所在地址
             // region: [province, city, district],
@@ -388,7 +391,7 @@ Page({
   handleToWeb(e) {
     console.log('home index.js handleToWeb', e);
     wx.navigateTo({
-      url: '/page/web/web',
+      url: '/page/web/web?url=' + e.currentTarget.dataset.item,
     });
   }
 })

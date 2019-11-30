@@ -5,14 +5,17 @@ Page({
    * Page initial data
    */
   data: {
-
+    url: ''
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    console.log('web.js onLoad', options);
+    this.setData({
+      url: options.url
+    });
   },
 
   /**
