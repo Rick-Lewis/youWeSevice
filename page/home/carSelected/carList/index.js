@@ -60,7 +60,7 @@ Page({
     });
     //获取车辆分类标签信息
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list',
+      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list?store_id=' + options.store_id,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token

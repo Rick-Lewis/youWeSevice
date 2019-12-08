@@ -247,7 +247,7 @@ Page({
         duration: this.data.duration
       });
       wx.navigateTo({
-        url: '/page/home/carSelected/carList/index',
+        url: '/page/home/carSelected/carList/index?store_id=' + this.fetchSiteId,
       });
     } else {
       if (!this.data.fetchDistrict || this.data.fetchDistrict === '请选择城市' || !this.data.repayDistrict || this.data.repayDistrict === '请选择城市') {
