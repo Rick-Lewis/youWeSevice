@@ -29,7 +29,7 @@ Page({
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/store/list',
       data: {
-        cityCode: adcodeTemp
+        city: adcodeTemp
       },
       header: {
         'content-type': 'application/json',
