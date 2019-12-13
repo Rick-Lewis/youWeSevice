@@ -226,14 +226,15 @@ Page({
           url: '/page/myZone/phoneAuth/index?from=preOrderDetail',
         });
       }
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '请勾选同意《租车服务合同》',
-        showCancel: false,
-        confirmText: '我知道了'
-      });
     }
+    // else {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '请勾选同意《租车服务合同》',
+    //     showCancel: false,
+    //     confirmText: '我知道了'
+    //   });
+    // }
   },
   // 取车须知
   fetchNotice: function() {

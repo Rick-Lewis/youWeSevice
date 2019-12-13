@@ -66,7 +66,7 @@
     </i-checkbox>
   </view>
   <view class="btn-container">
-    <i-button type="custom" disabled="{{true}}" bindtap="handlePayment">立即预定</i-button>
+    <i-button type="custom" bindtap="handlePayment" disabled="{{!checked}}">立即预定</i-button>
   </view>
   <i-modal title="取车须知" visible="{{ visible }}" show-cancel="{{false}}" bind:ok="handleOk">
     <view>1、需下单会员本人取车</view>

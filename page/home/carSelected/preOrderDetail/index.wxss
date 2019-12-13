@@ -94,6 +94,10 @@
 .pre-order-detail-container .btn-container {
   margin-top: 60rpx;
 }
+.i-btn-disabled {
+  color: #bbbec4 !important;
+  background: #f7f7f7 !important;
+}
 
 /* 协议 */
 
