@@ -14,8 +14,8 @@
 }
 
 .pre-order-detail-container .preview-info .left .cu-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 200rpx;
+  height: 110rpx;
   background-size: cover;
   background-position: center;
 }

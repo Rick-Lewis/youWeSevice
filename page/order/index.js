@@ -57,13 +57,18 @@ Page({
    */
   onShow: function() {
     let statusTemp = this.handleSwitchStatus(this.data.current);
+    let temp = {
+      pageIndex: 1,
+      pageSize: 20
+    };
+    if (statusTemp){
+      temp = Object.assign({}, temp, {
+        status: statusTemp
+      });
+    }
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
-      data: {
-        status: statusTemp,
-        pageIndex: 1,
-        pageSize: 20
-      },
+      data: temp,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
@@ -122,6 +127,15 @@ Page({
   handleTabChange: function(e) {
     console.log('order index.js handleTabChange', e);
     let statusTemp = this.handleSwitchStatus(e.detail.key);
+    let temp = {
+      pageIndex: 1,
+      pageSize: 20
+    };
+    if (statusTemp) {
+      temp = Object.assign({}, temp, {
+        status: statusTemp
+      });
+    }
     this.setData({
       current: e.detail.key
     });
@@ -131,11 +145,7 @@ Page({
     });
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
-      data: {
-        status: statusTemp,
-        pageIndex: 1,
-        pageSize: 20
-      },
+      data: temp,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
@@ -181,17 +191,22 @@ Page({
           success: res => {
             console.log('order index.js onLoad requestPayment success', res);
             let statusTemp = this.handleSwitchStatus(this.data.current);
+            let temp = {
+              pageIndex: 1,
+              pageSize: 20
+            };
+            if (statusTemp) {
+              temp = Object.assign({}, temp, {
+                status: statusTemp
+              });
+            }
             wx.showLoading({
               title: '加载中...',
               mask: true
             });
             app.httpInterceptor({
               url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
-              data: {
-                status: statusTemp,
-                pageIndex: 1,
-                pageSize: 20
-              },
+              data: temp,
               header: {
                 'content-type': 'application/json',
                 'token': app.globalData.token

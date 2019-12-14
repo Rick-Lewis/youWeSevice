@@ -51,8 +51,8 @@
 }
 
 .order-container .tab-content-container .order-card-container .content-container .left .cu-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 200rpx;
+  height: 110rpx;
   background-size: cover;
   background-position: center;
 }

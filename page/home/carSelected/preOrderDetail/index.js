@@ -42,6 +42,12 @@ Page({
       this.setData({
         preOrder: res.data
       });
+      if (res.data.vehicle_count <= 0){
+        wx.showToast({
+          title: '无可用车辆',
+          icon: 'none'
+        });
+      }
     }, err => {
       console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/preview failure', res);
     });

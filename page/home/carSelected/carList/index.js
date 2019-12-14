@@ -50,7 +50,7 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showLoading({
       title: '加载中...',
       mask: true
@@ -60,7 +60,7 @@ Page({
     });
     //获取车辆分类标签信息
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list?store_id=' + options.store_id,
+      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list?store_id=' + options.store_id + '&start_time=' + options.start_time + '&end_time=' + options.end_time,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
@@ -115,63 +115,70 @@ Page({
   /**
    * Lifecycle function--Called when page is initially rendered
    */
-  onReady: function() {
+  onReady: function () {
     wx.hideLoading();
   },
 
   /**
    * Lifecycle function--Called when page show
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * Page event handler function--Called when user drop down
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * Called when page reach bottom
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * Called when user click on the top right corner to share
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
   // 选择车辆回调
-  handleSelectedItem: function(e) {
+  handleSelectedItem: function (e) {
     console.log('carSelected index.js handleSelectedItem', e);
-    app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
-      carDetail: e.currentTarget.dataset.subItem
-    });
-    wx.navigateTo({
-      url: '/page/home/carSelected/preOrderDetail/index',
-    });
+    if (e.currentTarget.dataset.subItem.num > 0) {
+      app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
+        carDetail: e.currentTarget.dataset.subItem
+      });
+      wx.navigateTo({
+        url: '/page/home/carSelected/preOrderDetail/index',
+      });
+    } else {
+      wx.showToast({
+        title: '无可用车辆',
+        icon: 'none'
+      });
+    }
   },
   // 筛选
-  handleFilter: function() {
+  handleFilter: function () {
     var animation1 = wx.createAnimation();
     if (this.data.maskVisible) {
       animation1.translateY(-473).step();
@@ -184,7 +191,7 @@ Page({
     });
   },
   // 价格排序
-  priceSort: function() {
+  priceSort: function () {
     wx.showLoading({
       title: '加载中...',
       mask: true
@@ -211,7 +218,7 @@ Page({
     });
   },
   // 筛选选择
-  handleRadioChange: function(e) {
+  handleRadioChange: function (e) {
     console.log('carList index.js handleRadioChange', e, this.data.categoryList);
     switch (e.currentTarget.dataset.from) {
       case 'category':
@@ -232,7 +239,7 @@ Page({
     }
   },
   // 筛选确定
-  handleFilterConfirm: function() {
+  handleFilterConfirm: function () {
     this.handleFilter();
     setTimeout(() => {
       wx.showLoading({
@@ -282,7 +289,7 @@ Page({
       });
     }, 500);
   },
-  handleReset: function() {
+  handleReset: function () {
     this.setData({
       currentCategory: '全部',
       currentBrand: '全部',

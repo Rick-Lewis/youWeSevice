@@ -246,8 +246,10 @@ Page({
         },
         duration: this.data.duration
       });
+      let startTimeTemp = '' + this.data.timeArray[0][this.data.startIndex[0]].year + '-' + this.data.timeArray[0][this.data.startIndex[0]].month + '-' + this.data.timeArray[0][this.data.startIndex[0]].day + ' ' + this.data.timeArray[1][this.data.startIndex[1]].text;
+      let endTimeTemp = '' + this.data.timeArray[0][this.data.endIndex[0]].year + '-' + this.data.timeArray[0][this.data.endIndex[0]].month + '-' + this.data.timeArray[0][this.data.endIndex[0]].day + ' ' + this.data.timeArray[1][this.data.endIndex[1]].text;
       wx.navigateTo({
-        url: '/page/home/carSelected/carList/index?store_id=' + this.fetchSiteId,
+        url: '/page/home/carSelected/carList/index?store_id=' + this.fetchSiteId + '&start_time=' + startTimeTemp + '&end_time=' + endTimeTemp,
       });
     } else {
       if (!this.data.fetchDistrict || this.data.fetchDistrict === '请选择城市' || !this.data.repayDistrict || this.data.repayDistrict === '请选择城市') {
