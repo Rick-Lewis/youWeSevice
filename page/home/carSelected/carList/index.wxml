@@ -19,6 +19,7 @@
           <text style="color: var(--font-grey)">日均</text>
         </view>
       </view>
+      <view class="cover-container" wx:if="subItem.num === 0">已满租</view>
     </view>
   </view>
   <view class="modal">
