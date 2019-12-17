@@ -70,11 +70,11 @@
 }
 
 .car-list-container .list-container .item-container .cover-container image {
-  height: 100px;
-  width: 100px;
+  height: 170rpx;
+  width: 170rpx;
   display: block;
   position: absolute;
-  right: 0;
+  right: 10rpx;
   top: 0;
   bottom: 0;
   margin: auto 0;
