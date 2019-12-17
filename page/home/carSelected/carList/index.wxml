@@ -1,9 +1,13 @@
 <!--page/home/carSelected/carList/index.wxml-->
 <view class="car-list-container">
   <view class="header-container">
-    <view bindtap="priceSort" class="center">价格降序<image src="/image/icon/paixu-jiangxu.svg" style="width: 20px; height: 20px;"></image></view>
+    <view bindtap="priceSort" class="center">价格降序
+      <image src="/image/icon/paixu-jiangxu.svg" style="width: 20px; height: 20px;"></image>
+    </view>
     <view class="line"></view>
-    <view bindtap="handleFilter" class="center">筛选<image src="/image/icon/shaixuan.svg" style="width: 20px; height: 20px;"></image></view>
+    <view bindtap="handleFilter" class="center">筛选
+      <image src="/image/icon/shaixuan.svg" style="width: 20px; height: 20px;"></image>
+    </view>
   </view>
   <view class="list-container" style="overflow: {{maskVisible ? 'hidden' : 'auto'}}; padding-top: {{maskVisible ? '0' : '80rpx'}}">
     <view wx:if="{{carList.length === 0}}" style="text-align: center; margin-top: 5px;">~ 没有更多了 ~</view>
@@ -19,7 +23,9 @@
           <text style="color: var(--font-grey)">日均</text>
         </view>
       </view>
-      <view class="cover-container" wx:if="subItem.num === 0">已满租</view>
+      <view class="cover-container" wx:if="subItem.num === 0">
+        <image src="../../../../image/fill.png"></image>
+      </view>
     </view>
   </view>
   <view class="modal">

@@ -67,7 +67,17 @@
   top: 0;
   padding: 10rpx;
   box-sizing: border-box;
-  text-align: right;
+}
+
+.car-list-container .list-container .item-container .cover-container image {
+  height: 100px;
+  width: 100px;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
 }
 
 .car-list-container .list-container .item-container:not(:last-child) {
