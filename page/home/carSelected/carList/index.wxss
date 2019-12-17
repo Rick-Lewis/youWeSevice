@@ -70,8 +70,8 @@
 }
 
 .car-list-container .list-container .item-container .cover-container image {
-  height: 170rpx;
-  width: 170rpx;
+  height: 120rpx;
+  width: 120rpx;
   display: block;
   position: absolute;
   right: 10rpx;
