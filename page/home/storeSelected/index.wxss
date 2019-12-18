@@ -1,0 +1,45 @@
+/* page/home/storeSelected/index.wxss */
+@import "/wxss/colorUi.wxss";
+.verticalNav.nav {
+  width: 200rpx;
+  white-space: initial;
+}
+
+.verticalNav.nav .cu-item {
+  width: 100%;
+  text-align: center;
+  background-color: var(--ghostWhite);
+  margin: 0;
+  border: none;
+  height: 50px;
+  position: relative;
+}
+.verticalNav.nav .cu-item.backgroud-white{
+  background-color: #fff;
+}
+
+.verticalNav.nav .cu-item.cur {
+  background-color: #f1f1f1;
+}
+.verticalNav.nav .cu-item.cur::after {
+  content: "";
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 10rpx 0 0 10rpx;
+  position: absolute;
+  background-color: currentColor;
+  top: 0;
+  right: 0rpx;
+  bottom: 0;
+  margin: auto;
+}
+.verticalBox{
+  display: flex;
+}
+.verticalMain{
+  background-color: #f1f1f1;
+}
+.verticalMain .cu-list .list-item-expending{
+  margin-bottom: 10rpx;
+  height: 160rpx;
+}

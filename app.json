@@ -14,7 +14,8 @@
     "page/test/index",
     "page/myZone/phoneAuth/index",
     "page/order/rate/index",
-    "page/web/web"
+    "page/web/web",
+    "page/home/storeSelected/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
