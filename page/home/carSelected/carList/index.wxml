@@ -23,7 +23,7 @@
           <text style="color: var(--font-grey)">日均</text>
         </view>
       </view>
-      <view class="cover-container" wx:if="subItem.num === 0">
+      <view class="cover-container" wx:if="{{subItem.num === 0}}">
         <image src="../../../../image/fill.png"></image>
       </view>
     </view>
