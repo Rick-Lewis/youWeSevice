@@ -1,0 +1,63 @@
+/* page/home/storeSelected/storeDetail/index.wxss */
+.store-detail-container .preview-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 40rpx;
+  background-color: var(--white);
+}
+
+.store-detail-container .preview-info .left {
+  display: flex;
+  align-items: center;
+}
+
+.store-detail-container .preview-info .left .cu-avatar {
+  width: 200rpx;
+  height: 110rpx;
+  background-size: cover;
+  background-position: center;
+}
+.store-detail-container .preview-info .left .info {
+  margin-left: 40rpx;
+}
+.store-detail-container .preview-info .left .info .text-sm{
+  display: flex;
+  align-items: center;
+  color: var(--font-grey)
+}
+.store-detail-container .preview-info .left .info .text-sm:not(:first-child){
+  margin-top: 5rpx;
+}
+.store-detail-container .preview-info .left .info .text-sm:not(:last-child){
+  margin-top: 10rpx;
+}
+.store-detail-container .preview-info .left .info image{
+  width: 30rpx; 
+  height: 30rpx;
+  margin-right: 10rpx;
+  display: block;
+}
+.store-detail-container .other{
+  margin-top: 20rpx;
+}
+
+.store-detail-container .other .header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: var(--white);
+}
+.store-detail-container .other .header:not(:first-child){
+  margin-top: 5rpx;
+}
+
+.store-detail-container .other .header>view{
+  margin-right: 10rpx;
+}
+
+.store-detail-container .other .header image{
+  width: 50rpx; 
+  height: 50rpx;
+  display: block;
+}

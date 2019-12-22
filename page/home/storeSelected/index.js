@@ -9,114 +9,122 @@ Page({
     tabCur: 0,
     mainCur: 0,
     verticalNavTop: 0,
-    carList: [],
-    load: true
+    districtList: [],
+    load: true,
+    options: null, //对应onLoad中的options
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log('carSelected index.js', options, app.globalData.orderSubmit);
+  onLoad: function(options) {
+    console.log('storeSelected index.js', options, app.globalData.orderSubmit);
+    this.setData({
+      options: options
+    });
+    wx.setNavigationBarTitle({
+      title: options.title,
+    });
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
     //获取车辆分类标签信息
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list',
+      url: app.globalData.baseUrl + '/rentalcars/wechat/district/children/' + options.adcode,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
       },
       method: 'GET'
     }).then(res => {
-      console.log('carSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all success', res);
-      let carList = [];
+      console.log('storeSelected index.js onLoad /district/children/{code} success', res);
+      let tempDistrictList = [];
       for (let i = 0; i < res.data.length; i++) {
-        if (carList.length === 0) { // 写入第一个元素
-          let carItem = {
-            category_name: '',
-            list: []
-          }
-          carItem.category_name = res.data[i].category_name;
-          carItem.list.push(res.data[i]);
-          carList.push(carItem);
-        } else {
-          let indexTemp = carList.findIndex(item => item.category_name === res.data[i].category_name);
-          if (indexTemp !== -1) {
-            carList[indexTemp].list.push(res.data[i]);
-          } else {
-            let carItem = {
-              category_name: '',
-              list: []
-            }
-            carItem.category_name = res.data[i].category_name;
-            carItem.list.push(res.data[i]);
-            carList.push(carItem);
-          }
+        let tempItem = {
+          district: null,
+          storeList: []
         }
+        tempItem.district = res.data[i];
+        tempDistrictList.push(tempItem);
+        app.httpInterceptor({
+          url: app.globalData.baseUrl + '/rentalcars/wechat/store/list',
+          data: {
+            county: res.data[i].code
+          },
+          header: {
+            'content-type': 'application/json',
+            'token': app.globalData.token
+          },
+          method: 'GET'
+        }).then(res => {
+          console.log('storeSelected index.js /rentalcars/wechat/store/list success', res);
+          tempDistrictList[i].storeList.push(...res.data);
+          this.setData({
+            districtList: tempDistrictList
+          });
+        }, err => {
+          console.log('storeSelected index.js /rentalcars/wechat/store/list failure');
+        });
       };
-      this.setData({
-        carList: carList
-      });
+      if(res.data.length > 0){
+        this.setData({
+          tabCur: res.data[0].id,
+          mainCur: res.data[0].id,
+          verticalNavTop: (res.data[0].id - 1) * 50
+        });
+      }
     }, err => {
-      console.log('carSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all failure', err);
+      console.log('storeSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all failure', err);
     });
-    // let origCarsTemp = origCars.map((item, index) => Object.assign({}, item, {
-    //   id: index
-    // }));
-    // this.setData({
-    //   carList: origCarsTemp
-    // });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     wx.hideLoading();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
   // tab切换
@@ -129,45 +137,51 @@ Page({
   },
   // 页面右边内容滚动事件回调
   verticalMain(e) {
-    // console.log('carSelected index.js verticalMain', e);
+    // console.log('storeSelected index.js verticalMain', e);
     let that = this;
-    let carList = this.data.carList;
+    let districtList = this.data.districtList;
     let tabHeight = 0;
     if (this.data.load) {
-      for (let i = 0; i < carList.length; i++) {
-        let view = wx.createSelectorQuery().select("#main-" + carList[i].id);
+      for (let i = 0; i < districtList.length; i++) {
+        let view = wx.createSelectorQuery().select("#main-" + districtList[i].district.id);
         view.fields({
           size: true
         }, data => {
-          carList[i].top = tabHeight;
+          districtList[i].top = tabHeight;
           tabHeight = tabHeight + data.height;
-          carList[i].bottom = tabHeight;
+          districtList[i].bottom = tabHeight;
         }).exec();
       }
       that.setData({
         load: false,
-        carList: carList
+        districtList: districtList
       })
     }
     let scrollTop = e.detail.scrollTop + 20;
-    for (let i = 0; i < carList.length; i++) {
-      if (scrollTop > carList[i].top && scrollTop < carList[i].bottom) {
+    for (let i = 0; i < districtList.length; i++) {
+      if (scrollTop > districtList[i].top && scrollTop < districtList[i].bottom) {
         that.setData({
-          verticalNavTop: (carList[i].id - 1) * 50,
-          tabCur: carList[i].id
+          verticalNavTop: (districtList[i].district.id - 1) * 50,
+          tabCur: districtList[i].district.id
         })
         return false
       }
     }
   },
   // 选择车辆回调
-  handleSelectedItem: function (e) {
-    console.log('carSelected index.js handleSelectedItem', e);
-    app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
-      carDetail: e.currentTarget.dataset.subItem
-    });
-    wx.navigateTo({
-      url: '/page/home/carSelected/preOrderDetail/index',
+  handleSelectedItem: function(e) {
+    console.log('storeSelected index.js handleSelectedItem', e);
+    let targetPages = getCurrentPages().filter(item => item.route === 'page/home/index');
+    let subItemTemp = e.currentTarget.dataset.subItem;
+    targetPages[0][this.data.options.from + 'Id'] = subItemTemp.id;
+    targetPages[0]['repaySiteId'] = subItemTemp.id;
+    targetPages[0].setData({ //改变首页的地址选择
+      [this.data.options.from]: subItemTemp.name,
+      repaySite: subItemTemp.name
+    }, () => {
+      wx.navigateBack({
+        delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
+      });
     });
   }
 })

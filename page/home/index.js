@@ -77,19 +77,22 @@ Page({
       }
     });
     let temp = this.initTimeArray();
+    let indexTemp = this.initTimeIndex(temp);
     app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
       fetchTime: {
         day: temp[0][this.data.startIndex[0]],
-        time: temp[1][this.data.startIndex[1]]
+        time: temp[1][indexTemp]
       },
       repayTime: {
         day: temp[0][this.data.endIndex[0]],
-        time: temp[1][this.data.endIndex[1]]
+        time: temp[1][indexTemp]
       }
     });
     this.setData({
       timeArray: temp,
-      baseUrl: app.globalData.baseUrl
+      baseUrl: app.globalData.baseUrl,
+      startIndex: [this.data.startIndex[0], indexTemp],
+      endIndex: [this.data.endIndex[0], indexTemp]
     });
   },
 
@@ -199,19 +202,22 @@ Page({
           });
           return;
         }
+        // wx.navigateTo({
+        //   url: '/page/home/siteSelected/index?from=fetchSite&title=' + this.data.fetchDistrict + '&adcode=' + this.fetchDistrictAdcode,
+        // });
         wx.navigateTo({
-          url: '/page/home/siteSelected/index?from=fetchSite&title=' + this.data.fetchDistrict + '&adcode=' + this.fetchDistrictAdcode,
+          url: '/page/home/storeSelected/index?from=fetchSite&title=' + this.data.fetchDistrict + '&adcode=' + this.fetchDistrictAdcode,
         });
         break;
       case 'repayDistrict':
-        wx.navigateTo({
-          url: '/page/home/citySelected/index?from=repayDistrict',
-        });
+        // wx.navigateTo({
+        //   url: '/page/home/citySelected/index?from=repayDistrict',
+        // });
         break;
       case 'repaySite':
-        wx.navigateTo({
-          url: '/page/home/siteSelected/index?from=repaySite&title=' + this.data.repayDistrict + '&adcode=' + this.repayDistrictAdcode,
-        });
+        // wx.navigateTo({
+        //   url: '/page/home/siteSelected/index?from=repaySite&title=' + this.data.repayDistrict + '&adcode=' + this.repayDistrictAdcode,
+        // });
         break;
     }
   },
@@ -285,7 +291,7 @@ Page({
     let dateTemp = [],
       timeTemp = [],
       result = [];
-    for (let i = 0; i < 60; i++) { //未来60天日期的初始化
+    for (let i = 0; i < 29; i++) { //未来60天日期的初始化
       let someday = new Date(); //每次循环初始化，保证未来第i天都是相对于当前日期
       someday.setDate(today.getDate() + i); //未来第i天
       let yearTemp = someday.getFullYear();
@@ -342,6 +348,9 @@ Page({
   },
   bindStartMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    if (e.detail.column === 0 && e.detail.value === 0){ //不允许选择当前时间之前的时间
+    
+    }
   },
   // 结束时间选择
   bindEndPickerChange: function(e) {
@@ -395,5 +404,17 @@ Page({
     wx.navigateTo({
       url: '/page/web/web?url=' + e.currentTarget.dataset.item,
     });
+  },
+  initTimeIndex(val) { //租车时间限制，当前之后两小时
+    let today = new Date();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+    let result;
+    if (minutes / 30 > 1) { //大于30分钟，则默认小时+1
+      result = val[1].findIndex(item => item.hour === (hours + 3) && item.minute === 0);
+    } else {
+      result = val[1].findIndex(item => item.hour === (hours + 2) && item.minute === 30);
+    }
+    return result;
   }
 })

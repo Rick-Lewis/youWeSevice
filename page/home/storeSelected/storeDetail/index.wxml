@@ -1,0 +1,37 @@
+<!--page/home/storeSelected/storeDetail/index.wxml-->
+<view class="store-detail-container">
+  <view class="preview-info" bindtap="handleSelectedItem">
+    <view class="left">
+      <view class="cu-avatar" style="background-image:url({{baseUrl + orderSubmit.carDetail.image}});"></view>
+      <view class="info">
+        <view>古丈县政府门店</view>
+        <view class="text-sm">
+          <view>
+            <image src="/image/icon/time_fill.svg"></image>
+          </view>
+          <view>营业时间：07:00-19:00</view>
+        </view>
+        <view class="text-sm">
+          <view>
+            <image src="/image/icon/phone_light.svg"></image>
+          </view>
+          <view>0731-88888888</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="other">
+    <view class="header" bindtap="fetchNotice">
+      <view>
+        <image src="/image/icon/location_light.svg"></image>
+      </view>
+      <view>长沙开福区芙蓉东路208号</view>
+    </view>
+    <view class="header" bindtap="fetchNotice">
+      <view>
+        <image src="/image/icon/location_light.svg"></image>
+      </view>
+      <view>从东广场出火车站，右手边下地下停车场（入口在 茶颜悦色对面），进车库后右转</view>
+    </view>
+  </view>
+</view>
