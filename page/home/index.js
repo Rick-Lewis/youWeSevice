@@ -77,7 +77,7 @@ Page({
       }
     });
     let temp = this.initTimeArray();
-    let indexTemp = this.initTimeIndex(temp);
+    let indexTemp = this.initTimeIndex(temp) !== -1 ? this.initTimeIndex(temp) : this.data.startIndex[1];
     app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
       fetchTime: {
         day: temp[0][this.data.startIndex[0]],
@@ -288,10 +288,17 @@ Page({
   initTimeArray: function() {
     console.log('home index.js initTimeArray');
     let today = new Date();
+    let tenToday = new Date(new Date(new Date().toLocaleDateString()).getTime() + 22 * 60 * 60 * 1000); //当天22点
     let dateTemp = [],
       timeTemp = [],
-      result = [];
-    for (let i = 0; i < 29; i++) { //未来60天日期的初始化
+      result = [],
+      i = 0,
+      sum = 29; //可选天数
+    if (today > tenToday) {
+      i = 1;
+      sum = sum + i;
+    }
+    for (; i < sum; i++) { //未来60天日期的初始化
       let someday = new Date(); //每次循环初始化，保证未来第i天都是相对于当前日期
       someday.setDate(today.getDate() + i); //未来第i天
       let yearTemp = someday.getFullYear();
@@ -348,8 +355,8 @@ Page({
   },
   bindStartMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
-    if (e.detail.column === 0 && e.detail.value === 0){ //不允许选择当前时间之前的时间
-    
+    if (e.detail.column === 0 && e.detail.value === 0) { //不允许选择当前时间之前的时间
+
     }
   },
   // 结束时间选择
