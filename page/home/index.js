@@ -77,22 +77,27 @@ Page({
       }
     });
     let temp = this.initTimeArray();
-    let indexTemp = this.initTimeIndex(temp) !== -1 ? this.initTimeIndex(temp) : this.data.startIndex[1];
+    let indexTemp = this.initTimeIndex(temp);
+    let indexTemp1 = this.data.startIndex[0];
+    let indexTemp2 = this.data.endIndex[0];
+    if (indexTemp === -1) {
+      indexTemp = this.data.startIndex[1];
+    }
     app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
       fetchTime: {
-        day: temp[0][this.data.startIndex[0]],
+        day: temp[0][indexTemp1],
         time: temp[1][indexTemp]
       },
       repayTime: {
-        day: temp[0][this.data.endIndex[0]],
+        day: temp[0][indexTemp2],
         time: temp[1][indexTemp]
       }
     });
     this.setData({
       timeArray: temp,
       baseUrl: app.globalData.baseUrl,
-      startIndex: [this.data.startIndex[0], indexTemp],
-      endIndex: [this.data.endIndex[0], indexTemp]
+      startIndex: [indexTemp1, indexTemp],
+      endIndex: [indexTemp2, indexTemp]
     });
   },
 
@@ -225,6 +230,13 @@ Page({
   handleSelectCar: function(e) {
     console.log('home index.js handleSelectCar', e);
     if (this.data.fetchDistrict && this.data.fetchDistrict !== '请选择城市' && this.data.repayDistrict && this.data.repayDistrict !== '请选择城市' && this.data.fetchSite && this.data.fetchSite !== '请选择门店' && this.data.repaySite && this.data.repaySite !== '请选择门店' && (this.data.duration.days >= 0 && this.data.duration.hours >= 0 && this.data.duration.minutes >= 0) && !(this.data.duration.days === 0 && this.data.duration.hours === 0 && this.data.duration.minutes === 0)) { // 表单选择完成
+      if (this.data.duration.days >= 29) {
+        wx.showToast({
+          title: '租车时间不能大于29天',
+          icon: 'none'
+        });
+        return;
+      }
       app.globalData.orderSubmit = Object.assign({}, app.globalData.orderSubmit, {
         fetchDistrict: {
           district: this.data.fetchDistrict,
@@ -288,12 +300,12 @@ Page({
   initTimeArray: function() {
     console.log('home index.js initTimeArray');
     let today = new Date();
-    let tenToday = new Date(new Date(new Date().toLocaleDateString()).getTime() + 22 * 60 * 60 * 1000); //当天22点
+    let tenToday = new Date(new Date(new Date().toLocaleDateString()).getTime() + (21.5 - 2) * 60 * 60 * 1000); //当天21点30
     let dateTemp = [],
       timeTemp = [],
       result = [],
       i = 0,
-      sum = 29; //可选天数
+      sum = 60; //可选天数
     if (today > tenToday) {
       i = 1;
       sum = sum + i;

@@ -57,23 +57,35 @@ Page({
             'token': app.globalData.token
           },
           method: 'GET'
-        }).then(res => {
-          console.log('storeSelected index.js /rentalcars/wechat/store/list success', res);
-          tempDistrictList[i].storeList.push(...res.data);
-          this.setData({
-            districtList: tempDistrictList
-          });
+        }).then(res1 => {
+          console.log('storeSelected index.js /rentalcars/wechat/store/list success', res1);
+          tempDistrictList.length > 0 && tempDistrictList[i].storeList.push(...res1.data);
+          if (i === res.data.length - 1) {
+            tempDistrictList = tempDistrictList.filter(item => item.storeList.length > 0);
+            if (tempDistrictList.length > 0) {
+              this.setData({
+                districtList: tempDistrictList,
+                tabCur: tempDistrictList[0].district.id,
+                mainCur: tempDistrictList[0].district.id,
+                verticalNavTop: (tempDistrictList[0].district.id - 1) * 50
+              });
+            } else {
+              this.setData({
+                districtList: tempDistrictList
+              });
+            }
+          }
         }, err => {
           console.log('storeSelected index.js /rentalcars/wechat/store/list failure');
         });
       };
-      if(res.data.length > 0){
-        this.setData({
-          tabCur: res.data[0].id,
-          mainCur: res.data[0].id,
-          verticalNavTop: (res.data[0].id - 1) * 50
-        });
-      }
+      // if (res.data.length > 0) {
+      //   this.setData({
+      //     tabCur: res.data[0].id,
+      //     mainCur: res.data[0].id,
+      //     verticalNavTop: (res.data[0].id - 1) * 50
+      //   });
+      // }
     }, err => {
       console.log('storeSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all failure', err);
     });
