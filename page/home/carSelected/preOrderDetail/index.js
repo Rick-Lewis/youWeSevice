@@ -40,7 +40,7 @@ Page({
     }).then(res => {
       console.log('preOrderDetail index.js onLoad /rentalcars/wechat/order/rental/preview success', res);
       this.setData({
-        preOrder: res.data
+        preOrder: res.data.data
       });
       if (res.data.vehicle_count <= 0){
         wx.showToast({

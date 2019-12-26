@@ -29,66 +29,87 @@ Page({
       title: '加载中...',
       mask: true
     });
-    //获取车辆分类标签信息
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/district/children/' + options.adcode,
+      url: app.globalData.baseUrl + '/rentalcars/wechat/store/list',
+      data: {
+        city: options.adcode
+      },
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
       },
       method: 'GET'
-    }).then(res => {
-      console.log('storeSelected index.js onLoad /district/children/{code} success', res);
-      let tempDistrictList = [];
-      for (let i = 0; i < res.data.length; i++) {
-        let tempItem = {
-          district: null,
-          storeList: []
-        }
-        tempItem.district = res.data[i];
-        tempDistrictList.push(tempItem);
-        app.httpInterceptor({
-          url: app.globalData.baseUrl + '/rentalcars/wechat/store/list',
-          data: {
-            county: res.data[i].code
-          },
-          header: {
-            'content-type': 'application/json',
-            'token': app.globalData.token
-          },
-          method: 'GET'
-        }).then(res1 => {
-          console.log('storeSelected index.js /rentalcars/wechat/store/list success', res1);
-          tempDistrictList.length > 0 && tempDistrictList[i].storeList.push(...res1.data);
-          if (i === res.data.length - 1) {
-            tempDistrictList = tempDistrictList.filter(item => item.storeList.length > 0);
-            if (tempDistrictList.length > 0) {
-              this.setData({
-                districtList: tempDistrictList,
-                tabCur: tempDistrictList[0].district.id,
-                mainCur: tempDistrictList[0].district.id,
-                verticalNavTop: (tempDistrictList[0].district.id - 1) * 50
-              });
-            } else {
-              this.setData({
-                districtList: tempDistrictList
-              });
-            }
-          }
-        }, err => {
-          console.log('storeSelected index.js /rentalcars/wechat/store/list failure');
-        });
-      };
-      // if (res.data.length > 0) {
-      //   this.setData({
-      //     tabCur: res.data[0].id,
-      //     mainCur: res.data[0].id,
-      //     verticalNavTop: (res.data[0].id - 1) * 50
-      //   });
-      // }
-    }, err => {
-      console.log('storeSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all failure', err);
+    }).then(res1 => {
+      console.log('storeSelected index.js /rentalcars/wechat/store/list success', res1);
+      this.setData({
+        districtList: res1.data,
+        tabCur: res1.data[0].county,
+        mainCur: res1.data[0].county,
+        verticalNavTop: (res1.data[0].county - 1) * 50
+      });
+    }, err1 => {
+      console.log('storeSelected index.js /rentalcars/wechat/store/list failure', err1);
     });
+    //获取车辆分类标签信息
+    // app.httpInterceptor({
+    //   url: app.globalData.baseUrl + '/rentalcars/wechat/district/children/' + options.adcode,
+    //   header: {
+    //     'content-type': 'application/json',
+    //     'token': app.globalData.token
+    //   },
+    //   method: 'GET'
+    // }).then(res => {
+    //   console.log('storeSelected index.js onLoad /district/children/{code} success', res);
+    //   let tempDistrictList = [];
+    //   for (let i = 0; i < res.data.length; i++) {
+    //     let tempItem = {
+    //       district: null,
+    //       storeList: []
+    //     }
+    //     tempItem.district = res.data[i];
+    //     tempDistrictList.push(tempItem);
+    //     app.httpInterceptor({
+    //       url: app.globalData.baseUrl + '/rentalcars/wechat/store/list',
+    //       data: {
+    //         county: res.data[i].code
+    //       },
+    //       header: {
+    //         'content-type': 'application/json',
+    //         'token': app.globalData.token
+    //       },
+    //       method: 'GET'
+    //     }).then(res1 => {
+    //       console.log('storeSelected index.js /rentalcars/wechat/store/list success', res1);
+    //       tempDistrictList.length > 0 && tempDistrictList[i].storeList.push(...res1.data);
+    //       if (i === res.data.length - 1) {
+    //         tempDistrictList = tempDistrictList.filter(item => item.storeList.length > 0);
+    //         if (tempDistrictList.length > 0) {
+    //           this.setData({
+    //             districtList: tempDistrictList,
+    //             tabCur: tempDistrictList[0].district.id,
+    //             mainCur: tempDistrictList[0].district.id,
+    //             verticalNavTop: (tempDistrictList[0].district.id - 1) * 50
+    //           });
+    //         } else {
+    //           this.setData({
+    //             districtList: tempDistrictList
+    //           });
+    //         }
+    //       }
+    //     }, err => {
+    //       console.log('storeSelected index.js /rentalcars/wechat/store/list failure');
+    //     });
+    //   };
+    //   // if (res.data.length > 0) {
+    //   //   this.setData({
+    //   //     tabCur: res.data[0].id,
+    //   //     mainCur: res.data[0].id,
+    //   //     verticalNavTop: (res.data[0].id - 1) * 50
+    //   //   });
+    //   // }
+    // }, err => {
+    //   console.log('storeSelected index.js onLoad /rentalcars/wechat/vehicle/tag/all failure', err);
+    // });
   },
 
   /**
@@ -142,9 +163,9 @@ Page({
   // tab切换
   tabSelect(e) {
     this.setData({
-      tabCur: e.currentTarget.dataset.id,
-      mainCur: e.currentTarget.dataset.id,
-      verticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+      tabCur: e.currentTarget.dataset.county,
+      mainCur: e.currentTarget.dataset.county,
+      verticalNavTop: (e.currentTarget.dataset.county - 1) * 50
     })
   },
   // 页面右边内容滚动事件回调
@@ -155,7 +176,7 @@ Page({
     let tabHeight = 0;
     if (this.data.load) {
       for (let i = 0; i < districtList.length; i++) {
-        let view = wx.createSelectorQuery().select("#main-" + districtList[i].district.id);
+        let view = wx.createSelectorQuery().select("#main-" + districtList[i].county);
         view.fields({
           size: true
         }, data => {
@@ -173,8 +194,8 @@ Page({
     for (let i = 0; i < districtList.length; i++) {
       if (scrollTop > districtList[i].top && scrollTop < districtList[i].bottom) {
         that.setData({
-          verticalNavTop: (districtList[i].district.id - 1) * 50,
-          tabCur: districtList[i].district.id
+          verticalNavTop: (districtList[i].county - 1) * 50,
+          tabCur: districtList[i].county
         })
         return false
       }

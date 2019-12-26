@@ -3,22 +3,22 @@
   <view wx:if="{{districtList.length === 0}}" style="text-align: center; margin-top: 10rpx;width: 100%;">~ 没有更多了 ~</view>
   <block wx:else>
     <scroll-view class="verticalNav nav" scroll-y scroll-with-animation scroll-top="{{verticalNavTop}}" style="height:100vh">
-      <view class="cu-item {{item.district.id == tabCur ? 'text-red backgroud-white' : ''}}" wx:for="{{districtList}}" wx:key bindtap='tabSelect' data-id="{{item.district.id}}">
-        {{item.district.name}}
+      <view class="cu-item {{item.county == tabCur ? 'text-red backgroud-white' : ''}}" wx:for="{{districtList}}" wx:key bindtap='tabSelect' data-county="{{item.county}}">
+        {{item.county_name}}
       </view>
     </scroll-view>
     <scroll-view class="verticalMain" scroll-y scroll-with-animation style="height:100vh" scroll-into-view="main-{{mainCur}}" bindscroll="verticalMain">
-      <view wx:for="{{districtList}}" wx:key id="main-{{item.district.id}}">
+      <view wx:for="{{districtList}}" wx:key id="main-{{item.county}}">
         <view class='cu-bar solid-bottom bg-white' style="{{index !== 0 ? 'margin-top: 20rpx;': ''}}">
           <view class='action'>
-            <text class='cuIcon-title text-green'></text> {{item.district.name}} </view>
+            <text class='cuIcon-title text-green'></text> {{item.county_name}} </view>
         </view>
         <view class="cu-list menu-avatar">
-          <view class="cu-item list-item-expending" wx:for="{{item.storeList}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
+          <view class="cu-item list-item-expending" wx:for="{{item.stores}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
             <view class="content">
               <view>
                 <image src="/image/icon/shop.svg"></image>{{subItem.name}}</view>
-              <view style="margin-left: 46rpx; color: var(--font-grey); font-size: 24rpx;">{{subItem.county + subItem.address}}</view>
+              <view style="margin-left: 46rpx; color: var(--font-grey); font-size: 24rpx;">{{subItem.county_name + subItem.address}}</view>
             </view>
             <image src="/image/icon/sort_light.svg" style="width: 52rpx; height: 52rpx;"></image>
           </view>
