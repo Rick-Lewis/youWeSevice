@@ -231,14 +231,16 @@ Page({
     console.log('home index.js handleSelectCar', e);
     if (this.data.fetchDistrict && this.data.fetchDistrict !== '请选择城市' && this.data.repayDistrict && this.data.repayDistrict !== '请选择城市' && this.data.fetchSite && this.data.fetchSite !== '请选择门店' && this.data.repaySite && this.data.repaySite !== '请选择门店' && (this.data.duration.days >= 0 && this.data.duration.hours >= 0 && this.data.duration.minutes >= 0) && !(this.data.duration.days === 0 && this.data.duration.hours === 0 && this.data.duration.minutes === 0)) { // 表单选择完成
       let nowTemp = new Date();
-      let sum = nowTemp.getHours() * 100 + nowTemp.getMinutes();
-      let selSum = this.data.timeArray[1][this.data.startIndex[1]].hour * 100 + this.data.timeArray[1][this.data.startIndex[1]].minute;
-      if (sum + 200 < 2130 && selSum - sum < 200) { //当前时间后2个小时小于9点半且选择的时间与当前的时间间隔小于2小时，提示
-        wx.showToast({
-          title: '租车开始时间不能当前2小时',
-          icon: 'none'
-        });
-        return;
+      if (nowTemp.getFullYear() === this.data.timeArray[0][this.data.startIndex[0]].year && (nowTemp.getMonth() + 1) === this.data.timeArray[0][this.data.startIndex[0]].month && nowTemp.getDate() === this.data.timeArray[0][this.data.startIndex[0]].day) { //当天
+        let sum = nowTemp.getHours() * 100 + nowTemp.getMinutes();
+        let selSum = this.data.timeArray[1][this.data.startIndex[1]].hour * 100 + this.data.timeArray[1][this.data.startIndex[1]].minute;
+        if (sum + 200 < 2130 && selSum - sum < 200) { //当前时间后2个小时小于9点半且选择的时间与当前的时间间隔小于2小时，提示
+          wx.showToast({
+            title: '租车开始时间不能当前2小时',
+            icon: 'none'
+          });
+          return;
+        }
       }
       if (this.data.duration.days >= 29) {
         wx.showToast({
