@@ -44,7 +44,8 @@ Page({
     }],
     maskVisible: false,
     ani1: null,
-    sort: 'desc'
+    sort: 'desc',
+    queryStr: ''
   },
 
   /**
@@ -56,7 +57,8 @@ Page({
       mask: true
     });
     this.setData({
-      baseUrl: app.globalData.baseUrl
+      baseUrl: app.globalData.baseUrl,
+      queryStr: '?store_id=' + options.store_id + '&start_time=' + options.start_time + '&end_time=' + options.end_time
     });
     //获取车辆分类标签信息
     app.httpInterceptor({
@@ -251,11 +253,15 @@ Page({
       let temp1 = null;
       if (this.data.currentCategory && this.data.currentCategory !== '全部') {
         temp1 = this.data.categoryList.find(item => item.name === this.data.currentCategory);
-        strTemp = strTemp + '?category_id=' + temp1.id;
+        if (this.data.queryStr) {
+          strTemp = strTemp + '&category_id=' + temp1.id;
+        } else {
+          strTemp = strTemp + '?category_id=' + temp1.id;
+        }
       }
       if (this.data.currentBrand && this.data.currentBrand !== '全部') {
         temp1 = this.data.brandList.find(item => item.name === this.data.currentBrand);
-        if (strTemp) {
+        if (this.data.queryStr) {
           strTemp = strTemp + '&brand_id=' + temp1.id;
         } else {
           strTemp = strTemp + '?brand_id=' + temp1.id;
@@ -263,7 +269,7 @@ Page({
       }
       if (this.data.currentPrice && this.data.currentPrice !== '全部') {
         temp1 = this.data.priceList.find(item => item.name === this.data.currentPrice);
-        if (strTemp) {
+        if (this.data.queryStr) {
           strTemp = strTemp + '&price_lower=' + temp1.priceLower + '&price_upper=' + temp1.priceUpper;
         } else {
           strTemp = strTemp + '?price_lower=' + temp1.priceLower + '&price_upper=' + temp1.priceUpper;
@@ -271,7 +277,7 @@ Page({
       }
       //获取车辆分类标签信息
       app.httpInterceptor({
-        url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list' + strTemp,
+        url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list' + this.data.queryStr + strTemp,
         header: {
           'content-type': 'application/json',
           'token': app.globalData.token
