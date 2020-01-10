@@ -24,7 +24,7 @@
     <view class="cell-group-container">
       <i-cell-group>
         <i-cell is-link title="联系客服" bind:click="conCusService"></i-cell>
-        <i-cell is-link title="软件版本" url=""></i-cell>
+        <i-cell is-link title="软件版本" url="" value="1.0.0"></i-cell>
       </i-cell-group>
     </view>
     <!-- <view class="btn-container" wx:if="{{!isPhoneAuth}}">

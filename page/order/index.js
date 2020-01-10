@@ -249,10 +249,10 @@ Page({
         result = '';
         break;
       case '1':
-        result = '2';
+        result = '3';
         break;
       case '2':
-        result = '3';
+        result = '4';
         break;
       case '3':
         result = '-1';
