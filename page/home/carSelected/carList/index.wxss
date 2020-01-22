@@ -200,3 +200,11 @@ radio .wx-radio-input.wx-radio-input-checked {
 radio .wx-radio-input.wx-radio-input-checked::before {
   content: none;
 }
+
+radio text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80px;
+  display: block;
+}
