@@ -175,8 +175,8 @@ Page({
           method: 'GET'
         }).then(res => {
           console.log('home index.js onLoad /rentalcars/wechat/district/city/{code} success', res);
-          this.fetchDistrictAdcode = res.data.parent;
-          this.repayDistrictAdcode = res.data.parent;
+          this.fetchDistrictAdcode = res.data.code;
+          this.repayDistrictAdcode = res.data.code;
         }, err => {
           console.log('home index.js onLoad /rentalcars/wechat/district/city/{code} failure', err);
         });
