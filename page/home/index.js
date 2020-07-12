@@ -18,7 +18,7 @@ Page({
     repaySite: '请选择门店', //用户设置的还车门店
     swiperList: [],
     modalVisible: false, //选择时间模态框显示与否，true为显示
-    timeArray: [], //picker组件数据源
+    timeArray: [], //日期picker组件数据源
     startIndex: [0, 4], //开始时间选中的picker组件对应的下标
     endIndex: [2, 4], //结束时间选中的picker组件对应的下标
     duration: { //租车时间
@@ -236,7 +236,7 @@ Page({
         let selSum = this.data.timeArray[1][this.data.startIndex[1]].hour * 100 + this.data.timeArray[1][this.data.startIndex[1]].minute;
         if (sum + 200 < 2130 && selSum - sum < 200) { //当前时间后2个小时小于9点半且选择的时间与当前的时间间隔小于2小时，提示
           wx.showToast({
-            title: '租车开始时间不能当前2小时',
+            title: '租车开始时间应早于当前时间2小时',
             icon: 'none'
           });
           return;
@@ -318,7 +318,7 @@ Page({
       result = [],
       i = 0,
       sum = 60; //可选天数
-    if (today > tenToday) {
+    if (today > tenToday) { //晚于当天结束前两小时，从下一天开始计算时间
       i = 1;
       sum = sum + i;
     }
@@ -326,8 +326,8 @@ Page({
       let someday = new Date(); //每次循环初始化，保证未来第i天都是相对于当前日期
       someday.setDate(today.getDate() + i); //未来第i天
       let yearTemp = someday.getFullYear();
-      let monthTemp = someday.getMonth() + 1;
-      let dayTemp = someday.getDate();
+      let monthTemp = ('0' + (someday.getMonth() + 1)).slice(-2);
+      let dayTemp = ('0' + someday.getDate()).slice(-2);
       let weekTemp = this.weeks[someday.getDay()];
       let textTemp = ('0' + monthTemp).slice(-2) + '月' + ('0' + dayTemp).slice(-2) + '日 ';
       dateTemp.push({
@@ -357,6 +357,36 @@ Page({
   // 开始时间选择
   bindStartPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value);
+    let now = new Date();
+    let nowYear = now.getFullYear();
+    let nowMonth = now.getMonth() + 1;
+    let nowDate = now.getDate();
+    let selectedYear = parseInt(this.data.timeArray[0][e.detail.value[0]].year);
+    let selectedMonth = parseInt(this.data.timeArray[0][e.detail.value[0]].month);
+    let selectedDay = parseInt(this.data.timeArray[0][e.detail.value[0]].day);
+    if (selectedYear === nowYear && selectedMonth === nowMonth && selectedDay === nowDate) { //选择的时间要大于当前时间
+      let nowHours = now.getHours();
+      let nowMinutes = now.getMinutes();
+      let total = nowHours * 60 + nowMinutes;
+      let selectedTimes = this.data.timeArray[1][e.detail.value[1]];
+      let selectedTotal = selectedTimes.hour * 60 + selectedTimes.minute;
+      if (selectedTotal < total) {
+        wx.showToast({
+          title: '选择的开始时间不能早于当前时间',
+          icon: 'none'
+        });
+        return;
+      }
+    }
+    //租期大于29天
+    if ((e.detail.value[1] >= this.data.endIndex[1] && (e.detail.value[0] + 29) < this.data.endIndex[0]) || (e.detail.value[1] < this.data.endIndex[1] && (e.detail.value[0] + 28) < this.data.endIndex[0])) {
+      wx.showToast({
+        title: '租车时间应小于30天',
+        icon: 'none'
+      });
+      return;
+    }
+    //开始时间大于结束时间，结束时间往后+2
     if (e.detail.value[0] > this.data.endIndex[0]) {
       this.setData({
         endIndex: [e.detail.value[0] + 2, e.detail.value[1]]
@@ -380,12 +410,26 @@ Page({
   bindStartMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     if (e.detail.column === 0 && e.detail.value === 0) { //不允许选择当前时间之前的时间
-
     }
   },
   // 结束时间选择
   bindEndPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
+    //租期大于29天
+    if ((e.detail.value[1] <= this.data.startIndex[1] && (e.detail.value[0] - 29) > this.data.startIndex[0]) || (e.detail.value[1] > this.data.startIndex[1] && (e.detail.value[0] - 28) > this.data.startIndex[0])) {
+      wx.showToast({
+        title: '租车时间应小于30天',
+        icon: 'none'
+      });
+      return;
+    }
+    if (e.detail.value[0] < this.data.startIndex[0] && e.detail.value[1] < this.data.startIndex[1]){
+      wx.showToast({
+        title: '选择的结束时间不能早于开始时间',
+        icon: 'none'
+      });
+      return;
+    }
     this.setData({
       endIndex: e.detail.value
     }, () => {
