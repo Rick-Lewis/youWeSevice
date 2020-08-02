@@ -1,6 +1,21 @@
 /* page/home/storeSelected/index.wxss */
 @import "/wxss/colorUi.wxss";
 
+.cu-list.menu-avatar{
+  overflow: auto;
+}
+
+.cu-list.menu-avatar>.cu-item{
+  justify-content: space-between;
+  height: auto;
+  padding-top: 20rpx;
+}
+
+.cu-list.menu-avatar>.cu-item .content {
+	position: static;
+	margin-left: 46rpx;
+}
+
 .verticalNav.nav {
   width: 200rpx;
   white-space: initial;
@@ -50,9 +65,9 @@
   padding-right: 20rpx;
 }
 
-.verticalMain .cu-list .list-item-expending .content {
+/* .verticalMain .cu-list .list-item-expending .content {
   left: 40rpx;
-}
+} */
 
 .verticalMain .cu-list .list-item-expending .content image {
   width: 32rpx;

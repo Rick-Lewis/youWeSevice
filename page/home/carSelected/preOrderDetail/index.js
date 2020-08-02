@@ -212,7 +212,8 @@ Page({
                   });
                 } else {
                   wx.showToast({
-                    title: res.data.data,
+                    icon: 'none',
+                    title: res.data.message,
                   });
                 }
               }, err => {
@@ -221,7 +222,8 @@ Page({
             }
           } else {
             wx.showToast({
-              title: res.data.data,
+              icon: 'none',
+              title: res.data.message,
             });
           }
         }, err => {
