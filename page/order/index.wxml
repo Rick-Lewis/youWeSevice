@@ -43,9 +43,11 @@
           </view>
         </view>
         <view class="bottom">
-          <view class="evaluate" wx:if="{{item.status === 3}}" data-order-no="{{item.order_no}}"  catchtap="handleEvaluate">评价</view>
-          <view class="evaluate" wx:if="{{item.status === 0}}" data-order-no="{{item.order_no}}" catchtap="handlePayment">付款</view>
-          <view wx:else></view>
+        <view>
+          <view class="evaluate" wx:if="{{item.status === 4}}" data-order-no="{{item.order_no}}"  catchtap="handleEvaluate">评价</view>
+            <view class="evaluate" wx:if="{{item.status === 0}}" data-order-no="{{item.order_no}}">付款</view>
+            <view class="evaluate" wx:if="{{item.status === 0}}" data-order-no="{{item.order_no}}">取消</view>
+          </view>
           <view class="total">
             <text style="color: var(--font-grey)">共计：</text>
             <text style="color: var(--orange)">¥{{item.price_total}}</text>

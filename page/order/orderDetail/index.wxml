@@ -13,7 +13,7 @@
     </view>
     <view class="content-container">
       <view class="left">
-        <view class="cu-avatar" style="background-image:url({{baseUrl + orderDetail.model.image}});"></view>
+        <view class="cu-avatar" style="{{orderDetail && orderDetail.model && orderDetail.model.image ? 'background-image:url(' + baseUrl + orderDetail.model.image + ')' : ''}};"></view>
         <view style="margin-left: 20rpx;">
           <view>{{orderDetail.model.name}}</view>
           <view class="plate-number">{{orderDetail.order.plate_num}}</view>
@@ -76,5 +76,9 @@
       <text>共计：</text>
       <text style="color: var(--orange);float: right;">¥{{orderDetail.fee_list.rental_fee}}</text>
     </view>
+  </view>
+  <view class="btn-container" wx:if="{{orderDetail.order.status === 0}}">
+    <i-button style="width: 100%" type="custom" bindtap="handlePayment">付款</i-button>
+    <i-button style="width: 100%" type="default" bindtap="handleCancel">取消</i-button>
   </view>
 </view>

@@ -25,12 +25,12 @@ Page({
     }],
     orderList: [],
     ORDER_STATUS: {
-      '-1': '已取消',
-      '0': '待支付',
-      '1': '待取车',
-      '2': '退款中',
-      '3': '进行中',
-      '4': '已完成'
+      // '-1': '已取消',
+      // '0': '待支付',
+      // '1': '待取车',
+      // '2': '退款中',
+      // '3': '进行中',
+      // '4': '已完成'
     },
     baseUrl: ''
   },
@@ -42,6 +42,23 @@ Page({
     console.log('order index.js onLoad', options);
     this.setData({
       baseUrl: app.globalData.baseUrl
+    });
+    app.httpInterceptor({
+      url: app.globalData.baseUrl + '/rentalcars/wechat/order/status',
+      header: {
+        'content-type': 'application/json',
+        'token': app.globalData.token
+      },
+      method: 'GET'
+    }).then(res => {
+      console.log('order index.js onLoad /rentalcars/wechat/order/status', res);
+      let temp = {};
+      res.data.forEach(item => temp[item.status + ''] = item.name);
+      this.setData({
+        ORDER_STATUS: temp
+      });
+    }, err => {
+      console.log('order index.js onLoad /rentalcars/wechat/order/status failure', err);
     });
   },
 
@@ -80,7 +97,7 @@ Page({
         orderList: res.data.dataSource
       });
     }, err => {
-      console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
+      console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', err);
     });
   },
 
@@ -168,74 +185,74 @@ Page({
       });
     });
   },
-  handlePayment: function(e) {
-    app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/pay',
-      data: {
-        order_no: e.currentTarget.dataset.orderNo
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'token': app.globalData.token
-      },
-      method: 'GET'
-    }).then(res => {
-      console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay success', res);
-      if (res.data.code === 0) {
-        wx.requestPayment({
-          timeStamp: res.data.data.paySign.timeStamp,
-          nonceStr: res.data.data.paySign.nonceStr,
-          package: res.data.data.paySign.package,
-          paySign: res.data.data.paySign.paySign,
-          signType: res.data.data.paySign.signType,
-          success: res => {
-            console.log('order index.js onLoad requestPayment success', res);
-            let statusTemp = this.handleSwitchStatus(this.data.current);
-            let temp = {
-              pageIndex: 1,
-              pageSize: 20
-            };
-            if (statusTemp) {
-              temp = Object.assign({}, temp, {
-                status: statusTemp
-              });
-            }
-            wx.showLoading({
-              title: '加载中...',
-              mask: true
-            });
-            app.httpInterceptor({
-              url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
-              data: temp,
-              header: {
-                'content-type': 'application/json',
-                'token': app.globalData.token
-              },
-              method: 'GET'
-            }).then(res => {
-              console.log('order index.js onLoad /rentalcars/wechat/order/rental/page success', res);
-              this.setData({
-                orderList: res.data.dataSource
-              });
-              wx.hideLoading();
-            }, err => {
-              console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
-              wx.hideLoading();
-            });
-          },
-          fail: err => {
-            console.log('order index.js onLoad requestPayment fail', err);
-          }
-        });
-      } else {
-        wx.showToast({
-          title: res.data.data,
-        });
-      }
-    }, err => {
-      console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay failure', res);
-    });
-  },
+  // handlePayment: function(e) {
+  //   app.httpInterceptor({
+  //     url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/pay',
+  //     data: {
+  //       order_no: e.currentTarget.dataset.orderNo
+  //     },
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded',
+  //       'token': app.globalData.token
+  //     },
+  //     method: 'GET'
+  //   }).then(res => {
+  //     console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay success', res);
+  //     if (res.data.code === 0) {
+  //       wx.requestPayment({
+  //         timeStamp: res.data.data.paySign.timeStamp,
+  //         nonceStr: res.data.data.paySign.nonceStr,
+  //         package: res.data.data.paySign.package,
+  //         paySign: res.data.data.paySign.paySign,
+  //         signType: res.data.data.paySign.signType,
+  //         success: res => {
+  //           console.log('order index.js onLoad requestPayment success', res);
+  //           let statusTemp = this.handleSwitchStatus(this.data.current);
+  //           let temp = {
+  //             pageIndex: 1,
+  //             pageSize: 20
+  //           };
+  //           if (statusTemp) {
+  //             temp = Object.assign({}, temp, {
+  //               status: statusTemp
+  //             });
+  //           }
+  //           wx.showLoading({
+  //             title: '加载中...',
+  //             mask: true
+  //           });
+  //           app.httpInterceptor({
+  //             url: app.globalData.baseUrl + '/rentalcars/wechat/order/rental/page',
+  //             data: temp,
+  //             header: {
+  //               'content-type': 'application/json',
+  //               'token': app.globalData.token
+  //             },
+  //             method: 'GET'
+  //           }).then(res => {
+  //             console.log('order index.js onLoad /rentalcars/wechat/order/rental/page success', res);
+  //             this.setData({
+  //               orderList: res.data.dataSource
+  //             });
+  //             wx.hideLoading();
+  //           }, err => {
+  //             console.log('order index.js onLoad /rentalcars/wechat/order/rental/page failure', res);
+  //             wx.hideLoading();
+  //           });
+  //         },
+  //         fail: err => {
+  //           console.log('order index.js onLoad requestPayment fail', err);
+  //         }
+  //       });
+  //     } else {
+  //       wx.showToast({
+  //         title: res.data.data,
+  //       });
+  //     }
+  //   }, err => {
+  //     console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay failure', res);
+  //   });
+  // },
   handleEvaluate: function(e) {
     console.log('order index.js handleEvaluate', e);
     wx.navigateTo({

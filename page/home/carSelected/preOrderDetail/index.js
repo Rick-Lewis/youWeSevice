@@ -154,19 +154,19 @@ Page({
                 package: res.data.data.package,
                 paySign: res.data.data.paySign,
                 signType: res.data.data.signType,
-                success: res => {
-                  console.log('preOrderDetail index.js onLoad requestPayment success', res);
+                success: res1 => {
+                  console.log('preOrderDetail index.js onLoad requestPayment success', res1);
                   wx.showLoading();
                   setTimeout(() => {
-                    wx.switchTab({
-                      url: '/page/order/index',
+                    wx.redirectTo({
+                      url: '/page/order/orderDetail/index?orderNo=' + res.data.data.order_no,
                     }, () => {
                       wx.hideLoading();
                     });
                   }, 1500);
                 },
-                fail: err => {
-                  console.log('preOrderDetail index.js onLoad requestPayment fail', err);
+                fail: err1 => {
+                  console.log('preOrderDetail index.js onLoad requestPayment fail', err1);
                   wx.switchTab({
                     url: '/page/order/index',
                   });
@@ -183,28 +183,28 @@ Page({
                   'token': app.globalData.token
                 },
                 method: 'GET'
-              }).then(res => {
-                console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay success', res);
-                if (res.data.code === 0) {
+              }).then(res1 => {
+                console.log('order index.js onLoad /rentalcars/wechat/order/rental/pay success', res1);
+                if (res1.data.code === 0) {
                   wx.requestPayment({
-                    timeStamp: res.data.data.paySign.timeStamp,
-                    nonceStr: res.data.data.paySign.nonceStr,
-                    package: res.data.data.paySign.package,
-                    paySign: res.data.data.paySign.paySign,
-                    signType: res.data.data.paySign.signType,
-                    success: res => {
-                      console.log('preOrderDetail index.js onLoad requestPayment success', res);
+                    timeStamp: res1.data.data.paySign.timeStamp,
+                    nonceStr: res1.data.data.paySign.nonceStr,
+                    package: res1.data.data.paySign.package,
+                    paySign: res1.data.data.paySign.paySign,
+                    signType: res1.data.data.paySign.signType,
+                    success: res2 => {
+                      console.log('preOrderDetail index.js onLoad requestPayment success', res2);
                       wx.showLoading();
                       setTimeout(() => {
-                        wx.switchTab({
-                          url: '/page/order/index',
+                        wx.redirectTo({
+                          url: '/page/order/orderDetail/index?orderNo=' + res.data.data.order_no,
                         }, () => {
                           wx.hideLoading();
                         });
                       }, 1500);
                     },
-                    fail: err => {
-                      console.log('preOrderDetail index.js onLoad requestPayment fail', err);
+                    fail: err2 => {
+                      console.log('preOrderDetail index.js onLoad requestPayment fail', err2);
                       wx.switchTab({
                         url: '/page/order/index',
                       });

@@ -190,3 +190,9 @@
   padding: 20rpx;
   background-color: #fff;
 }
+
+.order-detail-container .btn-container{
+  display: flex;
+  align-content: space-between;
+  margin: 50rpx 20rpx 0 20rpx;
+}

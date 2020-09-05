@@ -155,4 +155,8 @@
   border-radius:160rpx;
   border: 1rpx solid var(--grey);
   text-align: center;
+  display: inline-block;
+}
+.order-container .tab-content-container .order-card-container .footer-container .bottom .evaluate:not(:last-child){
+  margin-right: 10rpx;
 }
