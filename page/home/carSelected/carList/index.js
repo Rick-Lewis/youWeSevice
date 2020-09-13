@@ -54,17 +54,37 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function(options) {
+    
+  },
+
+  /**
+   * Lifecycle function--Called when page is initially rendered
+   */
+  onReady: function() {
+    
+  },
+
+  /**
+   * Lifecycle function--Called when page show
+   */
+  onShow: function() {
+    // 获取当前小程序的页面栈
+    let pages = getCurrentPages();
+    // 数组中索引最大的页面--当前页面
+    let currentPage = pages[pages.length - 1];
+    // 获取当前页面中的 options
+    let options = currentPage.options;
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
     this.setData({
       baseUrl: app.globalData.baseUrl,
-      queryStr: '?store_id=' + options.store_id + '&start_time=' + options.start_time + '&end_time=' + options.end_time
+      queryStr: '?store_id=' + options.store_id + '&time_start=' + options.time_start + '&time_end=' + options.time_end
     });
     //获取车辆分类标签信息
     app.httpInterceptor({
-      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list?store_id=' + options.store_id + '&start_time=' + options.start_time + '&end_time=' + options.end_time,
+      url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/model/list?store_id=' + options.store_id + '&time_start=' + options.time_start + '&time_end=' + options.time_end,
       header: {
         'content-type': 'application/json',
         'token': app.globalData.token
@@ -75,8 +95,10 @@ Page({
       this.setData({
         carList: res.data
       });
+      wx.hideLoading();
     }, err => {
       console.log('carList index.js onLoad /wechat/vehicle/model/list failure', err);
+      wx.hideLoading();
     });
     app.httpInterceptor({
       url: app.globalData.baseUrl + '/rentalcars/wechat/vehicle/category/list',
@@ -114,20 +136,6 @@ Page({
     }, err => {
       console.log('carList index.js onLoad /wechat/vehicle/brand/list failure', err);
     });
-  },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function() {
-    wx.hideLoading();
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function() {
-
   },
 
   /**

@@ -50,9 +50,9 @@
       <!-- 租车时间 -->
       <view class="duration-container">
         <view class="time-container">
-          <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartMultiPickerColumnChange" value="{{startIndex}}" range="{{timeArray}}" range-key="text">
-            <view>{{timeArray[0][startIndex[0]].text}}</view>
-            <view style="color:var(--font-grey);">{{timeArray[0][startIndex[0]].week + ' ' + timeArray[1][startIndex[1]].text}}</view>
+          <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartMultiPickerColumnChange" value="{{startIndex}}" range="{{timeStartArray}}" range-key="text">
+            <view>{{timeStartArray[0][startIndex[0]].text}}</view>
+            <view style="color:var(--font-grey);">{{timeStartArray[0][startIndex[0]].week + ' ' + timeStartArray[1][startIndex[1]].text}}</view>
           </picker>
         </view>
         <view class="day-container">
@@ -66,9 +66,9 @@
           <view class="icon-line next-dot"></view>
         </view>
         <view class="time-container">
-          <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndMultiPickerColumnChange" value="{{endIndex}}" range="{{timeArray}}" range-key="text">
-            <view>{{timeArray[0][endIndex[0]].text}}</view>
-            <view style="color:var(--font-grey)">{{timeArray[0][endIndex[0]].week + ' ' + timeArray[1][endIndex[1]].text}}</view>
+          <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndMultiPickerColumnChange" value="{{endIndex}}" range="{{timeEndArray}}" range-key="text">
+            <view>{{timeEndArray[0][endIndex[0]].text}}</view>
+            <view style="color:var(--font-grey)">{{timeEndArray[0][endIndex[0]].week + ' ' + timeEndArray[1][endIndex[1]].text}}</view>
           </picker>
         </view>
       </view>

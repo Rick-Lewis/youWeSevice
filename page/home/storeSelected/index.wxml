@@ -17,10 +17,13 @@
           <view class="cu-item list-item-expending" wx:for="{{item.stores}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
             <view class="content">
               <view>
-                <image src="/image/icon/shop.svg"></image>{{subItem.name}}</view>
+                <image src="/image/icon/shop.svg"></image>
+                <view>{{subItem.name}}</view>
+                <!-- <view style="margin-left: 10rpx; color: var(--font-grey); font-size: 24rpx;">({{subItem.start_time}}-{{subItem.end_time}})</view> -->
+              </view>
               <view style="margin-left: 46rpx; color: var(--font-grey); font-size: 24rpx;">{{subItem.county_name + subItem.address}}</view>
             </view>
-            <image src="/image/icon/sort_light.svg" style="width: 52rpx; height: 52rpx;"></image>
+            <view><image src="/image/icon/sort_light.svg" style="width: 52rpx; height: 52rpx;"></image></view>
           </view>
         </view>
       </view>

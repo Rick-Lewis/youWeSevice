@@ -208,9 +208,33 @@ Page({
     let subItemTemp = e.currentTarget.dataset.subItem;
     targetPages[0][this.data.options.from + 'Id'] = subItemTemp.id;
     targetPages[0]['repaySiteId'] = subItemTemp.id;
+    targetPages[0].init({
+      startHour: parseInt(subItemTemp.start_time.split(":")[0]),
+      startMinute: parseInt(subItemTemp.start_time.split(":")[1]),
+      endHour: parseInt(subItemTemp.end_time.split(":")[0]),
+      endMinute: parseInt(subItemTemp.end_time.split(":")[1])
+    },{
+      startHour: parseInt(subItemTemp.start_time.split(":")[0]),
+      startMinute: parseInt(subItemTemp.start_time.split(":")[1]),
+      endHour: parseInt(subItemTemp.end_time.split(":")[0]),
+      endMinute: parseInt(subItemTemp.end_time.split(":")[1])
+    });
+
     targetPages[0].setData({ //改变首页的地址选择
       [this.data.options.from]: subItemTemp.name,
-      repaySite: subItemTemp.name
+      repaySite: subItemTemp.name,
+      startConfig: {
+        startHour: parseInt(subItemTemp.start_time.split(":")[0]),
+        startMinute: parseInt(subItemTemp.start_time.split(":")[1]),
+        endHour: parseInt(subItemTemp.end_time.split(":")[0]),
+        endMinute: parseInt(subItemTemp.end_time.split(":")[1])
+      },
+      endConfig: {
+        startHour: parseInt(subItemTemp.start_time.split(":")[0]),
+        startMinute: parseInt(subItemTemp.start_time.split(":")[1]),
+        endHour: parseInt(subItemTemp.end_time.split(":")[0]),
+        endMinute: parseInt(subItemTemp.end_time.split(":")[1])
+      }
     }, () => {
       wx.navigateBack({
         delta: 1 // 表示返回到上一个页面（如果值为2表示回退到上上一个页面）
