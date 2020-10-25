@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "i-button": "../../dist/button/index"
+    "i-button": "../../../dist/button/index"
   },
   "navigationBarTitleText": "订单详情"
 }

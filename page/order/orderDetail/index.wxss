@@ -43,8 +43,8 @@
 }
 
 .order-detail-container .basic-info .content-container .left .cu-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 200rpx;
+  height: 110rpx;
   background-size: cover;
   background-position: center;
 }
@@ -162,6 +162,7 @@
 
 .order-detail-container .at-info .address-container>view {
   display: flex;
+  align-items: center;
 }
 
 .order-detail-container .at-info .address-container .return-circle {
@@ -173,6 +174,7 @@
   line-height: 40rpx;
   text-align: center;
   color: rgba(104, 104, 104, 1);
+  margin-right: 10rpx;
 }
 
 .order-detail-container .at-info .address-container .fetch-circle {
@@ -184,6 +186,7 @@
   line-height: 40rpx;
   text-align: center;
   color: rgba(105, 189, 131, 1);
+  margin-right: 10rpx;
 }
 .order-detail-container .price-info {
   margin: 20rpx 40rpx 0 40rpx;

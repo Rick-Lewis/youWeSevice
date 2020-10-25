@@ -7,11 +7,11 @@
 </wxs>
 <view class="order-container">
   <i-tabs current="{{current}}" bindchange="handleTabChange" class="tabs-container">
-    <i-tab wx:for="{{tabList}}" wx:key key="{{item.key}}" title="{{item.title}}"></i-tab>
+    <i-tab wx:for="{{tabList}}" wx:key="index" key="{{item.key}}" title="{{item.title}}"></i-tab>
   </i-tabs>
   <view class="tab-content-container">
     <view wx:if="{{orderList.length === 0}}" style="text-align: center; margin-top: 5px;">~ 没有更多了 ~</view>
-    <view class="order-card-container" wx:for="{{orderList}}" wx:key data-order-no="{{item.order_no}}" bindtap="handleOrderSelect">
+    <view class="order-card-container" wx:for="{{orderList}}" wx:key="index" data-order-no="{{item.order_no}}" bindtap="handleOrderSelect">
       <view class="header-container">
         <text>订单编号：{{item.order_no}}</text>
         <text>{{ORDER_STATUS[item.status + '']}}</text>

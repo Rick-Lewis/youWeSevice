@@ -1,7 +1,7 @@
 <!--page/home/siteSelected/index.wxml-->
 <view class="site-selected-container">
   <i-cell-group wx:if="{{sites.length > 0}}">
-    <i-cell title="{{item.name}}" wx:for="{{sites}}" wx:key data-sub-item="{{item}}" bindtap="handleSelectedItem">
+    <i-cell title="{{item.name}}" wx:for="{{sites}}" wx:key="index" data-sub-item="{{item}}" bindtap="handleSelectedItem">
       <view>地址：{{item.address}}</view>
       <view>电话：{{item.telephone}}</view>
       <i-icon type="customerservice" size="30" slot="footer" data-phone-number="{{item.telephone}}" bindtap="handleCall" />

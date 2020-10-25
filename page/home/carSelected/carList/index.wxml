@@ -11,7 +11,7 @@
   </view>
   <view class="list-container" style="overflow: {{maskVisible ? 'hidden' : 'auto'}}; padding-top: {{maskVisible ? '0' : '80rpx'}}">
     <view wx:if="{{carList.length === 0}}" style="text-align: center; margin-top: 5px;">~ 没有更多了 ~</view>
-    <view class="item-container" wx:for="{{carList}}" wx:key wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
+    <view class="item-container" wx:for="{{carList}}" wx:key="index" wx:for-index="sub" wx:for-item="subItem" data-sub-item="{{subItem}}" bindtap="handleSelectedItem">
       <view class="cu-avatar" style="background-image:url({{baseUrl + subItem.image}}); left: 20rpx;"></view>
       <view class="content" style="left: 160rpx; width: auto;">
         <view class="title">{{subItem.name}}</view>
@@ -36,7 +36,7 @@
           <view class="title">类型</view>
           <view>
             <radio-group data-from="category" bindchange="handleRadioChange">
-              <radio wx:for="{{categoryList}}" wx:key="{{index}}" value="{{item.name}}" checked="{{item.name === currentCategory}}">
+              <radio wx:for="{{categoryList}}" wx:key="index" value="{{item.name}}" checked="{{item.name === currentCategory}}">
                 <text>{{item.name}}</text>
               </radio>
             </radio-group>
@@ -46,7 +46,7 @@
           <view class="title">类型</view>
           <view>
             <radio-group data-from="brand" bindchange="handleRadioChange">
-              <radio wx:for="{{brandList}}" wx:key="{{index}}" value="{{item.name}}" checked="{{item.name === currentBrand}}">
+              <radio wx:for="{{brandList}}" wx:key="index" value="{{item.name}}" checked="{{item.name === currentBrand}}">
                 <text>{{item.name}}</text>
               </radio>
             </radio-group>
@@ -56,7 +56,7 @@
           <view class="title">价格区间</view>
           <view>
             <radio-group data-from="price" bindchange="handleRadioChange">
-              <radio wx:for="{{priceList}}" wx:key="{{index}}" value="{{item.name}}" checked="{{item.name === currentPrice}}">
+              <radio wx:for="{{priceList}}" wx:key="index" value="{{item.name}}" checked="{{item.name === currentPrice}}">
                 <text>{{item.name}}</text>
               </radio>
             </radio-group>

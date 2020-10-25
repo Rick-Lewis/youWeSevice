@@ -6,7 +6,7 @@
   </i-tabs>
   <view class="carRentalContent" wx:if="{{current === 'carRental'}}">
     <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="50000" duration="500">
-      <swiper-item wx:for="{{swiperList}}" wx:key data-item="{{item.url}}" bindtap="handleToWeb">
+      <swiper-item wx:for="{{swiperList}}" wx:key="index" data-item="{{item.url}}" bindtap="handleToWeb">
         <image src="{{baseUrl + item.pic}}" mode="aspectFill"></image>
       </swiper-item>
     </swiper>

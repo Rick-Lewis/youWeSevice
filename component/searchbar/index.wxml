@@ -18,7 +18,7 @@
   </view>
   <view class="weui-cells searchbar-result" wx:if="{{inputShowed}}">
     <i-cell-group>
-      <i-cell title="{{item.name}}" wx:for="{{list}}" wx:key data-item="{{item}}" bindtap="handleSelectItem"></i-cell>
+      <i-cell title="{{item.name}}" wx:for="{{list}}" wx:key="index" data-item="{{item}}" bindtap="handleSelectItem"></i-cell>
     </i-cell-group>
   </view>
 </view>

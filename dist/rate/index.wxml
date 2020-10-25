@@ -3,7 +3,7 @@
     <input type="text" :name="name" wx:value="{{value}}" class="i-rate-hide-input" />
     <view
         wx:for="{{count}}"
-        wx:key="{{item}}" 
+        wx:key="item" 
         class="i-rate-star {{ parse.getCurrent( value,index ) }}" 
         data-index="{{index}}" 
         bindtap="handleClick">
